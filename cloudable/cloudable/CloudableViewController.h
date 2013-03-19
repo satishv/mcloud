@@ -15,12 +15,17 @@
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 @property (retain, nonatomic) IBOutlet UIView *greyBGView;
 @property (retain, nonatomic) IBOutlet UILabel *errorMessageLabel;
-@property (retain, nonatomic) IBOutlet UILabel *cloudCountLabel;
 @property (retain, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (retain, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (retain, nonatomic) IBOutlet UITextField *emailAddressTextField;
 @property (retain, nonatomic) IBOutlet UIButton *requestInviteButton;
-
 - (IBAction)requestButtonTouched:(id)sender;
+
+@property (retain, nonatomic) IBOutlet UITextField *emailAddressSignInTextField;
+@property (retain, nonatomic) IBOutlet UITextField *passwordTextField;
+- (IBAction)signInButtonTouched:(id)sender;
+
+@property (retain, nonatomic) IBOutlet UILabel *inviteErrorsLabel;
+@property (retain, nonatomic) IBOutlet UILabel *signInErrorsLabel;
 
 @end
