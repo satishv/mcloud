@@ -70,10 +70,15 @@
     
     NSRange range = [string rangeOfString:@"authenticity_token"];
     NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length + 23, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    NSLog(@"auth token???: \"%@\"", auth);
-    
+        
     return auth;
+}
+
+-(BOOL)checkValidityOfSignIn:(NSString *)string {
+    NSRange range = [string rangeOfString:@"Invalid email or password."];
+    // if NOT FOUND --> good email  --> email is VALID  --> return TRUE
+    // if found     --> bad email   --> email not VALID --> return false
+    return (range.location == NSNotFound);
 }
 
 #pragma mark textField functions
@@ -235,7 +240,7 @@
     [dataDict setValue:auth_token forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
-    NSString *url = @"http://cloudable.me/users/sign_in";
+    NSString *url = @"https://cloudable.me/users/sign_in";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSString *data = [NSString stringWithFormat:@""];
@@ -292,7 +297,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-    NSLog(@"response data: %@", responseString);
+//    NSLog(@"response data: %@", responseString);
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
 
@@ -308,7 +313,19 @@
             NSLog(@"status: %@", [dictResponse objectForKey:@"status"]);
             break;
         case REQUESTSIGNIN:
-            NSLog(@"signed in.");
+//            NSLog(@"sign in response data: %@", responseString);
+            // if BAD SIGN IN
+            if (![self checkValidityOfSignIn:(NSString *)responseString]){
+                // THEN, disply red text
+                [UIView animateWithDuration:0.5 animations:^{
+                    signInErrorsLabel.text = @"Invalid email or password.";
+                    signInErrorsLabel.alpha = 1.0f;
+                }];
+            }
+            else {
+                // O.W, display content!!! YEEE!!!
+                // $$$$$
+            }
             break;
         default:
             break;
