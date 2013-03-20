@@ -8,8 +8,12 @@
 
 #import "CloudableViewController.h"
 
-#define INVITEFIELDSCONTENTOFFSET 70
-#define SIGNINFIELDSCONTENTOFFSET 180
+#define INVITEFIELDSCONTENTOFFSET   70
+#define SIGNINFIELDSCONTENTOFFSET   180
+
+#define REQUESTHOMEPAGE             1
+#define REQUESTINVITE               2
+#define REQUESTSIGNIN               3  
 
 @interface CloudableViewController ()
 
@@ -36,6 +40,16 @@
     
     self.greyBGView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.greyBGView.layer.borderWidth = 1.0;
+    
+    // gets updated every time a request is made
+    // checked in connectionDidFinishLoading
+    requestNumber = 0;
+    
+    // emtpy auth token initially
+    auth_token = @"";
+    
+    // get home page to retrieve new auth token
+    [self requestHomePage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,12 +58,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark field validation functions
+#pragma mark helper functions
 - (BOOL)validateEmail: (NSString *) candidate {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
     return [emailTest evaluateWithObject:candidate];
+}
+
+-(NSString*)extractAuthToken:(NSString *)string {
+    
+    NSRange range = [string rangeOfString:@"authenticity_token"];
+    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length + 23, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSLog(@"auth token???: \"%@\"", auth);
+    
+    return auth;
 }
 
 #pragma mark textField functions
@@ -147,6 +171,23 @@
 }
 
 #pragma mark HTTP requests
+-(void)requestHomePage {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    NSString *url = @"http://cloudable.me/";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+
+    // HTTP request, setting stuff
+    [request setHTTPMethod:@"GET"];
+    
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = REQUESTHOMEPAGE;
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+
+}
+
 -(void)requestInvite {
     NSLog(@"requesting invite...");
     
@@ -157,7 +198,7 @@
     [user setValue:self.lastNameTextField.text forKey:@"last_name"];
     [user setValue:self.emailAddressTextField.text forKey:@"email"];
     NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
-    [dataDict setValue:@"iJNKwC1U5uVrOIA8mEB6Pxyk4FU/EmW8rmjY28doDuc=" forKey:@"authenticity_token"];
+    [dataDict setValue:auth_token forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
     NSString *url = @"http://cloudable.me/users/invitation";
@@ -172,8 +213,11 @@
     // HTTP request, setting stuff
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"]; 
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
+    
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = REQUESTINVITE;
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
@@ -188,7 +232,7 @@
     [user setValue:self.emailAddressSignInTextField.text forKey:@"email"];
     [user setValue:self.passwordTextField.text forKey:@"password"];
     NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
-    [dataDict setValue:@"iJNKwC1U5uVrOIA8mEB6Pxyk4FU/EmW8rmjY28doDuc=" forKey:@"authenticity_token"];
+    [dataDict setValue:auth_token forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
     NSString *url = @"http://cloudable.me/users/sign_in";
@@ -205,6 +249,9 @@
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
+    
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = REQUESTSIGNIN;
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
@@ -244,13 +291,28 @@
     NSLog(@"connectiondidfinishloading!");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
-    NSLog(@"response data: %@", [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding]);
+    NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+    NSLog(@"response data: %@", responseString);
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-    NSLog(@"dictionary form: %@", dictResponse);
-    NSLog(@"status: %@", [dictResponse objectForKey:@"status"]);
 
-    
+    // act based on what the request was (requestinvite, requestsignin, etc)
+    switch (requestNumber)
+    {
+        case REQUESTHOMEPAGE:
+            // SET auth token
+            auth_token = [self extractAuthToken:responseString];
+            break;
+        case REQUESTINVITE:
+            NSLog(@"dictionary form: %@", dictResponse);
+            NSLog(@"status: %@", [dictResponse objectForKey:@"status"]);
+            break;
+        case REQUESTSIGNIN:
+            NSLog(@"signed in.");
+            break;
+        default:
+            break;
+    }
     
 }
 

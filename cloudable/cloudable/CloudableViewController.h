@@ -11,6 +11,12 @@
 
 @interface CloudableViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate> {
     NSMutableData *_data;
+    
+    NSString *auth_token;
+    
+    // gets updated every time a request is made
+    // checked in connectionDidFinishLoading
+    int requestNumber;
 }
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 @property (retain, nonatomic) IBOutlet UIView *greyBGView;
