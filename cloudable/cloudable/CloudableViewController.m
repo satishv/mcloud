@@ -8,8 +8,8 @@
 
 #import "CloudableViewController.h"
 
-#define INVITEFIELDSCONTENTOFFSET   70
-#define SIGNINFIELDSCONTENTOFFSET   180
+#define SIGNINFIELDSCONTENTOFFSET   5
+#define INVITEFIELDSCONTENTOFFSET   200
 
 #define REQUESTHOMEPAGE             1
 #define REQUESTINVITE               2
@@ -21,7 +21,7 @@
 
 @implementation CloudableViewController
 
-@synthesize firstNameTextField, lastNameTextField, emailAddressTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
+@synthesize firstNameTextField, lastNameTextField, emailAddressTextField, invitePasswordTextField, inviteConfirmPasswordTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
 @synthesize emailAddressSignInTextField, passwordTextField;
 @synthesize inviteErrorsLabel, signInErrorsLabel;
 
@@ -35,6 +35,8 @@
     self.emailAddressTextField.delegate = self;
     self.emailAddressSignInTextField.delegate = self;
     self.passwordTextField.delegate = self;
+    self.invitePasswordTextField.delegate = self;
+    self.inviteConfirmPasswordTextField.delegate = self;
     
     self.scrolley.scrollEnabled = NO;
     
@@ -83,7 +85,7 @@
 
 #pragma mark textField functions
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField == self.firstNameTextField || textField == self.lastNameTextField || textField == self.emailAddressTextField){
+    if (textField == self.firstNameTextField || textField == self.lastNameTextField || textField == self.emailAddressTextField || textField == self.invitePasswordTextField || textField == self.inviteConfirmPasswordTextField){
         [UIView animateWithDuration:0.5 animations:^{
             self.scrolley.contentOffset = CGPointMake(0, INVITEFIELDSCONTENTOFFSET);
         }];
@@ -106,10 +108,16 @@
     else if (textField == self.lastNameTextField){
         [self.emailAddressTextField becomeFirstResponder];
     }
+    else if (textField == self.emailAddressTextField){
+        [self.invitePasswordTextField becomeFirstResponder];
+    }
+    else if (textField == self.invitePasswordTextField){
+        [self.inviteConfirmPasswordTextField becomeFirstResponder];
+    }
     else if (textField == self.emailAddressSignInTextField){
         [self.passwordTextField becomeFirstResponder];
     }
-    else if (textField == self.emailAddressTextField || textField == self.passwordTextField){
+    else if (textField == self.inviteConfirmPasswordTextField || textField == self.passwordTextField){
         [UIView animateWithDuration:0.5 animations:^{
             self.scrolley.contentOffset = CGPointMake(0, 0);
         }];
@@ -136,9 +144,16 @@
 - (IBAction)requestButtonTouched:(id)sender {
     
     // check for empty names, last names
-    if (firstNameTextField.text.length == 0 || lastNameTextField.text.length == 0){
+    if (firstNameTextField.text.length == 0 || lastNameTextField.text.length == 0 || self.emailAddressTextField.text.length == 0 || self.invitePasswordTextField.text.length == 0 || self.inviteConfirmPasswordTextField.text.length == 0){
         [UIView animateWithDuration:0.5 animations:^{
             inviteErrorsLabel.text = @"these fields are required.";
+            inviteErrorsLabel.alpha = 1.0f;
+        }];
+    }
+    // check that passwords match
+    else if (![self.invitePasswordTextField.text isEqualToString:self.inviteConfirmPasswordTextField.text]){
+        [UIView animateWithDuration:0.5 animations:^{
+            inviteErrorsLabel.text = @"please enter matching passwords.";
             inviteErrorsLabel.alpha = 1.0f;
         }];
     }
@@ -202,11 +217,13 @@
     [user setValue:self.firstNameTextField.text forKey:@"first_name"];
     [user setValue:self.lastNameTextField.text forKey:@"last_name"];
     [user setValue:self.emailAddressTextField.text forKey:@"email"];
+    [user setValue:self.invitePasswordTextField.text forKey:@"password"];
+    [user setValue:self.inviteConfirmPasswordTextField.text forKey:@"password_confirmation"];
     NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
     [dataDict setValue:auth_token forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
-    NSString *url = @"http://cloudable.me/users/invitation";
+    NSString *url = @"https://cloudable.me/users/invitation";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSString *data = [NSString stringWithFormat:@""];
@@ -311,6 +328,16 @@
         case REQUESTINVITE:
             NSLog(@"dictionary form: %@", dictResponse);
             NSLog(@"status: %@", [dictResponse objectForKey:@"status"]);
+            if ([[dictResponse objectForKey:@"status"] isEqualToString:@"success"]){
+                // pop up success alert view
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle: @"Success!"
+                                      message: [dictResponse objectForKey:@"msg"]
+                                      delegate: self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
             break;
         case REQUESTSIGNIN:
 //            NSLog(@"sign in response data: %@", responseString);
@@ -342,6 +369,8 @@
     [self setPasswordTextField:nil];
     [self setInviteErrorsLabel:nil];
     [self setSignInErrorsLabel:nil];
+    [self setInvitePasswordTextField:nil];
+    [self setInviteConfirmPasswordTextField:nil];
     [super viewDidUnload];
 }
 

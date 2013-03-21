@@ -24,6 +24,8 @@
 @property (retain, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (retain, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (retain, nonatomic) IBOutlet UITextField *emailAddressTextField;
+@property (retain, nonatomic) IBOutlet UITextField *invitePasswordTextField;
+@property (retain, nonatomic) IBOutlet UITextField *inviteConfirmPasswordTextField;
 @property (retain, nonatomic) IBOutlet UIButton *requestInviteButton;
 - (IBAction)requestButtonTouched:(id)sender;
 
