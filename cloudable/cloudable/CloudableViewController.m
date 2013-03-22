@@ -24,6 +24,7 @@
 @synthesize firstNameTextField, lastNameTextField, emailAddressTextField, invitePasswordTextField, inviteConfirmPasswordTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
 @synthesize emailAddressSignInTextField, passwordTextField;
 @synthesize inviteErrorsLabel, signInErrorsLabel;
+@synthesize storiesViewController;
 
 - (void)viewDidLoad
 {
@@ -192,6 +193,7 @@
 
 #pragma mark HTTP requests
 -(void)requestHomePage {
+    NSLog(@"HOME PAGE!!!");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSString *url = @"http://cloudable.me/";
@@ -314,7 +316,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-//    NSLog(@"response data: %@", responseString);
+    NSLog(@"response data: %@", responseString);
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
 
@@ -326,8 +328,6 @@
             auth_token = [self extractAuthToken:responseString];
             break;
         case REQUESTINVITE:
-            NSLog(@"dictionary form: %@", dictResponse);
-            NSLog(@"status: %@", [dictResponse objectForKey:@"status"]);
             if ([[dictResponse objectForKey:@"status"] isEqualToString:@"success"]){
                 // pop up success alert view
                 UIAlertView *alert = [[UIAlertView alloc]
@@ -340,7 +340,6 @@
             }
             break;
         case REQUESTSIGNIN:
-//            NSLog(@"sign in response data: %@", responseString);
             // if BAD SIGN IN
             if (![self checkValidityOfSignIn:(NSString *)responseString]){
                 // THEN, disply red text
@@ -351,7 +350,11 @@
             }
             else {
                 // O.W, display content!!! YEEE!!!
-                // $$$$$
+                
+                // $$$ FIX THIS SHIT WHY DOESNT IT WORK!!!!
+                NSLog(@"IN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                self.storiesViewController = [[CloudableStoriesViewController alloc] initWithNibName:@"CloudableStoriesViewController" bundle:nil];
+                [self.navigationController presentViewController:self.storiesViewController animated:YES completion:^{}];
             }
             break;
         default:

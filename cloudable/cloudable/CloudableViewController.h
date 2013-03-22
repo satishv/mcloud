@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "CloudableStoriesViewController.h"
 
 @interface CloudableViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate> {
     NSMutableData *_data;
@@ -35,5 +36,7 @@
 
 @property (retain, nonatomic) IBOutlet UILabel *inviteErrorsLabel;
 @property (retain, nonatomic) IBOutlet UILabel *signInErrorsLabel;
+
+@property (retain, nonatomic) CloudableStoriesViewController *storiesViewController;
 
 @end

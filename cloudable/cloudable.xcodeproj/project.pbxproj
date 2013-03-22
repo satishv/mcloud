@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C49F74516FD0BFC007F51DB /* CloudableStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C49F74316FD0BFC007F51DB /* CloudableStoriesViewController.m */; };
+		4C49F74616FD0BFC007F51DB /* CloudableStoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C49F74416FD0BFC007F51DB /* CloudableStoriesViewController.xib */; };
 		4C522D1A16F237C000773842 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C522D1916F237C000773842 /* UIKit.framework */; };
 		4C522D1C16F237C000773842 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C522D1B16F237C000773842 /* Foundation.framework */; };
 		4C522D1E16F237C000773842 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C522D1D16F237C000773842 /* CoreGraphics.framework */; };
@@ -27,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C49F74216FD0BFC007F51DB /* CloudableStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudableStoriesViewController.h; sourceTree = "<group>"; };
+		4C49F74316FD0BFC007F51DB /* CloudableStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudableStoriesViewController.m; sourceTree = "<group>"; };
+		4C49F74416FD0BFC007F51DB /* CloudableStoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CloudableStoriesViewController.xib; sourceTree = "<group>"; };
 		4C522D1616F237C000773842 /* cloudable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cloudable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C522D1916F237C000773842 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4C522D1B16F237C000773842 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +105,9 @@
 				4C522D3116F237C000773842 /* CloudableViewController.h */,
 				4C522D3216F237C000773842 /* CloudableViewController.m */,
 				4C522D3416F237C000773842 /* CloudableViewController.xib */,
+				4C49F74216FD0BFC007F51DB /* CloudableStoriesViewController.h */,
+				4C49F74316FD0BFC007F51DB /* CloudableStoriesViewController.m */,
+				4C49F74416FD0BFC007F51DB /* CloudableStoriesViewController.xib */,
 				4C522D2016F237C000773842 /* Supporting Files */,
 			);
 			path = cloudable;
@@ -188,6 +196,7 @@
 				4C522D4316F239E600773842 /* intro_logo.png in Resources */,
 				4C522D4516F23AA300773842 /* request_invite_webSS.png in Resources */,
 				4C95B79916F818F700900331 /* sign_in_webSS.png in Resources */,
+				4C49F74616FD0BFC007F51DB /* CloudableStoriesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +210,7 @@
 				4C522D2616F237C000773842 /* main.m in Sources */,
 				4C522D2A16F237C000773842 /* CloudableAppDelegate.m in Sources */,
 				4C522D3316F237C000773842 /* CloudableViewController.m in Sources */,
+				4C49F74516FD0BFC007F51DB /* CloudableStoriesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
