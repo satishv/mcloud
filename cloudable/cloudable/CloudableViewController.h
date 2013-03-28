@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CloudableStoriesViewController.h"
+#import "CloudableCurrentLoggedInUser.h"
 
 @interface CloudableViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate> {
     NSMutableData *_data;
@@ -19,6 +20,8 @@
     // checked in connectionDidFinishLoading
     int requestNumber;
 }
+@property (retain) CloudableCurrentLoggedInUser *currentUser;
+
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 @property (retain, nonatomic) IBOutlet UIView *greyBGView;
 @property (retain, nonatomic) IBOutlet UILabel *errorMessageLabel;
@@ -38,5 +41,6 @@
 @property (retain, nonatomic) IBOutlet UILabel *signInErrorsLabel;
 
 @property (retain, nonatomic) CloudableStoriesViewController *storiesViewController;
+
 
 @end

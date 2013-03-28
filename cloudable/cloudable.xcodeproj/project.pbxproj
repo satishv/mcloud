@@ -26,6 +26,7 @@
 		4C522D4316F239E600773842 /* intro_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C522D3F16F239E600773842 /* intro_logo.png */; };
 		4C522D4516F23AA300773842 /* request_invite_webSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C522D4416F23AA300773842 /* request_invite_webSS.png */; };
 		4C95B79916F818F700900331 /* sign_in_webSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C95B79816F818F700900331 /* sign_in_webSS.png */; };
+		4CFA4D9E16FF7E2B00398415 /* CloudableCurrentLoggedInUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFA4D9D16FF7E2B00398415 /* CloudableCurrentLoggedInUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		4C522D3F16F239E600773842 /* intro_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_logo.png; sourceTree = "<group>"; };
 		4C522D4416F23AA300773842 /* request_invite_webSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = request_invite_webSS.png; sourceTree = "<group>"; };
 		4C95B79816F818F700900331 /* sign_in_webSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sign_in_webSS.png; sourceTree = "<group>"; };
+		4CFA4D9C16FF7E2B00398415 /* CloudableCurrentLoggedInUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudableCurrentLoggedInUser.h; sourceTree = "<group>"; };
+		4CFA4D9D16FF7E2B00398415 /* CloudableCurrentLoggedInUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudableCurrentLoggedInUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				4C49F74216FD0BFC007F51DB /* CloudableStoriesViewController.h */,
 				4C49F74316FD0BFC007F51DB /* CloudableStoriesViewController.m */,
 				4C49F74416FD0BFC007F51DB /* CloudableStoriesViewController.xib */,
+				4CFA4D9C16FF7E2B00398415 /* CloudableCurrentLoggedInUser.h */,
+				4CFA4D9D16FF7E2B00398415 /* CloudableCurrentLoggedInUser.m */,
 				4C522D2016F237C000773842 /* Supporting Files */,
 			);
 			path = cloudable;
@@ -211,6 +216,7 @@
 				4C522D2A16F237C000773842 /* CloudableAppDelegate.m in Sources */,
 				4C522D3316F237C000773842 /* CloudableViewController.m in Sources */,
 				4C49F74516FD0BFC007F51DB /* CloudableStoriesViewController.m in Sources */,
+				4CFA4D9E16FF7E2B00398415 /* CloudableCurrentLoggedInUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

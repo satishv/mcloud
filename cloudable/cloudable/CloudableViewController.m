@@ -24,12 +24,14 @@
 @synthesize firstNameTextField, lastNameTextField, emailAddressTextField, invitePasswordTextField, inviteConfirmPasswordTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
 @synthesize emailAddressSignInTextField, passwordTextField;
 @synthesize inviteErrorsLabel, signInErrorsLabel;
-@synthesize storiesViewController;
+@synthesize storiesViewController, currentUser;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.currentUser = [CloudableCurrentLoggedInUser sharedDataModel];
     
     self.firstNameTextField.delegate = self;
     self.lastNameTextField.delegate = self;
@@ -82,6 +84,11 @@
     // if NOT FOUND --> good email  --> email is VALID  --> return TRUE
     // if found     --> bad email   --> email not VALID --> return false
     return (range.location == NSNotFound);
+}
+
+-(NSMutableArray *)createStoriesFromResponse:(NSString*)response {
+    
+    return [NSMutableArray array];
 }
 
 #pragma mark textField functions
@@ -319,7 +326,8 @@
     NSLog(@"response data: %@", responseString);
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-
+    
+    
     // act based on what the request was (requestinvite, requestsignin, etc)
     switch (requestNumber)
     {
@@ -350,6 +358,12 @@
             }
             else {
                 // O.W, display content!!! YEEE!!!
+                // $$$ populate stories array
+                NSMutableArray *stories = [[NSMutableArray alloc] init];
+                stories  = [self createStoriesFromResponse:responseString];
+                
+                // $$$ POPULATE SINGLETON STORIES FOR LOGGED IN USER
+                currentUser.stories = stories;
                 
                 // $$$ FIX THIS SHIT WHY DOESNT IT WORK!!!!
                 NSLog(@"IN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
