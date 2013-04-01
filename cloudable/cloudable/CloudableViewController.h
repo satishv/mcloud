@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CloudableStoriesViewController.h"
 #import "CloudableCurrentLoggedInUser.h"
+#import "CloudableStory.h"
+#import "CloudableAppDelegate.h"
 
 @interface CloudableViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate> {
     NSMutableData *_data;

@@ -86,9 +86,15 @@
     return (range.location == NSNotFound);
 }
 
--(NSMutableArray *)createStoriesFromResponse:(NSString*)response {
-    
-    return [NSMutableArray array];
+-(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
+    NSMutableArray *stories = [[NSMutableArray alloc] init];
+    for (int i = 0; i < array.count; i++){
+        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
+        CloudableStory *story = [[CloudableStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        [stories addObject:story];
+        
+    }
+    return stories;
 }
 
 #pragma mark textField functions
@@ -360,15 +366,20 @@
                 // O.W, display content!!! YEEE!!!
                 // $$$ populate stories array
                 NSMutableArray *stories = [[NSMutableArray alloc] init];
-                stories  = [self createStoriesFromResponse:responseString];
                 
-                // $$$ POPULATE SINGLETON STORIES FOR LOGGED IN USER
+                NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
+                
+                stories = [self createStoriesFromResponse:array];
+                
+                // POPULATE SINGLETON STORIES FOR LOGGED IN USER
                 currentUser.stories = stories;
                 
                 // $$$ FIX THIS SHIT WHY DOESNT IT WORK!!!!
-                NSLog(@"IN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 self.storiesViewController = [[CloudableStoriesViewController alloc] initWithNibName:@"CloudableStoriesViewController" bundle:nil];
-                [self.navigationController presentViewController:self.storiesViewController animated:YES completion:^{}];
+                CloudableAppDelegate *del = (CloudableAppDelegate*)[[UIApplication sharedApplication] delegate];
+                del.window.rootViewController = self.storiesViewController;
+                [del.window makeKeyAndVisible];
+//                [self.navigationController presentViewController:self.storiesViewController animated:YES completion:^{}];
             }
             break;
         default:

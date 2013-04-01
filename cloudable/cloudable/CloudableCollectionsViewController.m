@@ -1,25 +1,24 @@
 //
-//  CloudableStoriesViewController.m
+//  CloudableCollectionsViewController.m
 //  cloudable
 //
-//  Created by Nathan Fraenkel on 3/22/13.
+//  Created by Nathan Fraenkel on 3/29/13.
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
-#import "CloudableStoriesViewController.h"
+#import "CloudableCollectionsViewController.h"
 
-@interface CloudableStoriesViewController ()
+@interface CloudableCollectionsViewController ()
 
 @end
 
-@implementation CloudableStoriesViewController
+@implementation CloudableCollectionsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        NSLog(@"this just happened");
     }
     return self;
 }
@@ -28,7 +27,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"[CloudableStoriesViewController] viewdidload");
 }
 
 - (void)didReceiveMemoryWarning
