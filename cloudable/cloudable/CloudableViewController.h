@@ -12,6 +12,7 @@
 #import "CloudableCurrentLoggedInUser.h"
 #import "CloudableStory.h"
 #import "CloudableAppDelegate.h"
+#import "CloudableCollectionsViewController.h"
 
 @interface CloudableViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate> {
     NSMutableData *_data;
@@ -21,8 +22,12 @@
     // gets updated every time a request is made
     // checked in connectionDidFinishLoading
     int requestNumber;
+    
+    CloudableCollectionsViewController *parent;
 }
 @property (retain) CloudableCurrentLoggedInUser *currentUser;
+
+@property (retain, nonatomic) CloudableCollectionsViewController *parent;
 
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 @property (retain, nonatomic) IBOutlet UIView *greyBGView;

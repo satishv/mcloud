@@ -9,6 +9,7 @@
 #import "CloudableAppDelegate.h"
 
 #import "CloudableViewController.h"
+#import "CloudableCollectionsViewController.h"
 
 @implementation CloudableAppDelegate
 
@@ -16,7 +17,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[CloudableViewController alloc] initWithNibName:@"CloudableViewController" bundle:nil];
+    self.viewController = [[CloudableCollectionsViewController alloc] initWithNibName:@"CloudableCollectionsViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

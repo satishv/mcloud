@@ -24,7 +24,7 @@
 @synthesize firstNameTextField, lastNameTextField, emailAddressTextField, invitePasswordTextField, inviteConfirmPasswordTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
 @synthesize emailAddressSignInTextField, passwordTextField;
 @synthesize inviteErrorsLabel, signInErrorsLabel;
-@synthesize storiesViewController, currentUser;
+@synthesize storiesViewController, currentUser, parent;
 
 - (void)viewDidLoad
 {
@@ -372,14 +372,13 @@
                 stories = [self createStoriesFromResponse:array];
                 
                 // POPULATE SINGLETON STORIES FOR LOGGED IN USER
+                currentUser.isLoggedIn = TRUE;
                 currentUser.stories = stories;
                 
-                // $$$ FIX THIS SHIT WHY DOESNT IT WORK!!!!
-                self.storiesViewController = [[CloudableStoriesViewController alloc] initWithNibName:@"CloudableStoriesViewController" bundle:nil];
-                CloudableAppDelegate *del = (CloudableAppDelegate*)[[UIApplication sharedApplication] delegate];
-                del.window.rootViewController = self.storiesViewController;
-                [del.window makeKeyAndVisible];
-//                [self.navigationController presentViewController:self.storiesViewController animated:YES completion:^{}];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [self.parent refreshView];
+                }];
+            
             }
             break;
         default:

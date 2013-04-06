@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CloudableCurrentLoggedInUser.h"
 
 @interface CloudableStoriesViewController : UIViewController
+
+@property (retain) CloudableCurrentLoggedInUser *currentUser;
 
 @end

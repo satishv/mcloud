@@ -10,8 +10,11 @@
 
 @interface CloudableCurrentLoggedInUser : NSObject {
     NSMutableArray *stories;
+    
+    BOOL isLoggedIn;
 }
 
+@property (nonatomic, readwrite) BOOL isLoggedIn;
 @property (nonatomic, retain) NSMutableArray *stories;
 
 + (CloudableCurrentLoggedInUser *) sharedDataModel;

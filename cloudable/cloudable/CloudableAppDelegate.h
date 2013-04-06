@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class CloudableViewController;
+//@class CloudableViewController;
+@class CloudableCollectionsViewController;
 
 @interface CloudableAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) CloudableViewController *viewController;
+@property (strong, nonatomic) CloudableCollectionsViewController *viewController;
 
 @end
