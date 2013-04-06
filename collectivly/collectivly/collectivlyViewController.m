@@ -1,37 +1,38 @@
 //
-//  CloudableViewController.m
-//  cloudable
+//  collectivlyViewController.m
+//  collectivly
 //
-//  Created by Nathan Fraenkel on 1/31/13.
+//  Created by Nathan Fraenkel on 4/6/13.
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
-#import "CloudableViewController.h"
+#import "collectivlyViewController.h"
 
 #define SIGNINFIELDSCONTENTOFFSET   5
 #define INVITEFIELDSCONTENTOFFSET   200
 
 //#define REQUESTHOMEPAGE             1
 #define REQUESTINVITE               2
-#define REQUESTSIGNIN               3  
+#define REQUESTSIGNIN               3
 
-@interface CloudableViewController ()
+@interface collectivlyViewController ()
 
 @end
 
-@implementation CloudableViewController
+@implementation collectivlyViewController
 
 @synthesize firstNameTextField, lastNameTextField, emailAddressTextField, invitePasswordTextField, inviteConfirmPasswordTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
 @synthesize emailAddressSignInTextField, passwordTextField;
-@synthesize inviteErrorsLabel, signInErrorsLabel;
-@synthesize storiesViewController, currentUser, parent;
+@synthesize inviteErrorsLabel, signInErrorsLabel, parent;
+@synthesize currentUser;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.currentUser = [CloudableCurrentLoggedInUser sharedDataModel];
+    self.currentUser = [collectivlySingleton sharedDataModel];
     
     self.firstNameTextField.delegate = self;
     self.lastNameTextField.delegate = self;
@@ -49,13 +50,6 @@
     // gets updated every time a request is made
     // checked in connectionDidFinishLoading
     requestNumber = 0;
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark helper functions
@@ -77,7 +71,7 @@
     NSMutableArray *stories = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
         NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
-        CloudableStory *story = [[CloudableStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
         [stories addObject:story];
         
     }
@@ -90,14 +84,14 @@
         [UIView animateWithDuration:0.5 animations:^{
             self.scrolley.contentOffset = CGPointMake(0, INVITEFIELDSCONTENTOFFSET);
         }];
-
+        
     }
     if (textField == self.emailAddressSignInTextField || textField == self.passwordTextField){
         [UIView animateWithDuration:0.5 animations:^{
             self.scrolley.contentOffset = CGPointMake(0, SIGNINFIELDSCONTENTOFFSET);
         }];
     }
-
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -126,6 +120,8 @@
     
     return NO;
 }
+
+
 
 #pragma mark button listeners
 - (IBAction)requestButtonTouched:(id)sender {
@@ -176,6 +172,14 @@
         [self signUserIn];
     }
 }
+
+-(IBAction)closeButtonTouched:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        
+    }];
+}
+
 
 #pragma mark HTTP requests
 -(void)requestInvite {
@@ -247,7 +251,7 @@
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-
+    
 }
 
 #pragma mark connection protocol functions
@@ -292,10 +296,10 @@
     // act based on what the request was (requestinvite, requestsignin, etc)
     switch (requestNumber)
     {
-//        case REQUESTHOMEPAGE:
-//            // SET auth token
-//            auth_token = [self extractAuthToken:responseString];
-//            break;
+            //        case REQUESTHOMEPAGE:
+            //            // SET auth token
+            //            auth_token = [self extractAuthToken:responseString];
+            //            break;
         case REQUESTINVITE:
             if ([[dictResponse objectForKey:@"status"] isEqualToString:@"success"]){
                 // pop up success alert view
@@ -332,7 +336,7 @@
                 [self dismissViewControllerAnimated:YES completion:^{
                     [self.parent refreshView];
                 }];
-            
+                
             }
             break;
         default:
@@ -341,18 +345,12 @@
     
 }
 
-#pragma mark cleanup
-- (void)viewDidUnload {
-    [self setFirstNameTextField:nil];
-    [self setLastNameTextField:nil];
-    [self setEmailAddressTextField:nil];
-    [self setEmailAddressSignInTextField:nil];
-    [self setPasswordTextField:nil];
-    [self setInviteErrorsLabel:nil];
-    [self setSignInErrorsLabel:nil];
-    [self setInvitePasswordTextField:nil];
-    [self setInviteConfirmPasswordTextField:nil];
-    [super viewDidUnload];
+
+#pragma mark memory stuffs
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -10,7 +10,11 @@
 #import "CloudableCurrentLoggedInUser.h"
 #import "CloudableViewController.h"
 
-@interface CloudableCollectionsViewController : UIViewController
+@interface CloudableCollectionsViewController : UIViewController <NSURLConnectionDataDelegate> {
+    int requestNumber;
+    NSMutableData *_data;
+    
+}
 
 @property (retain) CloudableCurrentLoggedInUser *currentUser;
 

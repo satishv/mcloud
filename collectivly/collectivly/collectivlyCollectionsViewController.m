@@ -1,30 +1,28 @@
 //
-//  CloudableCollectionsViewController.m
-//  cloudable
+//  collectivlyCollectionsViewController.m
+//  collectivly
 //
-//  Created by Nathan Fraenkel on 3/29/13.
+//  Created by Nathan Fraenkel on 4/6/13.
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
-#import "CloudableCollectionsViewController.h"
+#import "collectivlyCollectionsViewController.h"
 
 #define REQUESTHOMEPAGE     1
 
-@interface CloudableCollectionsViewController ()
+@interface collectivlyCollectionsViewController ()
 
 @end
 
-@implementation CloudableCollectionsViewController
+@implementation collectivlyCollectionsViewController
 
-@synthesize currentUser, navBar, logInOrOutButton;
+@synthesize logInOrOutButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
-        
     }
     return self;
 }
@@ -32,15 +30,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	// Do any additional setup after loading the view.
     NSLog(@"[CloudableCollectionsViewController] viewdidload");
     
     // request number 0 initially
     requestNumber = 0;
     
-    self.currentUser = [CloudableCurrentLoggedInUser sharedDataModel];
+    self.currentUser = [collectivlySingleton sharedDataModel];
     self.currentUser.authToken = @"";
+    
+}
 
+-(void)viewDidAppear:(BOOL)animated {
+    NSLog(@"[CloudableCollectionsViewController] viewdidappear");
     // update log in button, fetch collections
     [self refreshView];
 }
@@ -77,7 +79,7 @@
     }
     else {
         NSLog(@"[CloudableCollectionsViewController] display most popular collections, because no one is logged in!");
-
+        
         
     }
     
@@ -89,15 +91,13 @@
     }
     else {
         
-        CloudableViewController *logInViewController = [[CloudableViewController alloc] initWithNibName:@"CloudableViewController" bundle:nil];
-        logInViewController.parent = self;
-        [self presentViewController:logInViewController animated:YES completion:^{
-            
-            
-        }];
+//        collectivlyViewController *logInViewController = [[collectivlyViewController alloc] init];
+        
+        [self performSegueWithIdentifier:@"loginsignup" sender:self];
     }
     
 }
+
 
 #pragma mark HTTP requests
 -(void)requestHomePage {
@@ -156,7 +156,6 @@
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
     
-    
     // act based on what the request was (requestinvite, requestsignin, etc)
     switch (requestNumber)
     {
@@ -170,18 +169,11 @@
     
 }
 
-#pragma mark memory stuffs
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidUnload {
-    [self setNavBar:nil];
-    [self setLogInOrOutButton:nil];
-    [self setLogInOrOutButton:nil];
-    [super viewDidUnload];
 }
 
 @end

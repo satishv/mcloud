@@ -1,14 +1,14 @@
 //
-//  CloudableCurrentLoggedInUser.h
-//  cloudable
+//  collectivlySingleton.h
+//  collectivly
 //
-//  Created by Nathan Fraenkel on 3/24/13.
+//  Created by Nathan Fraenkel on 4/6/13.
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface CloudableCurrentLoggedInUser : NSObject {
+@interface collectivlySingleton : NSObject {
     NSMutableArray *stories;
     
     BOOL isLoggedIn;
@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSMutableArray *stories;
 @property (nonatomic, retain) NSString *authToken;
 
-+ (CloudableCurrentLoggedInUser *) sharedDataModel;
++ (collectivlySingleton *) sharedDataModel;
 
 
 @end

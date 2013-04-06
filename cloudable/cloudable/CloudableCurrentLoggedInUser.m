@@ -10,7 +10,7 @@
 
 @implementation CloudableCurrentLoggedInUser
 
-@synthesize stories, isLoggedIn;
+@synthesize stories, isLoggedIn, authToken;
 
 static CloudableCurrentLoggedInUser *sharedDataModel = nil;
 
