@@ -248,6 +248,28 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="furley_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-1d-DrE"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="gdr-Ny-JaK">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="PIv-eV-gLD"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Yk-GZ-lfM">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="yaS-qP-Ckx"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Xk-hc-HtK">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="baA-16-zmy"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="hnK-Mc-EPw">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Qaj-r9-Zhm"/>
+                                    <constraint firstAttribute="height" constant="75" id="vjL-p5-8vp"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xWW-oj-cAB">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="216" id="Hls-9G-wob"/>
@@ -268,7 +290,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xWW-oj-cAB" firstAttribute="top" secondItem="4vS-EN-Ohe" secondAttribute="top" constant="20" symbolic="YES" type="default" id="3xb-Bf-nfK"/>
+                            <constraint firstItem="hnK-Mc-EPw" firstAttribute="top" secondItem="4vS-EN-Ohe" secondAttribute="top" constant="77" id="61S-LH-adC"/>
+                            <constraint firstItem="0Yk-GZ-lfM" firstAttribute="leading" secondItem="gdr-Ny-JaK" secondAttribute="leading" type="default" id="67F-aj-YNo"/>
+                            <constraint firstItem="3Xk-hc-HtK" firstAttribute="trailing" secondItem="hnK-Mc-EPw" secondAttribute="trailing" type="default" id="7Nj-St-95p"/>
+                            <constraint firstItem="gdr-Ny-JaK" firstAttribute="top" secondItem="3Xk-hc-HtK" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="8z5-Tu-l7Y"/>
+                            <constraint firstItem="3Xk-hc-HtK" firstAttribute="top" secondItem="hnK-Mc-EPw" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Axw-mB-eAf"/>
+                            <constraint firstItem="0Yk-GZ-lfM" firstAttribute="top" secondItem="gdr-Ny-JaK" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="HFo-5k-68D"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="leading" secondItem="4vS-EN-Ohe" secondAttribute="leading" type="default" id="HfT-ug-Mlj"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="top" secondItem="4vS-EN-Ohe" secondAttribute="top" type="default" id="JXH-zm-sQf"/>
+                            <constraint firstItem="0Yk-GZ-lfM" firstAttribute="trailing" secondItem="gdr-Ny-JaK" secondAttribute="trailing" type="default" id="P7U-Ek-PC1"/>
+                            <constraint firstItem="hnK-Mc-EPw" firstAttribute="centerX" secondItem="Ucw-1d-DrE" secondAttribute="centerX" type="default" id="Q0x-kv-t3q"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="bottom" secondItem="4vS-EN-Ohe" secondAttribute="bottom" type="default" id="Rp7-iO-bAI"/>
                             <constraint firstAttribute="trailing" secondItem="xWW-oj-cAB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="X0t-kc-OKQ"/>
+                            <constraint firstItem="gdr-Ny-JaK" firstAttribute="leading" secondItem="3Xk-hc-HtK" secondAttribute="leading" type="default" id="ar7-3Y-1DQ"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="trailing" secondItem="4vS-EN-Ohe" secondAttribute="trailing" type="default" id="hrW-RM-8kJ"/>
+                            <constraint firstItem="3Xk-hc-HtK" firstAttribute="leading" secondItem="hnK-Mc-EPw" secondAttribute="leading" type="default" id="w4G-08-TWA"/>
+                            <constraint firstItem="gdr-Ny-JaK" firstAttribute="trailing" secondItem="3Xk-hc-HtK" secondAttribute="trailing" type="default" id="wHJ-lZ-RXi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Collections" id="JAe-pl-2ss"/>
@@ -283,6 +320,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="furley_bg.png" width="600" height="600"/>
+        <image name="grey_wash_wall.png" width="350" height="259"/>
         <image name="intro_logo.png" width="176" height="47"/>
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sign_in_webSS.png" width="48" height="27"/>

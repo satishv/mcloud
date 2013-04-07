@@ -9,6 +9,7 @@
 #import "collectivlyCollectionsViewController.h"
 
 #define REQUESTHOMEPAGE     1
+#define GETCOLLECTIONS      2
 
 @interface collectivlyCollectionsViewController ()
 
@@ -17,6 +18,7 @@
 @implementation collectivlyCollectionsViewController
 
 @synthesize logInOrOutButton;
+@synthesize firstCollectionBG, firstTitle, secondCollectionBG, secondTitle, thirdCollectionBG, thirdTitle, fourthCollectionBG, fourthTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,19 +71,37 @@
 -(void)refreshView {
     [self updateLogInButtonText];
     
-    [self fetchCollections];
+    [self fetchRelevantCollections];
 }
 
--(void)fetchCollections {
+-(void)fetchRelevantCollections {
+    NSLog(@"fetching relevant collections.....");
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    NSString *url = @"";
+    
     if ([self someoneIsLoggedIn]){
         NSLog(@"[CloudableCollectionsViewController] display collections specific current logged in user!");
         
+        url = @"http://cloudable.me/categories.json?order=rank";
+
     }
     else {
         NSLog(@"[CloudableCollectionsViewController] display most popular collections, because no one is logged in!");
         
-        
+        url = @"http://cloudable.me/categories.json?page=1";
     }
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+
+    // HTTP request, setting stuff
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = GETCOLLECTIONS;
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
     
 }
 
@@ -159,10 +179,16 @@
     // act based on what the request was (requestinvite, requestsignin, etc)
     switch (requestNumber)
     {
-        case REQUESTHOMEPAGE:
+        case REQUESTHOMEPAGE: {
             // SET auth token
             self.currentUser.authToken = [self extractAuthToken:responseString];
             break;
+        }
+        case GETCOLLECTIONS: {
+            // TODO
+            NSLog(@"DICT RESPONSE FOR COLLECTTIONSS: %@", dictResponse);
+            break;
+        }
         default:
             break;
     }

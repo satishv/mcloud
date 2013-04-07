@@ -24,6 +24,16 @@
 
 //@property (retain, nonatomic) IBOutlet collectivlyViewController *logInViewController;
 
+@property (retain, nonatomic) IBOutlet UIImageView *firstCollectionBG;
+@property (retain, nonatomic) IBOutlet UIImageView *secondCollectionBG;
+@property (retain, nonatomic) IBOutlet UIImageView *thirdCollectionBG;
+@property (retain, nonatomic) IBOutlet UIImageView *fourthCollectionBG;
+
+@property (retain, nonatomic) IBOutlet UILabel *firstTitle;
+@property (retain, nonatomic) IBOutlet UILabel *secondTitle;
+@property (retain, nonatomic) IBOutlet UILabel *thirdTitle;
+@property (retain, nonatomic) IBOutlet UILabel *fourthTitle;
+
 -(IBAction)LogInOrOutButtonTouched:(id)sender;
 
 -(void)refreshView;
