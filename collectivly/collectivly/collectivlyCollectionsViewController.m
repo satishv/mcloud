@@ -45,6 +45,16 @@
     self.currentUser = [collectivlySingleton sharedDataModel];
     self.currentUser.authToken = @"";
     
+    firstTitle.text = @"";
+    secondTitle.text = @"";
+    thirdTitle.text = @"";
+    fourthTitle.text = @"";
+    
+    firstCollectionBG.alpha = 0.0f;
+    secondCollectionBG.alpha = 0.0f;
+    thirdCollectionBG.alpha = 0.0f;
+    fourthCollectionBG.alpha = 0.0f;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -199,24 +209,43 @@
                 
                 switch (i) {
                     case 1 :{
-                        firstTitle.text = cc.name;
+                        [UIView animateWithDuration:0.5f animations:^{
+                            firstTitle.text = cc.name;
+                            firstCollectionBG.image = cc.image;
+                            firstCollectionBG.alpha = 1.0f;
+                        }];
                         break;
                     }
                     case 2 :{
-                        secondTitle.text = cc.name;
+                        [UIView animateWithDuration:0.5f animations:^{
+                            secondTitle.text = cc.name;
+                            secondCollectionBG.image = cc.image;
+                            secondCollectionBG.alpha = 1.0f;
+                        }];
                         break;
                     }
                     case 3 :{
-                        thirdTitle.text = cc.name;
+                        [UIView animateWithDuration:0.5f animations:^{
+                            thirdTitle.text = cc.name;
+                            thirdCollectionBG.image = cc.image;
+                            thirdCollectionBG.alpha = 1.0f;
+                        }];
                         break;
                     }
                     case 4 :{
-                        fourthTitle.text = cc.name;
+                        [UIView animateWithDuration:0.5f animations:^{
+                            fourthTitle.text = cc.name;
+                            fourthCollectionBG.image = cc.image;
+                            fourthCollectionBG.alpha = 1.0f;
+                        }];
                         break;
                     }   
                     default: {
                         UIImageView *collectionBG = [[UIImageView alloc] initWithFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
                         collectionBG.image = cc.image;
+                        UILabel *collectionName = [[UILabel alloc] initWithFrame:CGRectMake(collectionBG.frame.origin.x + 18, collectionBG.frame.origin.y + 18, self.fourthTitle.frame.size.width, self.fourthTitle.frame.size.height)];
+                        [collectionBG addSubview:collectionName];
+                        [self.scrolley addSubview:collectionBG];
                         break;
                     }
                 }
