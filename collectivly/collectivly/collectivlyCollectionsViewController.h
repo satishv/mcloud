@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "collectivlySingleton.h"
-//#import "collectivlyViewController.h"
+#import "collectivlyCollection.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate> {
     int requestNumber;
     NSMutableData *_data;
     
@@ -33,6 +33,8 @@
 @property (retain, nonatomic) IBOutlet UILabel *secondTitle;
 @property (retain, nonatomic) IBOutlet UILabel *thirdTitle;
 @property (retain, nonatomic) IBOutlet UILabel *fourthTitle;
+
+@property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 
 -(IBAction)LogInOrOutButtonTouched:(id)sender;
 

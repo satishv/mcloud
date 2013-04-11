@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C143D5217168A6000B5A210 /* collectivlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C143D5117168A6000B5A210 /* collectivlyCollection.m */; };
 		4CF8D9B31710BEAD00E4FD21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */; };
 		4CF8D9B51710BEAD00E4FD21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B41710BEAD00E4FD21 /* Foundation.framework */; };
 		4CF8D9B71710BEAD00E4FD21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B61710BEAD00E4FD21 /* CoreGraphics.framework */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C143D5017168A6000B5A210 /* collectivlyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyCollection.h; sourceTree = "<group>"; };
+		4C143D5117168A6000B5A210 /* collectivlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyCollection.m; sourceTree = "<group>"; };
 		4CF8D9AF1710BEAD00E4FD21 /* collectivly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectivly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CF8D9B41710BEAD00E4FD21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +130,8 @@
 			children = (
 				4CF8D9F01710C0EB00E4FD21 /* collectivlyStory.h */,
 				4CF8D9F11710C0EB00E4FD21 /* collectivlyStory.m */,
+				4C143D5017168A6000B5A210 /* collectivlyCollection.h */,
+				4C143D5117168A6000B5A210 /* collectivlyCollection.m */,
 				4CF8D9D71710BF3500E4FD21 /* furley_bg_@2X.png */,
 				4CF8D9D81710BF3500E4FD21 /* furley_bg.png */,
 				4CF8D9D91710BF3500E4FD21 /* grey_wash_wall_@2X.png */,
@@ -227,6 +232,7 @@
 				4CF8D9EC1710C05900E4FD21 /* collectivlyCollectionsViewController.m in Sources */,
 				4CF8D9EF1710C0DB00E4FD21 /* collectivlySingleton.m in Sources */,
 				4CF8D9F21710C0EB00E4FD21 /* collectivlyStory.m in Sources */,
+				4C143D5217168A6000B5A210 /* collectivlyCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +355,7 @@
 				4CF8D9D41710BEAD00E4FD21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

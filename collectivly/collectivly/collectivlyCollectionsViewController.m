@@ -11,13 +11,15 @@
 #define REQUESTHOMEPAGE     1
 #define GETCOLLECTIONS      2
 
+#define COLLECTIONINBETWEEN 7
+
 @interface collectivlyCollectionsViewController ()
 
 @end
 
 @implementation collectivlyCollectionsViewController
 
-@synthesize logInOrOutButton;
+@synthesize logInOrOutButton, scrolley;
 @synthesize firstCollectionBG, firstTitle, secondCollectionBG, secondTitle, thirdCollectionBG, thirdTitle, fourthCollectionBG, fourthTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,6 +39,8 @@
     
     // request number 0 initially
     requestNumber = 0;
+    
+    scrolley.delegate = self;
     
     self.currentUser = [collectivlySingleton sharedDataModel];
     self.currentUser.authToken = @"";
@@ -187,6 +191,41 @@
         case GETCOLLECTIONS: {
             // TODO
             NSLog(@"DICT RESPONSE FOR COLLECTTIONSS: %@", dictResponse);
+            NSMutableArray *colls = [[NSMutableArray alloc] init];
+            int i = 1;
+            for (NSDictionary *dict in dictResponse){
+                collectivlyCollection *cc = [[collectivlyCollection alloc] initWithDictionary:dict];
+                
+                
+                switch (i) {
+                    case 1 :{
+                        firstTitle.text = cc.name;
+                        break;
+                    }
+                    case 2 :{
+                        secondTitle.text = cc.name;
+                        break;
+                    }
+                    case 3 :{
+                        thirdTitle.text = cc.name;
+                        break;
+                    }
+                    case 4 :{
+                        fourthTitle.text = cc.name;
+                        break;
+                    }   
+                    default: {
+                        UIImageView *collectionBG = [[UIImageView alloc] initWithFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
+                        collectionBG.image = cc.image;
+                        break;
+                    }
+                }
+                
+                
+                [colls addObject:cc];
+                i++;
+            }
+            self.currentUser.collections = colls;
             break;
         }
         default:

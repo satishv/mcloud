@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface collectivlySingleton : NSObject {
-    NSMutableArray *stories;
+    NSMutableArray *stories, *collections;
     
     BOOL isLoggedIn;
 }
 
 @property (nonatomic, readwrite) BOOL isLoggedIn;
-@property (nonatomic, retain) NSMutableArray *stories;
+@property (nonatomic, retain) NSMutableArray *stories, *collections;
 @property (nonatomic, retain) NSString *authToken;
 
 + (collectivlySingleton *) sharedDataModel;
