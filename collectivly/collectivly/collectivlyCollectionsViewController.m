@@ -8,8 +8,9 @@
 
 #import "collectivlyCollectionsViewController.h"
 
-#define REQUESTHOMEPAGE     1
-#define GETCOLLECTIONS      2
+#define REQUESTHOMEPAGE         1
+#define GETCOLLECTIONS          2
+#define GETCERTAINCOLLECTION    3
 
 #define COLLECTIONINBETWEEN 7
 
@@ -55,12 +56,71 @@
     thirdCollectionBG.alpha = 0.0f;
     fourthCollectionBG.alpha = 0.0f;
     
+    self.activityIndicator.alpha = 0.0f;
+}
+
+-(void)FirstImageTouched:(id) sender {
+    NSLog(@"image 1 has been touched and has liked it");
+    
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:1];
+    [self getStoriesForCollection:collection];
+}
+
+-(void)SecondImageTouched:(id) sender {
+    NSLog(@"image 2 has been touched and has liked it");
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:2];
+    [self getStoriesForCollection:collection];
+}
+
+-(void)ThirdImageTouched:(id) sender {
+    NSLog(@"image 3 has been touched and has liked it");
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:3];
+    [self getStoriesForCollection:collection];
+}
+
+-(void)FourthImageTouched:(id) sender {
+    NSLog(@"image 4 has been touched and has liked it");
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:4];
+    [self getStoriesForCollection:collection];
+}
+
+-(void)ithImageTouched:(id) sender {
+    NSLog(@"image i has been touched and has liked it");
+    int i = ithCollectionBG.tag;
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:i];
+    [self getStoriesForCollection:collection];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     NSLog(@"[CloudableCollectionsViewController] viewdidappear");
     // update log in button, fetch collections
     [self refreshView];
+}
+
+-(void)getStoriesForCollection:(collectivlyCollection *)collection {
+
+      NSLog(@"fetching relevant collections.....");
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+      
+      self.activityIndicator.alpha = 1.0f;
+      [self.activityIndicator startAnimating];
+      
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://cloudable.me/stories/everyone/%d", collection.idNumber]];
+
+    NSLog(@"[CloudableCollectionsViewController] fetching stories for collection with id: %d and name: %@", collection.idNumber, collection.name);
+
+      
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+      
+      // HTTP request, setting stuff
+      [request setHTTPMethod:@"GET"];
+      [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+      
+      // SET REQUEST NUMBER TO APPROPRIATE VALUE
+      requestNumber = GETCERTAINCOLLECTION;
+      
+      NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+      [connection start];
 }
 
 -(NSString*)extractAuthToken:(NSString *)string {
@@ -92,6 +152,9 @@
     NSLog(@"fetching relevant collections.....");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
+    self.activityIndicator.alpha = 1.0f;
+    [self.activityIndicator startAnimating];
+
     NSString *url = @"";
     
     if ([self someoneIsLoggedIn]){
@@ -136,6 +199,10 @@
 #pragma mark HTTP requests
 -(void)requestHomePage {
     NSLog(@"HOME PAGE!!!");
+    
+    self.activityIndicator.alpha = 1.0f;
+    [self.activityIndicator startAnimating];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSString *url = @"http://cloudable.me/";
@@ -170,6 +237,9 @@
     
     // stop spinner
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+    [self.activityIndicator stopAnimating];
+    self.activityIndicator.alpha = 0.0f;
     
     // alert view for network error
     UIAlertView *alert = [[UIAlertView alloc]
@@ -184,6 +254,8 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"connectiondidfinishloading!");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.activityIndicator stopAnimating];
+    self.activityIndicator.alpha = 0.0f;
     
     NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
     NSLog(@"response data: %@", responseString);
@@ -212,7 +284,14 @@
                         [UIView animateWithDuration:0.5f animations:^{
                             firstTitle.text = cc.name;
                             firstCollectionBG.image = cc.image;
-                            firstCollectionBG.alpha = 1.0f;
+                            firstCollectionBG.alpha = 0.45f;
+                            UITapGestureRecognizer *firstImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FirstImageTouched:)];
+                            [firstImageViewGestureRecognizer setNumberOfTapsRequired:1];
+                            [firstImageViewGestureRecognizer setDelegate:self];
+                            
+                            self.firstCollectionBG.userInteractionEnabled = YES;
+                            [self.firstCollectionBG addGestureRecognizer:firstImageViewGestureRecognizer];
+                        
                         }];
                         break;
                     }
@@ -220,7 +299,13 @@
                         [UIView animateWithDuration:0.5f animations:^{
                             secondTitle.text = cc.name;
                             secondCollectionBG.image = cc.image;
-                            secondCollectionBG.alpha = 1.0f;
+                            secondCollectionBG.alpha = 0.55f;
+                            UITapGestureRecognizer *secondImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(SecondImageTouched:)];
+                            [secondImageViewGestureRecognizer setNumberOfTapsRequired:1];
+                            [secondImageViewGestureRecognizer setDelegate:self];
+                            
+                            self.secondCollectionBG.userInteractionEnabled = YES;
+                            [self.secondCollectionBG addGestureRecognizer:secondImageViewGestureRecognizer];
                         }];
                         break;
                     }
@@ -228,7 +313,13 @@
                         [UIView animateWithDuration:0.5f animations:^{
                             thirdTitle.text = cc.name;
                             thirdCollectionBG.image = cc.image;
-                            thirdCollectionBG.alpha = 1.0f;
+                            thirdCollectionBG.alpha = 0.65f;
+                            UITapGestureRecognizer *thirdImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ThirdImageTouched:)];
+                            [thirdImageViewGestureRecognizer setNumberOfTapsRequired:1];
+                            [thirdImageViewGestureRecognizer setDelegate:self];
+                            
+                            self.thirdCollectionBG.userInteractionEnabled = YES;
+                            [self.thirdCollectionBG addGestureRecognizer:thirdImageViewGestureRecognizer];
                         }];
                         break;
                     }
@@ -236,16 +327,37 @@
                         [UIView animateWithDuration:0.5f animations:^{
                             fourthTitle.text = cc.name;
                             fourthCollectionBG.image = cc.image;
-                            fourthCollectionBG.alpha = 1.0f;
+                            fourthCollectionBG.alpha = 0.5f;
+                            UITapGestureRecognizer *fourthImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FourthImageTouched:)];
+                            [fourthImageViewGestureRecognizer setNumberOfTapsRequired:1];
+                            [fourthImageViewGestureRecognizer setDelegate:self];
+                            
+                            self.fourthCollectionBG.userInteractionEnabled = YES;
+                            [self.fourthCollectionBG addGestureRecognizer:fourthImageViewGestureRecognizer];
                         }];
                         break;
                     }   
                     default: {
-                        UIImageView *collectionBG = [[UIImageView alloc] initWithFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
-                        collectionBG.image = cc.image;
-                        UILabel *collectionName = [[UILabel alloc] initWithFrame:CGRectMake(collectionBG.frame.origin.x + 18, collectionBG.frame.origin.y + 18, self.fourthTitle.frame.size.width, self.fourthTitle.frame.size.height)];
-                        [collectionBG addSubview:collectionName];
-                        [self.scrolley addSubview:collectionBG];
+                        if (ithCollectionBG == nil){
+                            ithCollectionBG = [[UIImageView alloc] initWithFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
+    
+                        }
+                        else {
+                            [ithCollectionBG setFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
+
+                        }
+                        ithCollectionBG.image = cc.image;
+                        UILabel *collectionName = [[UILabel alloc] initWithFrame:CGRectMake(ithCollectionBG.frame.origin.x + 18, ithCollectionBG.frame.origin.y + 18, self.fourthTitle.frame.size.width, self.fourthTitle.frame.size.height)];
+                        [ithCollectionBG addSubview:collectionName];
+                        [self.scrolley addSubview:ithCollectionBG];
+                        ithCollectionBG.alpha = 0.55f;
+                        UITapGestureRecognizer *imageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ithImageTouched:)];
+                        [imageViewGestureRecognizer setNumberOfTapsRequired:1];
+                        [imageViewGestureRecognizer setDelegate:self];
+                        
+                        ithCollectionBG.userInteractionEnabled = YES;
+                        ithCollectionBG.tag = i;
+                        [ithCollectionBG addGestureRecognizer:imageViewGestureRecognizer];
                         break;
                     }
                 }

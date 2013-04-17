@@ -11,9 +11,11 @@
 #import "collectivlySingleton.h"
 #import "collectivlyCollection.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate> {
     int requestNumber;
     NSMutableData *_data;
+    
+    UIImageView *ithCollectionBG;
     
 }
 
@@ -23,6 +25,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *logInOrOutButton;
 
 //@property (retain, nonatomic) IBOutlet collectivlyViewController *logInViewController;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (retain, nonatomic) IBOutlet UIImageView *firstCollectionBG;
 @property (retain, nonatomic) IBOutlet UIImageView *secondCollectionBG;

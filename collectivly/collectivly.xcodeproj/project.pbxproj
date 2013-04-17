@@ -115,6 +115,7 @@
 		4CF8D9B81710BEAD00E4FD21 /* collectivly */ = {
 			isa = PBXGroup;
 			children = (
+				4C5F3132171EB4D9001027F8 /* logo.png */,
 				4CF8D9C11710BEAD00E4FD21 /* collectivlyAppDelegate.h */,
 				4CF8D9C21710BEAD00E4FD21 /* collectivlyAppDelegate.m */,
 				4CF8D9CA1710BEAD00E4FD21 /* MainStoryboard.storyboard */,
@@ -133,7 +134,6 @@
 		4CF8D9B91710BEAD00E4FD21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4C5F3132171EB4D9001027F8 /* logo.png */,
 				4CF8D9F01710C0EB00E4FD21 /* collectivlyStory.h */,
 				4CF8D9F11710C0EB00E4FD21 /* collectivlyStory.m */,
 				4C143D5017168A6000B5A210 /* collectivlyCollection.h */,
