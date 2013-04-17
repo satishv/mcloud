@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="2" customClass="collectivlyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNV-9M-pSm">
@@ -245,17 +245,18 @@
             <objects>
                 <viewController id="qlW-TG-BSF" customClass="collectivlyCollectionsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4vS-EN-Ohe">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjn-Nh-Rv4">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="furley_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-1d-DrE">
+                                    <imageView userInteractionEnabled="NO" contentMode="redraw" image="nyc_sunset.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-1d-DrE">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="416" id="6C9-Ad-oY6"/>
+                                            <constraint firstAttribute="width" constant="320" id="kHc-oG-dEn"/>
+                                            <constraint firstAttribute="height" constant="504" id="ox7-Ic-uYK"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="BOt-s0-XyP">
+                                    <imageView userInteractionEnabled="NO" contentMode="redraw" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="BOt-s0-XyP">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="fF7-zZ-aD7"/>
                                         </constraints>
@@ -269,7 +270,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="hnK-Mc-EPw">
+                                    <imageView userInteractionEnabled="NO" contentMode="redraw" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="hnK-Mc-EPw">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="vjL-p5-8vp"/>
                                             <constraint firstAttribute="width" constant="240" id="vsD-7l-uW7"/>
@@ -300,7 +301,7 @@
                                             <action selector="LogInOrOutButtonTouched:" destination="qlW-TG-BSF" eventType="touchUpInside" id="SXd-MN-sTx"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="aBK-MJ-UU3">
+                                    <imageView userInteractionEnabled="NO" contentMode="redraw" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="aBK-MJ-UU3">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="iSn-3k-SSV"/>
                                         </constraints>
@@ -313,7 +314,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="h95-Fp-f8M">
+                                    <imageView userInteractionEnabled="NO" contentMode="redraw" image="grey_wash_wall.png" translatesAutoresizingMaskIntoConstraints="NO" id="h95-Fp-f8M">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="YFp-Xc-gJ4"/>
                                         </constraints>
@@ -329,19 +330,20 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="lGT-7B-UnP" firstAttribute="leading" secondItem="kRu-Mc-x3r" secondAttribute="leading" type="default" id="0bR-K7-75n"/>
-                                    <constraint firstItem="g4c-Gj-8ba" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" constant="57" id="15s-Xe-l4j"/>
-                                    <constraint firstItem="BOt-s0-XyP" firstAttribute="centerX" secondItem="Ucw-1d-DrE" secondAttribute="centerX" type="default" id="1sI-6i-h70"/>
-                                    <constraint firstItem="Ucw-1d-DrE" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" type="default" id="3El-9N-qfC"/>
                                     <constraint firstItem="hnK-Mc-EPw" firstAttribute="trailing" secondItem="aBK-MJ-UU3" secondAttribute="trailing" type="default" id="75E-U1-IUV"/>
-                                    <constraint firstItem="Ucw-1d-DrE" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="2" id="CQx-Lb-20w"/>
                                     <constraint firstItem="g4c-Gj-8ba" firstAttribute="trailing" secondItem="LiU-o9-UHx" secondAttribute="trailing" type="default" id="CWx-Ic-hQO"/>
-                                    <constraint firstItem="Ucw-1d-DrE" firstAttribute="trailing" secondItem="kjn-Nh-Rv4" secondAttribute="trailing" type="default" id="Dps-Eb-ohR"/>
                                     <constraint firstItem="LiU-o9-UHx" firstAttribute="centerY" secondItem="h95-Fp-f8M" secondAttribute="centerY" type="default" id="GHV-vL-mDs"/>
                                     <constraint firstItem="BOt-s0-XyP" firstAttribute="leading" secondItem="aBK-MJ-UU3" secondAttribute="leading" type="default" id="GuV-GB-PRc"/>
+                                    <constraint firstItem="Ucw-1d-DrE" firstAttribute="bottom" secondItem="kjn-Nh-Rv4" secondAttribute="bottom" type="default" id="J7o-Lf-Yat"/>
                                     <constraint firstItem="kRu-Mc-x3r" firstAttribute="trailing" secondItem="lGT-7B-UnP" secondAttribute="trailing" type="default" id="KCu-2Z-Dcr"/>
+                                    <constraint firstItem="g4c-Gj-8ba" firstAttribute="centerX" secondItem="Ucw-1d-DrE" secondAttribute="centerX" type="default" id="PUq-Qx-KAD"/>
+                                    <constraint firstItem="aBK-MJ-UU3" firstAttribute="centerX" secondItem="kjn-Nh-Rv4" secondAttribute="centerX" type="default" id="RTS-vc-07R"/>
                                     <constraint firstItem="kRu-Mc-x3r" firstAttribute="centerX" secondItem="xWW-oj-cAB" secondAttribute="centerX" type="default" id="T3Y-Ca-djq"/>
+                                    <constraint firstItem="Ucw-1d-DrE" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="3" id="TQb-9n-dnd"/>
                                     <constraint firstItem="g4c-Gj-8ba" firstAttribute="leading" secondItem="LiU-o9-UHx" secondAttribute="leading" type="default" id="VUL-ND-eYH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ucw-1d-DrE" secondAttribute="trailing" constant="1" id="WUZ-Gu-F31"/>
                                     <constraint firstItem="hnK-Mc-EPw" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="81" id="XFb-fm-nKR"/>
+                                    <constraint firstItem="Ucw-1d-DrE" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" constant="-1" id="Zwe-fO-1CY"/>
                                     <constraint firstItem="aBK-MJ-UU3" firstAttribute="centerY" secondItem="lGT-7B-UnP" secondAttribute="centerY" type="default" id="aXS-Qw-k5p"/>
                                     <constraint firstItem="xWW-oj-cAB" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="20" symbolic="YES" type="default" id="azG-xa-Mdv"/>
                                     <constraint firstItem="hnK-Mc-EPw" firstAttribute="leading" secondItem="aBK-MJ-UU3" secondAttribute="leading" type="default" id="btg-XF-g6e"/>
@@ -350,8 +352,6 @@
                                     <constraint firstItem="BOt-s0-XyP" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="249" id="gqy-fu-esM"/>
                                     <constraint firstItem="BOt-s0-XyP" firstAttribute="trailing" secondItem="h95-Fp-f8M" secondAttribute="trailing" type="default" id="qnj-W9-vXS"/>
                                     <constraint firstItem="h95-Fp-f8M" firstAttribute="top" secondItem="BOt-s0-XyP" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="rT2-JM-jgf"/>
-                                    <constraint firstAttribute="bottom" secondItem="h95-Fp-f8M" secondAttribute="bottom" constant="12" id="sL5-7O-4Cr"/>
-                                    <constraint firstItem="h95-Fp-f8M" firstAttribute="centerX" secondItem="kjn-Nh-Rv4" secondAttribute="centerX" type="default" id="sTR-jG-Ty1"/>
                                     <constraint firstItem="aBK-MJ-UU3" firstAttribute="top" secondItem="hnK-Mc-EPw" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uX3-cp-NuS"/>
                                     <constraint firstItem="BOt-s0-XyP" firstAttribute="trailing" secondItem="aBK-MJ-UU3" secondAttribute="trailing" type="default" id="v3F-P2-nEv"/>
                                     <constraint firstItem="g4c-Gj-8ba" firstAttribute="centerY" secondItem="BOt-s0-XyP" secondAttribute="centerY" type="default" id="yDM-sl-PaC"/>
@@ -368,6 +368,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Collections" id="JAe-pl-2ss"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="firstCollectionBG" destination="hnK-Mc-EPw" id="4dS-ZL-mdl"/>
                         <outlet property="firstTitle" destination="kRu-Mc-x3r" id="jsM-zq-xgt"/>
@@ -387,15 +388,58 @@
         </scene>
     </scenes>
     <resources>
-        <image name="furley_bg.png" width="600" height="600"/>
         <image name="grey_wash_wall.png" width="350" height="259"/>
         <image name="intro_logo.png" width="176" height="47"/>
+        <image name="nyc_sunset.jpg" width="1024" height="595"/>
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sign_in_webSS.png" width="48" height="27"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="collectivlyCollectionsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="LogInOrOutButtonTouched:"/>
+                <relationship kind="outlet" name="firstCollectionBG" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="firstTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fourthCollectionBG" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="fourthTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="logInOrOutButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="secondCollectionBG" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="secondTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="thirdCollectionBG" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="thirdTitle" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="collectivlyViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="closeButtonTouched:"/>
+                <relationship kind="action" name="requestButtonTouched:"/>
+                <relationship kind="action" name="signInButtonTouched:"/>
+                <relationship kind="outlet" name="closeButtonTouched" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="emailAddressSignInTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailAddressTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="errorMessageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="greyBGView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="inviteConfirmPasswordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="inviteErrorsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="invitePasswordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="requestInviteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="signInErrorsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
