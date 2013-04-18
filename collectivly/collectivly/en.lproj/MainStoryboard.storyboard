@@ -293,13 +293,16 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xWW-oj-cAB">
+                                        <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="216" id="L9D-VP-UfA"/>
+                                            <constraint firstAttribute="width" constant="95" id="1tc-AK-n6A"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Log in/Sign up">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="tintColor" red="0.0" green="0.028664994629999999" blue="0.38457455839999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="titleShadowOffset" width="0.0" height="2"/>
+                                        <state key="normal" title="Sign In?">
+                                            <color key="titleColor" red="0.59999999999999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -380,6 +383,7 @@
                                     <constraint firstItem="BOt-s0-XyP" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="JYo-J9-BeG"/>
                                     <constraint firstItem="kRu-Mc-x3r" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" constant="38" id="KjC-Xj-sLh"/>
                                     <constraint firstItem="g4c-Gj-8ba" firstAttribute="leading" secondItem="lGT-7B-UnP" secondAttribute="leading" type="default" id="Mc6-CX-hrz"/>
+                                    <constraint firstItem="xWW-oj-cAB" firstAttribute="centerX" secondItem="kjn-Nh-Rv4" secondAttribute="centerX" type="default" id="NUF-bH-Wkw"/>
                                     <constraint firstItem="lGT-7B-UnP" firstAttribute="trailing" secondItem="kRu-Mc-x3r" secondAttribute="trailing" type="default" id="Och-kZ-uxM"/>
                                     <constraint firstItem="aBK-MJ-UU3" firstAttribute="centerX" secondItem="dV1-VZ-737" secondAttribute="centerX" type="default" id="SPb-gn-g7m"/>
                                     <constraint firstAttribute="trailing" secondItem="aBK-MJ-UU3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="TB6-Vc-1xu"/>
@@ -387,7 +391,6 @@
                                     <constraint firstItem="xWW-oj-cAB" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="20" symbolic="YES" type="default" id="azG-xa-Mdv"/>
                                     <constraint firstItem="hnK-Mc-EPw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="79" type="user" id="clv-j2-Rtr"/>
                                     <constraint firstItem="kRu-Mc-x3r" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="112" id="ctC-BG-A1h"/>
-                                    <constraint firstItem="BOt-s0-XyP" firstAttribute="centerX" secondItem="kjn-Nh-Rv4" secondAttribute="centerX" type="default" id="dqP-8v-Lj4"/>
                                     <constraint firstItem="g4c-Gj-8ba" firstAttribute="trailing" secondItem="lGT-7B-UnP" secondAttribute="trailing" type="default" id="erg-AF-xos"/>
                                     <constraint firstAttribute="trailing" secondItem="BOt-s0-XyP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="g79-9w-zpA"/>
                                     <constraint firstItem="kRu-Mc-x3r" firstAttribute="leading" secondItem="lGT-7B-UnP" secondAttribute="leading" type="default" id="gjk-n3-MV2"/>
@@ -438,7 +441,7 @@
             </objects>
             <point key="canvasLocation" x="306" y="-289"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Table View Controller - Story-->
         <scene sceneID="Wfr-on-XAG">
             <objects>
                 <tableViewController id="zXo-41-V8Q" sceneMemberID="viewController">
@@ -475,7 +478,9 @@
                             <outlet property="delegate" destination="zXo-41-V8Q" id="s4q-eR-aOf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bWH-N8-2JF"/>
+                    <navigationItem key="navigationItem" title="Story" id="bWH-N8-2JF">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="dlT-m0-v9G"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wos-Na-1f8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -489,50 +494,6 @@
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sign_in_webSS.png" width="48" height="27"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="collectivlyCollectionsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="LogInOrOutButtonTouched:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="firstCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="firstTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="fourthCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="fourthTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="logInOrOutButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="secondCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="secondTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="thirdCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="thirdTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="collectivlyViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeButtonTouched:"/>
-                <relationship kind="action" name="requestButtonTouched:"/>
-                <relationship kind="action" name="signInButtonTouched:"/>
-                <relationship kind="outlet" name="closeButtonTouched" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="emailAddressSignInTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailAddressTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="errorMessageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="greyBGView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="inviteConfirmPasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="inviteErrorsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="invitePasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lastNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="requestInviteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="signInErrorsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

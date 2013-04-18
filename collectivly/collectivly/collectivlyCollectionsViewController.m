@@ -62,32 +62,32 @@
 -(void)FirstImageTouched:(id) sender {
     NSLog(@"image 1 has been touched and has liked it");
     
-    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:1];
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:0];
     [self getStoriesForCollection:collection];
 }
 
 -(void)SecondImageTouched:(id) sender {
     NSLog(@"image 2 has been touched and has liked it");
-    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:2];
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:1];
     [self getStoriesForCollection:collection];
 }
 
 -(void)ThirdImageTouched:(id) sender {
     NSLog(@"image 3 has been touched and has liked it");
-    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:3];
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:2];
     [self getStoriesForCollection:collection];
 }
 
 -(void)FourthImageTouched:(id) sender {
     NSLog(@"image 4 has been touched and has liked it");
-    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:4];
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:3];
     [self getStoriesForCollection:collection];
 }
 
 -(void)ithImageTouched:(id) sender {
     NSLog(@"image i has been touched and has liked it");
     int i = ithCollectionBG.tag;
-    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:i];
+    collectivlyCollection *collection = [self.currentUser.collections objectAtIndex:i-1];
     [self getStoriesForCollection:collection];
 }
 
@@ -104,8 +104,10 @@
       
       self.activityIndicator.alpha = 1.0f;
       [self.activityIndicator startAnimating];
-      
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://cloudable.me/stories/everyone/%d", collection.idNumber]];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://cloudable.me/stories/everyone/11.json"]];
+    NSLog(@"id: %d", collection.idNumber);
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://cloudable.me/stories/everyone/%d.json", collection.idNumber]];
 
     NSLog(@"[CloudableCollectionsViewController] fetching stories for collection with id: %d and name: %@", collection.idNumber, collection.name);
 
