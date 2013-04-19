@@ -21,7 +21,7 @@
 
 @implementation collectivlyCollectionsViewController
 
-int selectedCollection;
+NSInteger selectedCollection;
 
 @synthesize logInOrOutButton, scrolley, currentUser;
 @synthesize firstCollectionBG, firstTitle, secondCollectionBG, secondTitle, thirdCollectionBG, thirdTitle, fourthCollectionBG, fourthTitle;
@@ -406,8 +406,12 @@ int selectedCollection;
             
             stories = [self createStoriesFromResponse:array];
             
-            if (selectedCollection != -1)
-                [currentUser.storiesForCollectionWithId setObject:stories forKey:[NSNumber numberWithInt:selectedCollection]];
+            if (selectedCollection != -1) {
+                // update current selection
+                [currentUser setCurrentCollectionId:selectedCollection];
+                // update singleton dictionary of stories for a collection
+                [currentUser.storiesForCollectionWithId setObject:stories forKey:selectedCollection];
+            }
             selectedCollection = -1;
             
             
