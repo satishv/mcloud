@@ -26,7 +26,7 @@
 		4C08AF721721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C08AF611721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf */; };
 		4C143D5217168A6000B5A210 /* collectivlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C143D5117168A6000B5A210 /* collectivlyCollection.m */; };
 		4C5F3131171EB30E001027F8 /* nyc_sunset.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */; };
-		4C5F3133171EB4D9001027F8 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F3132171EB4D9001027F8 /* logo.png */; };
+		4C6B5B001721D661009C3986 /* collectivly_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6B5AFF1721D661009C3986 /* collectivly_logo.png */; };
 		4C9680621721026C00F56B5A /* manhattan_skyline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9680611721026C00F56B5A /* manhattan_skyline.jpg */; };
 		4CF8D9B31710BEAD00E4FD21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */; };
 		4CF8D9B51710BEAD00E4FD21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B41710BEAD00E4FD21 /* Foundation.framework */; };
@@ -73,7 +73,7 @@
 		4C143D5017168A6000B5A210 /* collectivlyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyCollection.h; sourceTree = "<group>"; };
 		4C143D5117168A6000B5A210 /* collectivlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyCollection.m; sourceTree = "<group>"; };
 		4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nyc_sunset.jpg; sourceTree = "<group>"; };
-		4C5F3132171EB4D9001027F8 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		4C6B5AFF1721D661009C3986 /* collectivly_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collectivly_logo.png; sourceTree = "<group>"; };
 		4C9680611721026C00F56B5A /* manhattan_skyline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manhattan_skyline.jpg; sourceTree = "<group>"; };
 		4CF8D9AF1710BEAD00E4FD21 /* collectivly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectivly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -175,7 +175,7 @@
 		4CF8D9B81710BEAD00E4FD21 /* collectivly */ = {
 			isa = PBXGroup;
 			children = (
-				4C5F3132171EB4D9001027F8 /* logo.png */,
+				4C6B5AFF1721D661009C3986 /* collectivly_logo.png */,
 				4CF8D9C11710BEAD00E4FD21 /* collectivlyAppDelegate.h */,
 				4CF8D9C21710BEAD00E4FD21 /* collectivlyAppDelegate.m */,
 				4CF8D9CA1710BEAD00E4FD21 /* MainStoryboard.storyboard */,
@@ -285,7 +285,6 @@
 				4CF8D9E31710BF3500E4FD21 /* request_invite_webSS.png in Resources */,
 				4CF8D9E41710BF3500E4FD21 /* sign_in_webSS.png in Resources */,
 				4C5F3131171EB30E001027F8 /* nyc_sunset.jpg in Resources */,
-				4C5F3133171EB4D9001027F8 /* logo.png in Resources */,
 				4C9680621721026C00F56B5A /* manhattan_skyline.jpg in Resources */,
 				4C08AF621721CDC900862911 /* ProximaNova-Black.otf in Resources */,
 				4C08AF631721CDC900862911 /* ProximaNova-Bold.otf in Resources */,
@@ -304,6 +303,7 @@
 				4C08AF701721CDC900862911 /* ProximaNovaCond-RegularIt.otf in Resources */,
 				4C08AF711721CDC900862911 /* ProximaNovaCond-Semibold.otf in Resources */,
 				4C08AF721721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf in Resources */,
+				4C6B5B001721D661009C3986 /* collectivly_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

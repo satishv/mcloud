@@ -24,7 +24,7 @@
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>logo.png</string>
+		<string>collectivly_logo.png</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -41,14 +41,14 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>CFBundleIconFile</key>
-	<string>logo.png</string>
+	<string>collectivly_logo.png</string>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>logo.png</string>
+				<string>collectivly_logo.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
