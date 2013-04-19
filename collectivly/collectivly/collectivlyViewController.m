@@ -331,7 +331,7 @@
                 
                 // POPULATE SINGLETON STORIES FOR LOGGED IN USER
                 currentUser.isLoggedIn = TRUE;
-                currentUser.stories = stories;
+                currentUser.personalStories = stories;
                 
                 [self dismissViewControllerAnimated:YES completion:^{
                     [self.parent refreshView];

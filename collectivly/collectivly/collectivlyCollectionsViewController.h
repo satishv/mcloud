@@ -10,6 +10,7 @@
 
 #import "collectivlySingleton.h"
 #import "collectivlyCollection.h"
+#import "collectivlyStory.h"
 
 @interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate> {
     int requestNumber;

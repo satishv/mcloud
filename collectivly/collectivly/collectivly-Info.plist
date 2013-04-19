@@ -65,5 +65,11 @@
 			<string>UINewsstandBindingEdgeLeft</string>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ProximaNova-Regular.otf</string>
+		<string>ProximaNova-Semibold.otf</string>
+		<string>ProximaNovaCond-Semibold.otf</string>
+	</array>
 </dict>
 </plist>
