@@ -56,8 +56,8 @@
         self.retweets = (NSInteger)[story objectForKey:@"retweets"];
         self.site = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [story objectForKey:@"site"]]];
         self.status = (NSInteger)[story objectForKey:@"status"];
-        self.summary = [NSString stringWithFormat:@"summary"];
-        self.title = [NSString stringWithFormat:@"title"];
+        self.summary = [NSString stringWithFormat:@"%@", [story objectForKey:@"summary"]];
+        self.title = [NSString stringWithFormat:@"%@", [story objectForKey:@"title"]];
         
         self.updatedAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"updated_at"]];
         self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [story objectForKey:@"url"]]];

@@ -19,6 +19,7 @@
 @property (nonatomic, readwrite) NSInteger currentCollectionId;
 @property (nonatomic, retain) NSMutableArray *personalStories, *popularCollections;
 @property (nonatomic, retain) NSMutableDictionary *storiesForCollectionWithId;
+@property (nonatomic, retain) NSArray *currentStories;
 
 @property (nonatomic, retain) NSString *authToken;
 

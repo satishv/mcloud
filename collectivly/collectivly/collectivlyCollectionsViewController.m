@@ -268,6 +268,24 @@ NSInteger selectedCollection;
     [alert show];
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            if (requestNumber == REQUESTHOMEPAGE){
+                [self requestHomePage];
+            }
+            else if (requestNumber == GETCOLLECTIONS){
+                [self fetchRelevantCollections];
+            }
+            else if (requestNumber == GETCERTAINCOLLECTION){
+//                [self getStoriesForCollection:self.currentUser];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"connectiondidfinishloading!");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -405,12 +423,16 @@ NSInteger selectedCollection;
             NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
             
             stories = [self createStoriesFromResponse:array];
+            NSLog(@"STORIES????: %@", stories);
             
             if (selectedCollection != -1) {
                 // update current selection
-                [currentUser setCurrentCollectionId:selectedCollection];
+                [self.currentUser setCurrentCollectionId:selectedCollection];
                 // update singleton dictionary of stories for a collection
-                [currentUser.storiesForCollectionWithId setObject:stories forKey:selectedCollection];
+//                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
+                [self.currentUser setCurrentStories:stories];
+                
+//                NSLog(@"storing stories for %d: %@", self.currentUser.currentCollectionId, [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]]);
             }
             selectedCollection = -1;
             

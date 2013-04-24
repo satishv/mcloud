@@ -12,7 +12,7 @@
 #import "collectivlyCollection.h"
 #import "collectivlyStory.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate> {
     int requestNumber;
     NSMutableData *_data;
     

@@ -42,7 +42,8 @@
     
     self.currentUser = [collectivlySingleton sharedDataModel];
     
-    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSNumber numberWithInt:self.currentUser.currentCollectionId]];
+    self.stories = self.currentUser.currentStories;
+//    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]];
     NSLog(@"stories for id %d: %@", self.currentUser.currentCollectionId, self.stories);
 }
 
@@ -72,12 +73,14 @@
 {
     
     NSLog(@" we in here for index: %d", indexPath.row);
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"StoryCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     collectivlyStory *story = self.stories[indexPath.row];
     cell.textLabel.text = story.title;
+    
+    NSLog(@"Story title: %@", story.title);
     
     return cell;
 }
