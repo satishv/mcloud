@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "collectivlyCollection.h"
 
 @interface collectivlySingleton : NSObject {
     NSMutableArray *personalStories, *popularCollections;
@@ -16,7 +17,7 @@
 }
 
 @property (nonatomic, readwrite) BOOL isLoggedIn;
-@property (nonatomic, readwrite) NSInteger currentCollectionId;
+@property (nonatomic, readwrite) collectivlyCollection *currentCollection;
 @property (nonatomic, retain) NSMutableArray *personalStories, *popularCollections;
 @property (nonatomic, retain) NSMutableDictionary *storiesForCollectionWithId;
 @property (nonatomic, retain) NSArray *currentStories;

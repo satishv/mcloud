@@ -40,7 +40,7 @@ NSInteger selectedCollection;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     NSLog(@"[CloudableCollectionsViewController] viewdidload");
-    
+
     // request number 0 initially
     requestNumber = 0;
     
@@ -134,6 +134,7 @@ NSInteger selectedCollection;
   
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
     requestNumber = GETCERTAINCOLLECTION;
+    self.currentUser.currentCollection = collection;
     selectedCollection = collection.idNumber;
       
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -425,9 +426,7 @@ NSInteger selectedCollection;
             stories = [self createStoriesFromResponse:array];
             NSLog(@"STORIES????: %@", stories);
             
-            if (selectedCollection != -1) {
-                // update current selection
-                [self.currentUser setCurrentCollectionId:selectedCollection];
+            if (self.currentUser.currentCollection != NULL) {
                 // update singleton dictionary of stories for a collection
 //                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
                 [self.currentUser setCurrentStories:stories];

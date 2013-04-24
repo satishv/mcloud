@@ -32,6 +32,10 @@
     [super viewDidLoad];
     
     NSLog(@"[collectivlyStoriesViewController] viewdidload");
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshStories) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,9 +46,15 @@
     
     self.currentUser = [collectivlySingleton sharedDataModel];
     
+    self.title = self.currentUser.currentCollection.name;
+    
     self.stories = self.currentUser.currentStories;
 //    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]];
-    NSLog(@"stories for id %d: %@", self.currentUser.currentCollectionId, self.stories);
+    NSLog(@"stories for id %d: %@", self.currentUser.currentCollection.idNumber, self.stories);
+}
+
+-(void)refreshStories {
+    
 }
 
 - (void)didReceiveMemoryWarning
