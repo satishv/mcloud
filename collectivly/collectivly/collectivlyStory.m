@@ -24,9 +24,9 @@
 //        [dateFormat setDateFormat:@"yyyy-MM-ddTHH:mm:ssZ"];
 //        [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         
-        self.articleImage = [NSString stringWithFormat:@"%@", [story objectForKey:@"article_image"]];
+        self.articleImage = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"article_image"]]];
         NSLog(@"article image: %@", self.articleImage);
-        self.categoryID = (NSInteger)[story objectForKey:@"category_id"];
+        self.categoryID = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"category_id"]] UTF8String]);
         NSLog(@"category id: %d", self.categoryID);
         self.commentedAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"commented_at"]];
         NSLog(@"commented at: \"%@\"", self.commentedAt);
@@ -39,9 +39,9 @@
         //USD?
         self.expandedImage = [NSString stringWithFormat:@"%@", [story objectForKey:@"expanded_image"]];
         self.facebookLikes = (NSInteger)[story objectForKey:@"facebook_likes"];
-        self.idNumber = (NSInteger)[story objectForKey:@"id"];
+        self.idNumber = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"id"]] UTF8String]);
         NSLog(@"identity: %d", self.idNumber);
-        self.image = [NSString stringWithFormat:@"%@", [story objectForKey:@"image"]];
+        self.image = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"image"]]];
         self.imageURLs = [story objectForKey:@"image_urls"];
         if ([imageURLs isKindOfClass:[NSArray class]]){
             for (NSString *imageURL in imageURLs){
@@ -65,6 +65,24 @@
         
     }
     return self;
+}
+
+// HELPER - returns image from url. so sexy
+- (UIImage *)imageFromURLString:(NSString *)urlString
+{
+    NSURL *imageURL = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:imageURL];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    //    [request release];
+    //    [self handleError:error];
+    UIImage *resultImage = [UIImage imageWithData:(NSData *)result];
+    
+    //    NSLog(@"urlString: %@",urlString);
+    return resultImage;
 }
 
 @end

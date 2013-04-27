@@ -55,6 +55,8 @@
 
 -(void)refreshStories {
     
+    // TODO
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,19 +83,43 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIFont *customFont = [UIFont fontWithName:@"ProximaNovaCond-Semibold" size:17];
     
     NSLog(@" we in here for index: %d", indexPath.row);
+//    static NSString *CellIdentifier = @"StoryCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    
+//    // Configure the cell...
+//    collectivlyStory *story = self.stories[indexPath.row];
+//    cell.textLabel.text = story.title;
+//    
+//    NSLog(@"Story title: %@", story.title);
+//    
+//    return cell;
+    
+    
     static NSString *CellIdentifier = @"StoryCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    collectivlyStory *story = self.stories[indexPath.row];
-    cell.textLabel.text = story.title;
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
-    NSLog(@"Story title: %@", story.title);
+    // Display recipe in the table cell
+    collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
+    UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
+    storyImageView.image = story.articleImage;
+    
+    UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
+    storyNameLabel.text = story.title;
+    storyNameLabel.font = customFont;
     
     return cell;
 }
+
+
+
 
 /*
 // Override to support conditional editing of the table view.

@@ -22,7 +22,7 @@
         
         self.createdAt = [NSString stringWithFormat:@"%@", [collection objectForKey:@"created_at"]];
         self.domain = [NSString stringWithFormat:@"%@", [collection objectForKey:@"domain"]];
-        self.idNumber = (NSInteger)[collection objectForKey:@"id"];
+        self.idNumber = atoi([[NSString stringWithFormat:@"%@", [collection objectForKey:@"id"]] cStringUsingEncoding:NSUTF8StringEncoding]);
         self.image = [self imageFromURLString:[NSString stringWithFormat:@"%@", [collection objectForKey:@"image"]]];
         self.keywords = [collection objectForKey:@"keywords"];
         if ([keywords isKindOfClass:[NSArray class]]){
@@ -32,7 +32,6 @@
         }
         self.name = [NSString stringWithFormat:@"%@", [collection objectForKey:@"name"]];
         self.parentID= (NSInteger)[collection objectForKey:@"parent_id"];
-        NSLog(@"parent id: %d", parentID);
         self.postCount = (NSInteger)[collection objectForKey:@"post_count"];
         self.rank = (NSInteger)[collection objectForKey:@"rank"];
         self.tagLine = [collection objectForKey:@"tag_line"];

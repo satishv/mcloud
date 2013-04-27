@@ -119,9 +119,9 @@ NSInteger selectedCollection;
       self.activityIndicator.alpha = 1.0f;
       [self.activityIndicator startAnimating];
 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://cloudable.me/stories/everyone/11.json"]];
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/11.json"]];
     NSLog(@"id: %d", collection.idNumber);
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://cloudable.me/stories/everyone/%d.json", collection.idNumber]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json", collection.idNumber]];
 
     NSLog(@"[CloudableCollectionsViewController] fetching stories for collection with id: %d and name: %@", collection.idNumber, collection.name);
 
@@ -178,13 +178,13 @@ NSInteger selectedCollection;
     if ([self someoneIsLoggedIn]){
         NSLog(@"[CloudableCollectionsViewController] display collections specific current logged in user!");
         
-        url = @"http://cloudable.me/categories.json?order=rank";
+        url = @"http://collectivly.com/categories.json?order=rank";
 
     }
     else {
         NSLog(@"[CloudableCollectionsViewController] display most popular collections, because no one is logged in!");
         
-        url = @"http://cloudable.me/categories.json?page=1";
+        url = @"http://collectivly.com/categories.json?page=1";
     }
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
 
@@ -408,6 +408,7 @@ NSInteger selectedCollection;
                     }
                 }
                 
+                NSLog(@"ADDINGGNGGGG collection with id: %d", cc.idNumber);
                 
                 [colls addObject:cc];
                 i++;
