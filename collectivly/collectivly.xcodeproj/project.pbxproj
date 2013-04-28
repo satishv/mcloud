@@ -28,6 +28,9 @@
 		4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */; };
 		4C5F3131171EB30E001027F8 /* nyc_sunset.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */; };
 		4C6B5B001721D661009C3986 /* collectivly_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6B5AFF1721D661009C3986 /* collectivly_logo.png */; };
+		4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */; };
+		4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */; };
+		4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */; };
 		4C9680621721026C00F56B5A /* manhattan_skyline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9680611721026C00F56B5A /* manhattan_skyline.jpg */; };
 		4CA8DC0E172C693500FC6579 /* red_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA8DC0D172C693400FC6579 /* red_triangle.png */; };
 		4CD125BA1727B38E00E55C58 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD125AE1727B38E00E55C58 /* clock.png */; };
@@ -90,6 +93,13 @@
 		4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyStoriesViewController.m; sourceTree = "<group>"; };
 		4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nyc_sunset.jpg; sourceTree = "<group>"; };
 		4C6B5AFF1721D661009C3986 /* collectivly_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collectivly_logo.png; sourceTree = "<group>"; };
+		4C6D3587172CAD5E00AB7F3B /* JTRevealSidebarV2Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTRevealSidebarV2Delegate.h; sourceTree = "<group>"; };
+		4C6D3588172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+JTRevealSidebarV2.h"; sourceTree = "<group>"; };
+		4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+JTRevealSidebarV2.m"; sourceTree = "<group>"; };
+		4C6D358A172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JTRevealSidebarV2.h"; sourceTree = "<group>"; };
+		4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JTRevealSidebarV2.m"; sourceTree = "<group>"; };
+		4C6D358E172CB0F700AB7F3B /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SidebarViewController.h; path = JTRevealSidebarV2/SidebarViewController.h; sourceTree = "<group>"; };
+		4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SidebarViewController.m; path = JTRevealSidebarV2/SidebarViewController.m; sourceTree = "<group>"; };
 		4C9680611721026C00F56B5A /* manhattan_skyline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manhattan_skyline.jpg; sourceTree = "<group>"; };
 		4CA8DC0D172C693400FC6579 /* red_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_triangle.png; sourceTree = "<group>"; };
 		4CD125AE1727B38E00E55C58 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
@@ -174,6 +184,18 @@
 			path = ProximaNova;
 			sourceTree = "<group>";
 		};
+		4C6D3586172CAD5E00AB7F3B /* JTRevealSidebarV2 */ = {
+			isa = PBXGroup;
+			children = (
+				4C6D3587172CAD5E00AB7F3B /* JTRevealSidebarV2Delegate.h */,
+				4C6D3588172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.h */,
+				4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */,
+				4C6D358A172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.h */,
+				4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */,
+			);
+			path = JTRevealSidebarV2;
+			sourceTree = "<group>";
+		};
 		4CD125AD1727B38E00E55C58 /* storiesview */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +258,9 @@
 				4CF8D9EE1710C0DB00E4FD21 /* collectivlySingleton.m */,
 				4C2F88F81721EF15009006EF /* collectivlyStoriesViewController.h */,
 				4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */,
+				4C6D358E172CB0F700AB7F3B /* SidebarViewController.h */,
+				4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */,
+				4C6D3586172CAD5E00AB7F3B /* JTRevealSidebarV2 */,
 				4CF8D9B91710BEAD00E4FD21 /* Supporting Files */,
 			);
 			path = collectivly;
@@ -387,6 +412,9 @@
 				4CF8D9F21710C0EB00E4FD21 /* collectivlyStory.m in Sources */,
 				4C143D5217168A6000B5A210 /* collectivlyCollection.m in Sources */,
 				4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */,
+				4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */,
+				4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */,
+				4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,9 +499,12 @@
 		4CF8D9D31710BEAD00E4FD21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "collectivly/collectivly-Prefix.pch";
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "collectivly/collectivly-Info.plist";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -482,9 +513,12 @@
 		4CF8D9D41710BEAD00E4FD21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "collectivly/collectivly-Prefix.pch";
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "collectivly/collectivly-Info.plist";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

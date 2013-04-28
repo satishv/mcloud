@@ -54,8 +54,24 @@
 }
 
 -(void)refreshStories {
+    NSLog(@"REFRESHING STORIES");
     
-    // TODO
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/11.json"]];
+    NSLog(@"refreshing collection with id: %d", self.currentUser.currentCollection.idNumber);
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json", self.currentUser.currentCollection.idNumber]];
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // HTTP request, setting stuff
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+    
     
 }
 
@@ -86,17 +102,6 @@
     UIFont *customFont = [UIFont fontWithName:@"ProximaNovaCond-Semibold" size:17];
     
     NSLog(@" we in here for index: %d", indexPath.row);
-//    static NSString *CellIdentifier = @"StoryCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    
-//    // Configure the cell...
-//    collectivlyStory *story = self.stories[indexPath.row];
-//    cell.textLabel.text = story.title;
-//    
-//    NSLog(@"Story title: %@", story.title);
-//    
-//    return cell;
-    
     
     static NSString *CellIdentifier = @"StoryCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -106,7 +111,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Display recipe in the table cell
     collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
     UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
     storyImageView.image = story.articleImage;
@@ -172,5 +176,81 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+-(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
+    NSMutableArray *lolz = [[NSMutableArray alloc] init];
+    for (int i = 0; i < array.count; i++){
+        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
+        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        [lolz addObject:story];
+        
+    }
+    return lolz;
+}
+
+#pragma mark connection protocol functions
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"conection did receive response!");
+    _data = [[NSMutableData alloc] init];
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"conection did receive data!");
+    [_data appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // Please do something sensible here, like log the error.
+    NSLog(@"connection failed with error: %@", error.description);
+    
+    // stop spinner
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    [self.refreshControl endRefreshing];
+    
+    // alert view for network error
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Network Error"
+                          message: @"There was a network error :\\"
+                          delegate: self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Retry", nil];
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            [self refreshStories];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connectiondidfinishloading!");
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    [self.refreshControl endRefreshing];
+    
+    NSMutableArray *newStories = [[NSMutableArray alloc] init];
+    
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
+    
+    newStories = [self createStoriesFromResponse:array];
+    
+    if (self.currentUser.currentCollection != NULL) {
+        // update singleton dictionary of stories for a collection
+        //                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
+        [self.currentUser setCurrentStories:newStories];
+        
+        self.stories = newStories;
+    }
+    
+    [self.tableView reloadData];
+}
+
 
 @end

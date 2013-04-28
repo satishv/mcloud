@@ -11,7 +11,10 @@
 #import "collectivlySingleton.h"
 #import "collectivlyStory.h"
 
-@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate> {
+
+    NSMutableData *_data;
+}
 
 @property (retain) collectivlySingleton *currentUser;
 

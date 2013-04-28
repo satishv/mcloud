@@ -23,7 +23,7 @@
 
 NSInteger selectedCollection;
 
-@synthesize logInOrOutButton, scrolley, currentUser;
+@synthesize scrolley, currentUser, activityIndicator, rightSideBarViewController;
 @synthesize firstCollectionBG, firstTitle, secondCollectionBG, secondTitle, thirdCollectionBG, thirdTitle, fourthCollectionBG, fourthTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,7 +60,67 @@ NSInteger selectedCollection;
     fourthCollectionBG.alpha = 0.0f;
     
     self.activityIndicator.alpha = 0.0f;
+    
+    self.navigationItem.revealSidebarDelegate = self;
 }
+
+- (IBAction)rightSideBarButtonTouched:(id)sender {
+    NSLog(@"touched");
+    [self.navigationController toggleRevealState:JTRevealedStateRight];
+}
+
+#pragma mark SidebarViewControllerDelegate
+
+- (void)sidebarViewController:(SidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
+    
+    [sidebarViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.navigationController setRevealedState:JTRevealedStateNo];
+
+    NSLog(@"SIDEBARRRRRR DIDSELECTOBJECT: %@", object.description);
+    if ([object isKindOfClass:[NSString class]]){
+        NSString *string = (NSString *)object;
+        if ([string isEqualToString:@"Login"]){
+            [self performSegueWithIdentifier:@"loginsignup" sender:self];
+        }
+    }
+
+}
+
+//- (NSIndexPath *)lastSelectedIndexPathForSidebarViewController:(SidebarViewController *)sidebarViewController {
+//    return self.rightSelectedIndexPath;
+//}
+
+#pragma mark JTRevealSidebarDelegate
+
+// This is an examle to configure your sidebar view through a custom UIViewController
+- (UIView *)viewForRightSidebar {
+    // Use applicationViewFrame to get the correctly calculated view's frame
+    // for use as a reference to our sidebar's view
+    CGRect viewFrame = self.navigationController.applicationViewFrame;
+    SidebarViewController *controller = self.rightSideBarViewController;
+    if ( ! controller) {
+        self.rightSideBarViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RIGHT"];
+        self.rightSideBarViewController.sidebarDelegate = self;
+        controller = self.rightSideBarViewController;
+        controller.navigationItem.title = @"Settings";
+        controller.title = @"Settings";
+    }
+    controller.view.frame = CGRectMake(0, viewFrame.origin.y, 270, viewFrame.size.height);
+    controller.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    return controller.view;
+}
+
+// Optional delegate methods for additional configuration after reveal state changed
+- (void)didChangeRevealedStateForViewController:(UIViewController *)viewController {
+    // Example to disable userInteraction on content view while sidebar is revealing
+    if (viewController.revealedState == JTRevealedStateNo) {
+        self.view.userInteractionEnabled = YES;
+    } else {
+        self.view.userInteractionEnabled = NO;
+    }
+}
+
 
 -(void)FirstImageTouched:(id) sender {
     NSLog(@"image 1 has been touched and has liked it");
@@ -153,16 +213,7 @@ NSInteger selectedCollection;
     return (self.currentUser.isLoggedIn);
 }
 
--(void)updateLogInButtonText {
-    if (self.currentUser.isLoggedIn)
-        self.logInOrOutButton.titleLabel.text = @"Log Out";
-    else
-        self.logInOrOutButton.titleLabel.text = @"Log In/Sign up";
-}
-
 -(void)refreshView {
-    [self updateLogInButtonText];
-    
     [self fetchRelevantCollections];
 }
 
@@ -197,19 +248,6 @@ NSInteger selectedCollection;
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-    
-}
-
-- (IBAction)LogInOrOutButtonTouched:(id)sender {
-    if (self.currentUser.isLoggedIn){
-        // TODO: LOG USER OUT
-    }
-    else {
-        
-//        collectivlyViewController *logInViewController = [[collectivlyViewController alloc] init];
-        
-        [self performSegueWithIdentifier:@"loginsignup" sender:self];
-    }
     
 }
 

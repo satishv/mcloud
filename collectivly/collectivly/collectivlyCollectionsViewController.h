@@ -11,8 +11,12 @@
 #import "collectivlySingleton.h"
 #import "collectivlyCollection.h"
 #import "collectivlyStory.h"
+#import "JTRevealSidebarV2Delegate.h"
+#import "UINavigationItem+JTRevealSidebarV2.h"
+#import "UIViewController+JTRevealSidebarV2.h"
+#import "SidebarViewController.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, SidebarViewControllerDelegate> {
     int requestNumber;
     NSMutableData *_data;
     
@@ -21,9 +25,6 @@
 }
 
 @property (retain) collectivlySingleton *currentUser;
-
-//@property (retain, nonatomic) IBOutlet UINavigationBar *navBar;
-@property (retain, nonatomic) IBOutlet UIButton *logInOrOutButton;
 
 //@property (retain, nonatomic) IBOutlet collectivlyViewController *logInViewController;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -40,7 +41,9 @@
 
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 
--(IBAction)LogInOrOutButtonTouched:(id)sender;
+@property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
+
+-(IBAction)rightSideBarButtonTouched:(id)sender;
 
 -(void)refreshView;
 

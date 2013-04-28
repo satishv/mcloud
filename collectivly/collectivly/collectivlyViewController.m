@@ -23,7 +23,7 @@
 
 @synthesize firstNameTextField, lastNameTextField, emailAddressTextField, invitePasswordTextField, inviteConfirmPasswordTextField, requestInviteButton, scrolley, greyBGView, errorMessageLabel;
 @synthesize emailAddressSignInTextField, passwordTextField;
-@synthesize inviteErrorsLabel, signInErrorsLabel, parent;
+@synthesize inviteErrorsLabel, signInErrorsLabel, parent, closeButtonTouched;
 @synthesize currentUser;
 
 
