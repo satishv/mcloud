@@ -229,13 +229,13 @@ NSInteger selectedCollection;
     if ([self someoneIsLoggedIn]){
         NSLog(@"[CloudableCollectionsViewController] display collections specific current logged in user!");
         
-        url = @"http://collectivly.com/categories.json?order=rank";
+        url = @"https://collectivly.com/categories.json?order=rank";
 
     }
     else {
         NSLog(@"[CloudableCollectionsViewController] display most popular collections, because no one is logged in!");
         
-        url = @"http://collectivly.com/categories.json?page=1";
+        url = @"https://collectivly.com/categories.json?page=1";
     }
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
 
@@ -261,7 +261,7 @@ NSInteger selectedCollection;
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    NSString *url = @"http://cloudable.me/";
+    NSString *url = @"https://collectivly.com/";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     // HTTP request, setting stuff
