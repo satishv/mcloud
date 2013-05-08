@@ -245,6 +245,7 @@
         // update singleton dictionary of stories for a collection
         //                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
         [self.currentUser setCurrentStories:newStories];
+        [self.currentUser.storiesForCollectionWithId setObject:newStories forKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber]];
         
         self.stories = newStories;
     }

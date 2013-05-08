@@ -172,6 +172,32 @@ NSInteger selectedCollection;
 }
 
 -(void)getStoriesForCollection:(collectivlyCollection *)collection {
+    
+    // TODO: PULL OLD COLLECTIONS FROM SINGLETON
+    
+    NSLog(@"length of storiesforcollectionwithid: %d", self.currentUser.storiesForCollectionWithId.count);
+    for (NSString *key in self.currentUser.storiesForCollectionWithId){
+        NSLog(@"KEY: %@, and VALUE: %@", key, [self.currentUser.storiesForCollectionWithId objectForKey:key]);
+    }
+    
+    if ([[self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", collection.idNumber]] isKindOfClass:[NSMutableArray class]]){
+        
+        NSLog(@"GETTING OLD STORIES!!! FOR COLLECTION ID: %d WITH TITLE: %@", collection.idNumber, collection.name);
+        
+        NSMutableArray *stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", collection.idNumber]];
+        
+        self.currentUser.currentCollection = collection;
+        selectedCollection = collection.idNumber;
+        
+        
+        [self.currentUser setCurrentStories:stories];
+        selectedCollection = -1;
+        [self performSegueWithIdentifier:@"showCollection" sender:self];
+    
+        return;
+    
+    }
+    
 
       NSLog(@"fetching relevant collections.....");
       [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -462,19 +488,29 @@ NSInteger selectedCollection;
             
             NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
             
+            
+            // stories for the relevant collection!
             stories = [self createStoriesFromResponse:array];
             NSLog(@"STORIES????: %@", stories);
             
+            // UPDATE STORIES DICTIONARY IN SINGLETON 
             if (self.currentUser.currentCollection != NULL) {
-                // update singleton dictionary of stories for a collection
-//                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
-                [self.currentUser setCurrentStories:stories];
+                NSLog(@"ADDING A GUY for this collection: %d", selectedCollection);
                 
-//                NSLog(@"storing stories for %d: %@", self.currentUser.currentCollectionId, [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]]);
+                // update singleton dictionary of stories for a collection
+                // initil
+                if (self.currentUser.storiesForCollectionWithId == nil) {
+                    self.currentUser.storiesForCollectionWithId = [[NSMutableDictionary alloc] initWithObjectsAndKeys:stories, [NSString stringWithFormat:@"%d", selectedCollection], nil];
+                }
+                else {
+                    [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
+                }
+                NSLog(@"storiesforcollectionwithid: %@", self.currentUser.storiesForCollectionWithId);
+                [self.currentUser setCurrentStories:stories];
             }
             selectedCollection = -1;
             
-            
+            // SHOW COLLECTOIN ITSELF AND ITS STORIES!
             [self performSegueWithIdentifier:@"showCollection" sender:self];
         }
         default:
