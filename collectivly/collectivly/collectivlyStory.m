@@ -16,6 +16,7 @@
 @synthesize commentCategories, computedTags, imageURLs, keywords;
 @synthesize computedCategories;
 @synthesize url, site, origURL;
+@synthesize profileImage, friendsCount, totalCount;
 
 - (id)initWithDictionary:(NSDictionary *)story {
     self = [super init];
@@ -23,6 +24,8 @@
 //        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 //        [dateFormat setDateFormat:@"yyyy-MM-ddTHH:mm:ssZ"];
 //        [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        
+        NSLog(@"making story from STORYRYRYRYRY: %@", story);
         
         self.articleImage = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"article_image"]]];
         NSLog(@"article image: %@", self.articleImage);
@@ -38,27 +41,31 @@
         self.createdTime = [NSString stringWithFormat:@"%@", [story objectForKey:@"created_time"]];
         //USD?
         self.expandedImage = [NSString stringWithFormat:@"%@", [story objectForKey:@"expanded_image"]];
-        self.facebookLikes = (NSInteger)[story objectForKey:@"facebook_likes"];
+        self.facebookLikes = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"facebook_likes"]] UTF8String]);
+        self.friendsCount = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"friends_count"]] UTF8String]);
         self.idNumber = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"id"]] UTF8String]);
         NSLog(@"identity: %d", self.idNumber);
         self.image = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"image"]]];
         self.imageURLs = [story objectForKey:@"image_urls"];
         if ([imageURLs isKindOfClass:[NSArray class]]){
-            for (NSString *imageURL in imageURLs){
-                NSLog(@"image url: %@", imageURL);
-            }
+            NSLog(@"image urls are not null, and there are more than one!!!");
+//            for (NSString *imageURL in imageURLs){
+//                NSLog(@"image url: %@", imageURL);
+//            }
         }
         self.keywords = [story objectForKey:@"keywords"];
         self.linkID = [NSString stringWithFormat:@"%@", [story objectForKey:@"link_id"]];
         self.ogType = [NSString stringWithFormat:@"%@", [story objectForKey:@"og_type"]];
         self.origURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [story objectForKey:@"orig_url"]]];
+        NSDictionary *owner = [story objectForKey:@"owner"];
+        self.profileImage = [self imageFromURLString:[NSString stringWithFormat:@"%@", [owner objectForKey:@"profile_image"]]];
         self.provider = (NSInteger)[story objectForKey:@"provider"];
         self.retweets = (NSInteger)[story objectForKey:@"retweets"];
         self.site = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [story objectForKey:@"site"]]];
         self.status = (NSInteger)[story objectForKey:@"status"];
         self.summary = [NSString stringWithFormat:@"%@", [story objectForKey:@"summary"]];
         self.title = [NSString stringWithFormat:@"%@", [story objectForKey:@"title"]];
-        
+        self.totalCount = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"total_count"]] UTF8String]);
         self.updatedAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"updated_at"]];
         self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [story objectForKey:@"url"]]];
         

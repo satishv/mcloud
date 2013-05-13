@@ -10,10 +10,10 @@
 
 @interface collectivlyStory : NSObject {
 
-    UIImage *articleImage, *expandedImage, *image;
+    UIImage *articleImage, *expandedImage, *image, *profileImage;
     NSString *linkID, *ogType, *title, *summary;
     NSString *commentedAt, *createdAt, *createdTime, *updatedAt;
-    NSInteger categoryID, commentsCount, facebookLikes, idNumber, status, retweets, provider;
+    NSInteger categoryID, commentsCount, facebookLikes, idNumber, status, retweets, provider, friendsCount, totalCount;
     NSArray *commentCategories, *computedTags, *imageURLs, *keywords;
     NSDictionary *computedCategories;
     // expires_at??
@@ -35,9 +35,9 @@
 
 }
 
-@property (retain, nonatomic) UIImage *articleImage, *expandedImage, *image;
+@property (retain, nonatomic) UIImage *articleImage, *expandedImage, *image, *profileImage;
 @property (retain, nonatomic) NSString *linkID, *ogType, *title, *summary;
-@property (assign, nonatomic) NSInteger categoryID, commentsCount, facebookLikes, idNumber, status, retweets, provider;
+@property (assign, nonatomic) NSInteger categoryID, commentsCount, facebookLikes, idNumber, status, retweets, provider, friendsCount, totalCount;
 @property (retain, nonatomic) NSString *commentedAt, *createdAt, *createdTime, *updatedAt;
 @property (retain, nonatomic) NSArray *commentCategories, *computedTags, *imageURLs, *keywords;
 @property (retain, nonatomic) NSDictionary *computedCategories;

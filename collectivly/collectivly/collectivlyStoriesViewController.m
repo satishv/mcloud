@@ -101,7 +101,7 @@
 {
     UIFont *customFont = [UIFont fontWithName:@"ProximaNovaCond-Semibold" size:17];
     
-    NSLog(@" we in here for index: %d", indexPath.row);
+    UIFont *smallCustomFont = [UIFont fontWithName:@"ProximaNovaCond-Regular" size:11.5];
     
     static NSString *CellIdentifier = @"StoryCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -112,12 +112,30 @@
     }
     
     collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
+    NSLog(@"story number %d: %@", indexPath.row, story.title);
     UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
     storyImageView.image = story.articleImage;
     
     UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
     storyNameLabel.text = story.title;
     storyNameLabel.font = customFont;
+    
+    UIImageView *sourceImage = (UIImageView *)[cell viewWithTag:102];
+    sourceImage.image = story.profileImage;
+    
+    UILabel *timeAgoLabel = (UILabel *)[cell viewWithTag:103];
+    timeAgoLabel.text = @"10 seconds ago";
+    timeAgoLabel.font = smallCustomFont;
+    
+    UILabel *totalCountLabel = (UILabel *)[cell viewWithTag:104];
+    totalCountLabel.text = [NSString stringWithFormat:@"%d", story.totalCount];
+//    totalCountLabel.text = @"1205";
+    totalCountLabel.font = smallCustomFont;
+    
+    UILabel *friendsCountLabel = (UILabel *)[cell viewWithTag:105];
+    friendsCountLabel.text = [NSString stringWithFormat:@"%d", story.friendsCount];
+//    friendsCountLabel.text = @"15";
+    friendsCountLabel.font = smallCustomFont;
     
     return cell;
 }
