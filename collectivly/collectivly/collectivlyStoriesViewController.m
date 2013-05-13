@@ -99,14 +99,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // set up fonts
     UIFont *customFont = [UIFont fontWithName:@"ProximaNovaCond-Semibold" size:17];
-    
     UIFont *smallCustomFont = [UIFont fontWithName:@"ProximaNovaCond-Regular" size:11.5];
     
+    // get current time --> convert to GMT time zone time
+    NSDate *currentTime = [NSDate date];
+    NSString *currentGMTTime = [self convertToGMTTime:currentTime];
+    
+    // Configure the cell...
     static NSString *CellIdentifier = @"StoryCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
@@ -123,8 +127,12 @@
     UIImageView *sourceImage = (UIImageView *)[cell viewWithTag:102];
     sourceImage.image = story.profileImage;
     
+    // extract time difference between current time and post time, output time difference to UI
+    NSString *timeDifference = [self findDifferenceBetweenCurrent:currentGMTTime AndCreatedTime:story.createdAt];
+    
     UILabel *timeAgoLabel = (UILabel *)[cell viewWithTag:103];
-    timeAgoLabel.text = @"10 seconds ago";
+//    timeAgoLabel.text = @"10 seconds ago";
+    timeAgoLabel.text = timeDifference;
     timeAgoLabel.font = smallCustomFont;
     
     UILabel *totalCountLabel = (UILabel *)[cell viewWithTag:104];
@@ -140,7 +148,38 @@
     return cell;
 }
 
+-(NSString *)convertToGMTTime:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
+    NSString *resultString = [dateFormatter stringFromDate:date];
+    NSLog(@"current time: %@", resultString);
+    NSTimeZone *currentZone = [NSTimeZone localTimeZone];
+    NSInteger diff = [currentZone secondsFromGMT];
+    NSInteger hoursFromGMT = diff / 60 / 60;
+    NSLog(@"hourss from gmt...      : %d", hoursFromGMT);
+    
+    // convert current time to GMT TIME
+    NSInteger currentHour = atoi([[resultString substringWithRange:NSMakeRange(11, 2)] UTF8String]);
+    NSInteger currentDay  = atoi([[resultString substringWithRange:NSMakeRange(8, 2)] UTF8String]);
+    NSLog(@"current hour and day: %d, %d", currentHour, currentDay);
+    NSInteger hourGMTadjust = currentHour - hoursFromGMT;
+    if (hourGMTadjust > 23) {
+        hourGMTadjust -= 24;
+        currentDay += 1;
+    }
+    
+    // make new GMT time!
+    NSString *currentGMTTime = [NSString stringWithFormat:@"%@%dT%d%@", [resultString substringToIndex:8], currentDay, hourGMTadjust, [resultString substringFromIndex:13]];
+    NSLog(@"current GMT time: %@", currentGMTTime);
+    
+    return currentGMTTime;
+}
 
+-(NSString *)findDifferenceBetweenCurrent:(NSString *)current AndCreatedTime:(NSString *)created {
+    // TODO: FIX!!!
+    
+    return @"10 seconds ago";
+}
 
 
 /*

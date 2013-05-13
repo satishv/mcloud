@@ -651,55 +651,6 @@
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sign_in_webSS.png" width="48" height="27"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SidebarViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SidebarViewController.h"/>
-        </class>
-        <class className="collectivlyCollectionsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="firstCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="firstTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="fourthCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="fourthTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rightSideBarViewController" candidateClass="SidebarViewController"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="secondCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="secondTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="thirdCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="thirdTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
-        </class>
-        <class className="collectivlyViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="requestButtonTouched:"/>
-                <relationship kind="action" name="signInButtonTouched:"/>
-                <relationship kind="outlet" name="closeButtonTouched" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="emailAddressSignInTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailAddressTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="errorMessageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="greyBGView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="inviteConfirmPasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="inviteErrorsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="invitePasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lastNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="requestInviteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="signInErrorsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
