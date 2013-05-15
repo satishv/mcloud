@@ -10,8 +10,13 @@
 
 #import "collectivlySingleton.h"
 #import "collectivlyStory.h"
+#import "JTRevealSidebarV2Delegate.h"
+#import "UINavigationItem+JTRevealSidebarV2.h"
+#import "UIViewController+JTRevealSidebarV2.h"
+#import "SidebarViewController.h"
 
-@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate> {
+
+@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, JTRevealSidebarV2Delegate, SidebarViewControllerDelegate> {
 
     NSMutableData *_data;
 }
@@ -19,6 +24,8 @@
 @property (retain) collectivlySingleton *currentUser;
 
 @property (nonatomic, retain) NSArray *stories;
+
+@property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
 
 
 @end

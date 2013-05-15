@@ -66,9 +66,9 @@ NSInteger selectedCollection;
     
     self.activityIndicator.alpha = 0.0f;
     
-    // customize right bar button item
+    // customize nav bar right bar button item
     UIImage* threeBars = [UIImage imageNamed:@"options menu.png"];
-    NSInteger offset = 10;
+    NSInteger offset = 12;
     CGRect frameimg = CGRectMake(offset, offset, threeBars.size.width - offset, threeBars.size.height - offset);
     UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
     [someButton setBackgroundImage:threeBars forState:UIControlStateNormal];
@@ -76,6 +76,17 @@ NSInteger selectedCollection;
     [someButton setShowsTouchWhenHighlighted:YES];
     UIBarButtonItem *showOptions =[[UIBarButtonItem alloc] initWithCustomView:someButton];
     self.navigationItem.rightBarButtonItem = showOptions;
+    
+    // customize nav bar label text
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"ProximaNova-Bold" size:16];
+//    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+//    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor =[UIColor whiteColor];
+    label.text = @"COLLECTIONS";
+    self.navigationItem.titleView = label;
     
     // set up delegate for sidebar actions
     self.navigationItem.revealSidebarDelegate = self;

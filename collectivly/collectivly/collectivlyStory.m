@@ -23,13 +23,13 @@
     if (self) {
 
         self.articleImage = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"article_image"]]];
-        NSLog(@"article image: %@", self.articleImage);
+//        NSLog(@"article image: %@", self.articleImage);
         self.categoryID = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"category_id"]] UTF8String]);
-        NSLog(@"category id: %d", self.categoryID);
+//        NSLog(@"category id: %d", self.categoryID);
         self.commentedAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"commented_at"]];
-        NSLog(@"commented at: \"%@\"", self.commentedAt);
+//        NSLog(@"commented at: \"%@\"", self.commentedAt);
         self.commentsCount = (NSInteger)[story objectForKey:@"comments_count"];
-        NSLog(@"comments count: %d", self.commentsCount);
+//        NSLog(@"comments count: %d", self.commentsCount);
         self.computedCategories = [story objectForKey:@"computed_categories"];
         self.computedTags = [story objectForKey:@"computed_tags"];
         self.createdAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"created_at"]];
@@ -39,11 +39,11 @@
         self.facebookLikes = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"facebook_likes"]] UTF8String]);
         self.friendsCount = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"friends_count"]] UTF8String]);
         self.idNumber = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"id"]] UTF8String]);
-        NSLog(@"identity: %d", self.idNumber);
+//        NSLog(@"identity: %d", self.idNumber);
         self.image = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"image"]]];
         self.imageURLs = [story objectForKey:@"image_urls"];
         if ([imageURLs isKindOfClass:[NSArray class]]){
-            NSLog(@"image urls are not null, and there are more than one!!!");
+//            NSLog(@"image urls are not null, and there are more than one!!!");
 //            for (NSString *imageURL in imageURLs){
 //                NSLog(@"image url: %@", imageURL);
 //            }

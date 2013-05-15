@@ -26,7 +26,6 @@
 
 @property (retain) collectivlySingleton *currentUser;
 
-//@property (retain, nonatomic) IBOutlet collectivlyViewController *logInViewController;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (retain, nonatomic) IBOutlet UIImageView *firstCollectionBG;
