@@ -467,15 +467,7 @@
                             <constraint firstItem="kjn-Nh-Rv4" firstAttribute="trailing" secondItem="4vS-EN-Ohe" secondAttribute="trailing" type="default" id="qaf-P8-kLp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Collections" id="JAe-pl-2ss">
-                        <barButtonItem key="rightBarButtonItem" image="options menu.png" id="lgK-tz-QIE">
-                            <inset key="imageInsets" minX="5" minY="5" maxX="11" maxY="0.0"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="rightSideBarButtonTouched:" destination="qlW-TG-BSF" id="1QK-BP-py3"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Collections" id="JAe-pl-2ss"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -644,7 +636,6 @@
         <image name="hexfortotalsharecount.png" width="29" height="25"/>
         <image name="intro_logo.png" width="176" height="47"/>
         <image name="manhattan_skyline.jpg" width="1600" height="1200"/>
-        <image name="options menu.png" width="38" height="36"/>
         <image name="red_triangle.png" width="37" height="63"/>
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sign_in_webSS.png" width="48" height="27"/>

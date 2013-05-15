@@ -53,6 +53,7 @@ NSInteger selectedCollection;
     self.currentUser = [collectivlySingleton sharedDataModel];
     self.currentUser.authToken = @"";
     
+    // clear all collection images
     firstTitle.text = @"";
     secondTitle.text = @"";
     thirdTitle.text = @"";
@@ -65,6 +66,18 @@ NSInteger selectedCollection;
     
     self.activityIndicator.alpha = 0.0f;
     
+    // customize right bar button item
+    UIImage* threeBars = [UIImage imageNamed:@"options menu.png"];
+    NSInteger offset = 10;
+    CGRect frameimg = CGRectMake(offset, offset, threeBars.size.width - offset, threeBars.size.height - offset);
+    UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
+    [someButton setBackgroundImage:threeBars forState:UIControlStateNormal];
+    [someButton addTarget:self action:@selector(rightSideBarButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [someButton setShowsTouchWhenHighlighted:YES];
+    UIBarButtonItem *showOptions =[[UIBarButtonItem alloc] initWithCustomView:someButton];
+    self.navigationItem.rightBarButtonItem = showOptions;
+    
+    // set up delegate for sidebar actions
     self.navigationItem.revealSidebarDelegate = self;
 }
 
