@@ -8,6 +8,14 @@
 
 #import "collectivlyAppDelegate.h"
 
+
+@implementation UINavigationBar (UINavigationBarCategory)
+- (void)drawRect:(CGRect)rect {
+    UIImage *img = [UIImage imageNamed:@"topbar_320x44.png"];
+    [img drawInRect:rect];
+}
+@end
+
 @implementation collectivlyAppDelegate
 
 @synthesize window;

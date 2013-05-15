@@ -40,6 +40,10 @@ NSInteger selectedCollection;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     NSLog(@"[CloudableCollectionsViewController] viewdidload");
+    
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbar_320x44.png"] forBarMetrics:UIBarMetricsDefault];
+    }
 
     // request number 0 initially
     requestNumber = 0;

@@ -33,6 +33,7 @@
 		4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */; };
 		4C9680621721026C00F56B5A /* manhattan_skyline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9680611721026C00F56B5A /* manhattan_skyline.jpg */; };
 		4CA8DC0E172C693500FC6579 /* red_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA8DC0D172C693400FC6579 /* red_triangle.png */; };
+		4CAA47EF17436F070081940E /* topbar_320x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CAA47EE17436F070081940E /* topbar_320x44.png */; };
 		4CD125BA1727B38E00E55C58 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD125AE1727B38E00E55C58 /* clock.png */; };
 		4CD125BD1727B38E00E55C58 /* friendssharecount.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD125B11727B38E00E55C58 /* friendssharecount.png */; };
 		4CD125BE1727B38E00E55C58 /* hexfortotalsharecount.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD125B21727B38E00E55C58 /* hexfortotalsharecount.png */; };
@@ -100,6 +101,7 @@
 		4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SidebarViewController.m; path = JTRevealSidebarV2/SidebarViewController.m; sourceTree = "<group>"; };
 		4C9680611721026C00F56B5A /* manhattan_skyline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manhattan_skyline.jpg; sourceTree = "<group>"; };
 		4CA8DC0D172C693400FC6579 /* red_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_triangle.png; sourceTree = "<group>"; };
+		4CAA47EE17436F070081940E /* topbar_320x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar_320x44.png; sourceTree = "<group>"; };
 		4CD125AE1727B38E00E55C58 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		4CD125B11727B38E00E55C58 /* friendssharecount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendssharecount.png; sourceTree = "<group>"; };
 		4CD125B21727B38E00E55C58 /* hexfortotalsharecount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexfortotalsharecount.png; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		4CD125AD1727B38E00E55C58 /* storiesview */ = {
 			isa = PBXGroup;
 			children = (
+				4CAA47EE17436F070081940E /* topbar_320x44.png */,
 				4CA8DC0D172C693400FC6579 /* red_triangle.png */,
 				4CD125AE1727B38E00E55C58 /* clock.png */,
 				4CD125B11727B38E00E55C58 /* friendssharecount.png */,
@@ -386,6 +389,7 @@
 				4CD125C41727B38E00E55C58 /* storyback.png in Resources */,
 				4CD125C51727B38E00E55C58 /* topbar.png in Resources */,
 				4CA8DC0E172C693500FC6579 /* red_triangle.png in Resources */,
+				4CAA47EF17436F070081940E /* topbar_320x44.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
