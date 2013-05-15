@@ -163,7 +163,7 @@ NSInteger selectedCollection;
 -(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
     NSMutableArray *stories = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
-        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
+//        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
         collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
         [stories addObject:story];
         

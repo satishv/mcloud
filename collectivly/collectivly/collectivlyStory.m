@@ -21,12 +21,7 @@
 - (id)initWithDictionary:(NSDictionary *)story {
     self = [super init];
     if (self) {
-//        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//        [dateFormat setDateFormat:@"yyyy-MM-ddTHH:mm:ssZ"];
-//        [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-        
-        NSLog(@"making story from STORYRYRYRYRY: %@", story);
-        
+
         self.articleImage = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"article_image"]]];
         NSLog(@"article image: %@", self.articleImage);
         self.categoryID = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"category_id"]] UTF8String]);

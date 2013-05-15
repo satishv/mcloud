@@ -152,16 +152,16 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
     NSString *resultString = [dateFormatter stringFromDate:date];
-    NSLog(@"current time: %@", resultString);
+//    NSLog(@"current time: %@", resultString);
     NSTimeZone *currentZone = [NSTimeZone localTimeZone];
     NSInteger diff = [currentZone secondsFromGMT];
     NSInteger hoursFromGMT = diff / 60 / 60;
-    NSLog(@"hourss from gmt...      : %d", hoursFromGMT);
+//    NSLog(@"hourss from gmt...      : %d", hoursFromGMT);
     
     // convert current time to GMT TIME
     NSInteger currentHour = atoi([[resultString substringWithRange:NSMakeRange(11, 2)] UTF8String]);
     NSInteger currentDay  = atoi([[resultString substringWithRange:NSMakeRange(8, 2)] UTF8String]);
-    NSLog(@"current hour and day: %d, %d", currentHour, currentDay);
+//    NSLog(@"current hour and day: %d, %d", currentHour, currentDay);
     NSInteger hourGMTadjust = currentHour - hoursFromGMT;
     if (hourGMTadjust > 23) {
         hourGMTadjust -= 24;
@@ -170,15 +170,70 @@
     
     // make new GMT time!
     NSString *currentGMTTime = [NSString stringWithFormat:@"%@%dT%d%@", [resultString substringToIndex:8], currentDay, hourGMTadjust, [resultString substringFromIndex:13]];
-    NSLog(@"current GMT time: %@", currentGMTTime);
+//    NSLog(@"current GMT time: %@", currentGMTTime);
     
     return currentGMTTime;
 }
 
 -(NSString *)findDifferenceBetweenCurrent:(NSString *)current AndCreatedTime:(NSString *)created {
-    // TODO: FIX!!!
+
+    NSInteger createdYear = atoi([[created substringWithRange:NSMakeRange(0, 4)] UTF8String]);
+    NSInteger currentYear  = atoi([[current substringWithRange:NSMakeRange(0, 4)] UTF8String]);
     
-    return @"10 seconds ago";
+    NSInteger createdMonth = atoi([[created substringWithRange:NSMakeRange(5, 2)] UTF8String]);
+    NSInteger currentMonth  = atoi([[current substringWithRange:NSMakeRange(5, 2)] UTF8String]);
+    
+    NSInteger createdDay = atoi([[created substringWithRange:NSMakeRange(8, 2)] UTF8String]);
+    NSInteger currentDay  = atoi([[current substringWithRange:NSMakeRange(8, 2)] UTF8String]);
+    
+    NSInteger createdHour = atoi([[created substringWithRange:NSMakeRange(11, 2)] UTF8String]);
+    NSInteger currentHour  = atoi([[current substringWithRange:NSMakeRange(11, 2)] UTF8String]);
+    
+    NSInteger createdMinute = atoi([[created substringWithRange:NSMakeRange(14, 2)] UTF8String]);
+    NSInteger currentMinute  = atoi([[current substringWithRange:NSMakeRange(14, 2)] UTF8String]);
+    
+    NSInteger createdSecond = atoi([[created substringWithRange:NSMakeRange(17, 2)] UTF8String]);
+    NSInteger currentSecond  = atoi([[current substringWithRange:NSMakeRange(17, 2)] UTF8String]);
+    
+    if (currentYear - createdYear > 0){
+        if (currentYear - createdYear == 1)
+            return @"1 year ago";
+        else
+            return [NSString stringWithFormat:@"%d years ago", currentYear - createdYear];
+    }
+    else if (currentMonth - createdMonth > 0){
+        if (currentMonth - createdMonth == 1)
+            return @"1 month ago";
+        else
+            return [NSString stringWithFormat:@"%d months ago", currentMonth - createdMonth];
+    }
+    else if (currentDay - createdDay > 0){
+        if (currentDay - createdDay == 1)
+            return @"1 day ago";
+        else
+            return [NSString stringWithFormat:@"%d days ago", currentDay - createdDay];
+    }
+    else if (currentHour - createdHour > 0){
+        if (currentHour - createdHour == 1)
+            return @"1 hour ago";
+        else
+            return [NSString stringWithFormat:@"%d hours ago", currentHour - createdHour];
+    }
+    else if (currentMinute - createdMinute > 0){
+        if (currentMinute - createdMinute == 1)
+            return @"1 minute ago";
+        else
+            return [NSString stringWithFormat:@"%d minutes ago", currentMinute - createdMinute];
+    }
+    else if (currentSecond - createdSecond > 0){
+        if (currentSecond - createdSecond == 1)
+            return @"1 second ago";
+        else
+            return [NSString stringWithFormat:@"%d seconds ago", currentSecond - createdSecond];
+    }
+    else {
+        return @"ERROR seconds ago";
+    }
 }
 
 
@@ -237,7 +292,7 @@
 -(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
     NSMutableArray *lolz = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
-        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
+//        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
         collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
         [lolz addObject:story];
         
