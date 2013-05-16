@@ -10,6 +10,7 @@
 
 #import "collectivlySingleton.h"
 #import "collectivlyStory.h"
+#import "collectivlySimplifiedStory.h"
 #import "JTRevealSidebarV2Delegate.h"
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"

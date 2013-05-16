@@ -58,6 +58,8 @@
 
 -(void)setUpNavBar {
     
+    NSLog(@"[collectivlyStoriesViewController] setting up nav bar");
+    
     // customize LEFT / BACK bar button item
     UIImage* logo = [UIImage imageNamed:@"logo.png"];
     NSInteger logoOffset = 26;
@@ -92,15 +94,17 @@
     
     // set side bar view delegate
     self.navigationItem.revealSidebarDelegate = self;
+    
+    NSLog(@"[collectivlyStoriesViewController] DONE setting up nav bar");
 }
 
 - (IBAction)rightSideBarButtonTouched:(id)sender {
-    NSLog(@"OPTIONS MENU touched from STORIES VIEW CONTROLLER");
+    NSLog(@"[collectivlyStoriesViewController] OPTIONS MENU touched");
     [self.navigationController toggleRevealState:JTRevealedStateRight];
 }
 
 - (IBAction)leftBarButtonItemTouched:(id)sender {
-    NSLog(@"BACK BUTTON / COLLECTIVLY LOGO HIT FROM STORIESVIEWCONTROLLER for collection: %@", self.title);
+    NSLog(@"[collectivlyStoriesViewController] BACK BUTTON / COLLECTIVLY LOGO HIT for collection: %@", self.title);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -112,7 +116,7 @@
     
     [self.navigationController setRevealedState:JTRevealedStateNo];
     
-    NSLog(@"SIDEBARRRRRR DIDSELECTOBJECT from stories view: %@", object.description);
+    NSLog(@"[collectivlyStoriesViewController] SIDEBARRRRRR DIDSELECTOBJECT: %@", object.description);
     if ([object isKindOfClass:[NSString class]]){
         NSString *string = (NSString *)object;
         if ([string isEqualToString:@"Login"]){
@@ -158,7 +162,7 @@
 
 
 -(void)refreshStories {
-    NSLog(@"REFRESHING STORIES");
+    NSLog(@"[collectivlyStoriesViewController] REFRESHING STORIES");
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -219,7 +223,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
+    collectivlySimplifiedStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
     storyImageView.image = story.articleImage;
@@ -384,6 +388,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO!!!! push updated view
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -394,31 +399,34 @@
 }
 
 -(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
+    NSLog(@"[collectivlyStoriesViewController] creating stories.");
     NSMutableArray *lolz = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
-//        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
-        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        NSLog(@"STORYYY %d out of %d", i, array.count);
+        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        NSLog(@"STORYYY %d out of %d DONE", i, array.count);
         [lolz addObject:story];
         
     }
+    NSLog(@"[collectivlyStoriesViewController] DONE creating stories.");
     return lolz;
 }
 
 #pragma mark connection protocol functions
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"conection did receive response!");
+    NSLog(@"[collectivlyStoriesViewController] conection did receive response!");
     _data = [[NSMutableData alloc] init];
     
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"conection did receive data!");
+    NSLog(@"[collectivlyStoriesViewController] conection did receive data!");
     [_data appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // Please do something sensible here, like log the error.
-    NSLog(@"connection failed with error: %@", error.description);
+    NSLog(@"[collectivlyStoriesViewController] connection failed with error: %@", error.description);
     
     // stop spinner
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -446,7 +454,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connectiondidfinishloading!");
+    NSLog(@"[collectivlyStoriesViewController] connectiondidfinishloading!");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     [self.refreshControl endRefreshing];

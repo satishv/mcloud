@@ -26,6 +26,7 @@
 		4C08AF721721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C08AF611721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf */; };
 		4C143D5217168A6000B5A210 /* collectivlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C143D5117168A6000B5A210 /* collectivlyCollection.m */; };
 		4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */; };
+		4C3E356717454148001962D7 /* collectivlySimplifiedStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E356617454148001962D7 /* collectivlySimplifiedStory.m */; };
 		4C5F3131171EB30E001027F8 /* nyc_sunset.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */; };
 		4C6B5B001721D661009C3986 /* collectivly_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6B5AFF1721D661009C3986 /* collectivly_logo.png */; };
 		4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */; };
@@ -90,6 +91,8 @@
 		4C143D5117168A6000B5A210 /* collectivlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyCollection.m; sourceTree = "<group>"; };
 		4C2F88F81721EF15009006EF /* collectivlyStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyStoriesViewController.h; sourceTree = "<group>"; };
 		4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyStoriesViewController.m; sourceTree = "<group>"; };
+		4C3E356517454148001962D7 /* collectivlySimplifiedStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySimplifiedStory.h; sourceTree = "<group>"; };
+		4C3E356617454148001962D7 /* collectivlySimplifiedStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlySimplifiedStory.m; sourceTree = "<group>"; };
 		4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nyc_sunset.jpg; sourceTree = "<group>"; };
 		4C6B5AFF1721D661009C3986 /* collectivly_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collectivly_logo.png; sourceTree = "<group>"; };
 		4C6D3587172CAD5E00AB7F3B /* JTRevealSidebarV2Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTRevealSidebarV2Delegate.h; sourceTree = "<group>"; };
@@ -257,6 +260,12 @@
 				4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */,
 				4C6D358E172CB0F700AB7F3B /* SidebarViewController.h */,
 				4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */,
+				4C3E356517454148001962D7 /* collectivlySimplifiedStory.h */,
+				4C3E356617454148001962D7 /* collectivlySimplifiedStory.m */,
+				4CF8D9F01710C0EB00E4FD21 /* collectivlyStory.h */,
+				4CF8D9F11710C0EB00E4FD21 /* collectivlyStory.m */,
+				4C143D5017168A6000B5A210 /* collectivlyCollection.h */,
+				4C143D5117168A6000B5A210 /* collectivlyCollection.m */,
 				4C6D3586172CAD5E00AB7F3B /* JTRevealSidebarV2 */,
 				4CF8D9B91710BEAD00E4FD21 /* Supporting Files */,
 			);
@@ -270,10 +279,6 @@
 				4C08AF501721CDC900862911 /* ProximaNova */,
 				4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */,
 				4C9680611721026C00F56B5A /* manhattan_skyline.jpg */,
-				4CF8D9F01710C0EB00E4FD21 /* collectivlyStory.h */,
-				4CF8D9F11710C0EB00E4FD21 /* collectivlyStory.m */,
-				4C143D5017168A6000B5A210 /* collectivlyCollection.h */,
-				4C143D5117168A6000B5A210 /* collectivlyCollection.m */,
 				4CF8D9D71710BF3500E4FD21 /* furley_bg_@2X.png */,
 				4CF8D9D81710BF3500E4FD21 /* furley_bg.png */,
 				4CF8D9D91710BF3500E4FD21 /* grey_wash_wall_@2X.png */,
@@ -411,6 +416,7 @@
 				4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */,
 				4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */,
 				4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */,
+				4C3E356717454148001962D7 /* collectivlySimplifiedStory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
