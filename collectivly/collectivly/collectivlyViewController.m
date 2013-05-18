@@ -197,7 +197,7 @@
     [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
-    NSString *url = @"https://cloudable.me/users/invitation";
+    NSString *url = @"https://collectivly.com/users/invitation";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSString *data = [NSString stringWithFormat:@""];
@@ -231,7 +231,7 @@
     [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
-    NSString *url = @"https://cloudable.me/users/sign_in";
+    NSString *url = @"https://collecvitly.com/users/sign_in";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSString *data = [NSString stringWithFormat:@""];

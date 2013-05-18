@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "collectivlyCollection.h"
+#import "collectivlyStory.h"
 
 @interface collectivlySingleton : NSObject {
     NSMutableArray *personalStories, *popularCollections;
@@ -21,6 +22,7 @@
 @property (nonatomic, retain) NSMutableArray *personalStories, *popularCollections;
 @property (nonatomic, retain) NSMutableDictionary *storiesForCollectionWithId;
 @property (nonatomic, retain) NSArray *currentStories;
+@property (nonatomic, retain) collectivlyStory *currentStory;
 
 @property (nonatomic, retain) NSString *authToken;
 

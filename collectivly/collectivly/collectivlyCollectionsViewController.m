@@ -66,7 +66,24 @@ NSInteger selectedCollection;
     
     self.activityIndicator.alpha = 0.0f;
     
-    // customize nav bar right bar button item
+    [self setUpNavBar];
+}
+
+-(void)setUpNavBar {
+    
+    // customize LEFT / BACK bar button item
+    UIImage* logo = [UIImage imageNamed:@"logo.png"];
+    NSInteger logoOffset = 26;
+    CGRect logoframe = CGRectMake(logoOffset*2, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
+    UIButton *logoButton = [[UIButton alloc] initWithFrame:logoframe];
+    logoButton.userInteractionEnabled = NO;
+    [logoButton setBackgroundImage:logo forState:UIControlStateNormal];
+    [logoButton addTarget:self action:@selector(leftBarButtonItemTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [logoButton setShowsTouchWhenHighlighted:YES];
+    UIBarButtonItem *backToCollections =[[UIBarButtonItem alloc] initWithCustomView:logoButton];
+    self.navigationItem.leftBarButtonItem = backToCollections;
+    
+    // customize nav bar RIGHT bar button item
     UIImage* threeBars = [UIImage imageNamed:@"options menu.png"];
     NSInteger offset = 12;
     CGRect frameimg = CGRectMake(offset, offset, threeBars.size.width - offset, threeBars.size.height - offset);
@@ -81,8 +98,8 @@ NSInteger selectedCollection;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"ProximaNova-Bold" size:16];
-//    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-//    label.textAlignment = UITextAlignmentCenter;
+    //    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    //    label.textAlignment = UITextAlignmentCenter;
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor =[UIColor whiteColor];
     label.text = @"COLLECTIONS";
@@ -193,7 +210,7 @@ NSInteger selectedCollection;
     NSMutableArray *stories = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
         NSLog(@"[collectivlyCollectionsViewController] STORYYY %d out of %d", i, array.count);
-        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
         NSLog(@"[collectivlyCollectionsViewController] STORYYY %d out of %d DONE", i, array.count);
         [stories addObject:story];
         

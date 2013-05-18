@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="2" customClass="collectivlyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNV-9M-pSm">
@@ -209,7 +209,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="RIGHT" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wkZ-Sv-po6" customClass="SidebarViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="04t-EZ-gKn">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -282,7 +282,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0UQ-3p-wcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-150" y="-289"/>
+            <point key="canvasLocation" x="-316" y="-289"/>
         </scene>
         <!--Collectivly Collections View Controller - Collections-->
         <scene sceneID="1Rk-jy-LpN">
@@ -490,7 +490,7 @@
                 <tapGestureRecognizer id="BjF-g4-aEP"/>
                 <tapGestureRecognizer id="D1t-rR-4Dn"/>
             </objects>
-            <point key="canvasLocation" x="306" y="-289"/>
+            <point key="canvasLocation" x="50" y="-289"/>
         </scene>
         <!--Collectivly Stories View Controller - Collection Name-->
         <scene sceneID="Wfr-on-XAG">
@@ -625,11 +625,43 @@
                     </navigationItem>
                     <connections>
                         <segue destination="sJW-NR-vuB" kind="modal" identifier="loginsignupfromstories" id="2kM-eC-ete"/>
+                        <segue destination="07V-Qb-Xzk" kind="push" identifier="pushexpandedstory" id="rgC-Uj-BCC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wos-Na-1f8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="-308"/>
+            <point key="canvasLocation" x="518" y="-391"/>
+        </scene>
+        <!--Collectivly Expanded Content View Controller-->
+        <scene sceneID="A8h-9e-mnM">
+            <objects>
+                <viewController id="07V-Qb-Xzk" customClass="collectivlyExpandedContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BBv-Gw-097">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNS-t4-CE0">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="255" id="tS9-ZL-b3k"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kNS-t4-CE0" firstAttribute="top" secondItem="BBv-Gw-097" secondAttribute="top" type="default" id="AyR-4g-hHd"/>
+                            <constraint firstItem="kNS-t4-CE0" firstAttribute="leading" secondItem="BBv-Gw-097" secondAttribute="leading" type="default" id="DTl-e2-Efu"/>
+                            <constraint firstItem="kNS-t4-CE0" firstAttribute="trailing" secondItem="BBv-Gw-097" secondAttribute="trailing" type="default" id="d2W-2E-vFG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cX2-1s-QRd"/>
+                    <connections>
+                        <outlet property="expandedImageView" destination="kNS-t4-CE0" id="3NW-79-vaU"/>
+                        <segue destination="2" kind="modal" identifier="loginsignupfromstory" id="UvC-Sz-jjS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ALc-b8-YwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024" y="-321"/>
         </scene>
     </scenes>
     <resources>
@@ -639,71 +671,17 @@
         <image name="hexfortotalsharecount.png" width="29" height="25"/>
         <image name="intro_logo.png" width="176" height="47"/>
         <image name="manhattan_skyline.jpg" width="1600" height="1200"/>
-        <image name="red_triangle.png" width="37" height="63"/>
+        <image name="red_triangle.png" width="37" height="64"/>
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sign_in_webSS.png" width="48" height="27"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SidebarViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SidebarViewController.h"/>
-        </class>
-        <class className="collectivlyCollectionsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="firstCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="firstTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="fourthCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="fourthTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rightSideBarViewController" candidateClass="SidebarViewController"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="secondCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="secondTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="thirdCollectionBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="thirdTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
-                <relationship kind="outlet" name="rightSideBarViewController" candidateClass="SidebarViewController"/>
-            </relationships>
-        </class>
-        <class className="collectivlyViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeButtonTouched:"/>
-                <relationship kind="action" name="requestButtonTouched:"/>
-                <relationship kind="action" name="signInButtonTouched:"/>
-                <relationship kind="outlet" name="closeButtonTouched" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="emailAddressSignInTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailAddressTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="errorMessageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="greyBGView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="inviteConfirmPasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="inviteErrorsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="invitePasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lastNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="requestInviteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="signInErrorsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="UvC-Sz-jjS"/>
         <segue reference="2kM-eC-ete"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -35,7 +35,7 @@
         self.createdAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"created_at"]];
         self.createdTime = [NSString stringWithFormat:@"%@", [story objectForKey:@"created_time"]];
         //USD?
-        self.expandedImage = [NSString stringWithFormat:@"%@", [story objectForKey:@"expanded_image"]];
+        self.expandedImage = [self imageFromURLString:[NSString stringWithFormat:@"%@", [story objectForKey:@"expanded_image"]]];
         self.facebookLikes = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"facebook_likes"]] UTF8String]);
         self.friendsCount = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"friends_count"]] UTF8String]);
         self.idNumber = atoi([[NSString stringWithFormat:@"%@", [story objectForKey:@"id"]] UTF8String]);

@@ -223,7 +223,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    collectivlySimplifiedStory *story = [self.stories objectAtIndex:indexPath.row];
+    collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
     storyImageView.image = story.articleImage;
@@ -388,14 +388,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO!!!! push updated view
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
+//    collectivlyExpandedContentViewController *detailViewController = [[collectivlyExpandedContentViewController alloc] initWithNibName:@"collectivlyExpandedContentViewController" bundle:nil];
+    collectivlyStory *selected = [self.stories objectAtIndex:indexPath.row];
+    [self.currentUser setCurrentStory:selected];
+    NSLog(@"selected story title: %@", selected.title);
+    // ...
      // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+//     [self.navigationController pushViewController:detailViewController animated:YES];
+    [self performSegueWithIdentifier:@"pushexpandedstory" sender:self];
 }
 
 -(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
@@ -403,7 +404,7 @@
     NSMutableArray *lolz = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
         NSLog(@"STORYYY %d out of %d", i, array.count);
-        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
         NSLog(@"STORYYY %d out of %d DONE", i, array.count);
         [lolz addObject:story];
         
