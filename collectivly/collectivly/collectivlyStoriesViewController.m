@@ -341,6 +341,7 @@
             return [NSString stringWithFormat:@"%d seconds ago", currentSecond - createdSecond];
     }
     else {
+        NSLog(@"ERROR in story: current time is %@ while story time is %@", current, created);
         return @"ERROR seconds ago";
     }
 }
