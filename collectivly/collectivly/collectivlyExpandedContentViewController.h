@@ -19,9 +19,15 @@
 @property (retain) collectivlySingleton *currentUser;
 
 @property (nonatomic, retain) collectivlyStory *story;
-@property (retain, nonatomic) IBOutlet UIImageView *expandedImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *expandedImageView;
 
 @property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
 
+@property (weak, nonatomic) IBOutlet UILabel *timeAgoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalCountLabel;
+- (IBAction)centerRecollectButtonTouched:(id)sender;
+- (IBAction)downVoteButtonTouched:(id)sender;
+- (IBAction)upVoteButtonTouched:(id)sender;
 
 @end

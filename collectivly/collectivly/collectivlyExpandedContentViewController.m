@@ -14,7 +14,7 @@
 
 @implementation collectivlyExpandedContentViewController
 
-@synthesize currentUser, expandedImageView, story, rightSideBarViewController;
+@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,7 +33,15 @@
     self.currentUser = [collectivlySingleton sharedDataModel];
     
     self.story = self.currentUser.currentStory;
-    self.expandedImageView.image = self.story.expandedImage;
+//    self.expandedImageView.image = self.story.expandedImage;
+    
+    self.timeAgoLabel.text = self.story.timeAgo;
+    self.totalCountLabel.text = [NSString stringWithFormat:@"%d", self.story.totalCount];
+    self.friendsCountLabel.text = [NSString stringWithFormat:@"%d", self.story.friendsCount];
+    
+    
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    NSLog(@"screen height and width: %f and %f", screenBound.size.height, screenBound.size.width);
 
     
     [self setUpNavBar];
@@ -148,4 +156,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)centerRecollectButtonTouched:(id)sender {
+    // TODO
+    NSLog(@"!!!!!!!!!! RECOLLECT !!!!!!!!!!");
+}
+
+- (IBAction)downVoteButtonTouched:(id)sender {
+    // TODO
+    NSLog(@"!!!!!!!!!! DOWNVOTE !!!!!!!!!!");
+    
+}
+
+- (IBAction)upVoteButtonTouched:(id)sender {
+    // TODO
+    NSLog(@"!!!!!!!!!! UPVOTE !!!!!!!!!!");
+
+}
 @end

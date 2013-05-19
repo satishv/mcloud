@@ -33,6 +33,9 @@
 		4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */; };
 		4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */; };
 		4C9680621721026C00F56B5A /* manhattan_skyline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9680611721026C00F56B5A /* manhattan_skyline.jpg */; };
+		4C96F07117484F310011DF23 /* clock_darker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C96F06E17484F310011DF23 /* clock_darker.png */; };
+		4C96F07217484F310011DF23 /* friends_darker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C96F06F17484F310011DF23 /* friends_darker.png */; };
+		4C96F07317484F310011DF23 /* hex_darker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C96F07017484F310011DF23 /* hex_darker.png */; };
 		4CA998E11746A07000C252B3 /* collectivlyExpandedContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */; };
 		4CD527EC17455243000101BB /* 1pxblacklinebelowimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD527CF17455243000101BB /* 1pxblacklinebelowimage.png */; };
 		4CD527ED17455243000101BB /* backbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD527D017455243000101BB /* backbutton.png */; };
@@ -120,6 +123,9 @@
 		4C6D358E172CB0F700AB7F3B /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SidebarViewController.h; path = JTRevealSidebarV2/SidebarViewController.h; sourceTree = "<group>"; };
 		4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SidebarViewController.m; path = JTRevealSidebarV2/SidebarViewController.m; sourceTree = "<group>"; };
 		4C9680611721026C00F56B5A /* manhattan_skyline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manhattan_skyline.jpg; sourceTree = "<group>"; };
+		4C96F06E17484F310011DF23 /* clock_darker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_darker.png; sourceTree = "<group>"; };
+		4C96F06F17484F310011DF23 /* friends_darker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends_darker.png; sourceTree = "<group>"; };
+		4C96F07017484F310011DF23 /* hex_darker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hex_darker.png; sourceTree = "<group>"; };
 		4CA998DE1746A07000C252B3 /* collectivlyExpandedContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyExpandedContentViewController.h; sourceTree = "<group>"; };
 		4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyExpandedContentViewController.m; sourceTree = "<group>"; };
 		4CD527CF17455243000101BB /* 1pxblacklinebelowimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1pxblacklinebelowimage.png; sourceTree = "<group>"; };
@@ -235,6 +241,9 @@
 		4CD527CE17455243000101BB /* expanded_content */ = {
 			isa = PBXGroup;
 			children = (
+				4C96F06E17484F310011DF23 /* clock_darker.png */,
+				4C96F06F17484F310011DF23 /* friends_darker.png */,
+				4C96F07017484F310011DF23 /* hex_darker.png */,
 				4CD527CF17455243000101BB /* 1pxblacklinebelowimage.png */,
 				4CD527D017455243000101BB /* backbutton.png */,
 				4CD527D117455243000101BB /* centerrecollectbutton.png */,
@@ -472,6 +481,9 @@
 				4CD5280517455243000101BB /* storyback.png in Resources */,
 				4CD5280617455243000101BB /* topbar.png in Resources */,
 				4CD5280717455243000101BB /* topbar_320x44.png in Resources */,
+				4C96F07117484F310011DF23 /* clock_darker.png in Resources */,
+				4C96F07217484F310011DF23 /* friends_darker.png in Resources */,
+				4C96F07317484F310011DF23 /* hex_darker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

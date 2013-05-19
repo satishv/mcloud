@@ -12,7 +12,7 @@
 
 @synthesize articleImage, expandedImage, image, linkID, ogType, title, summary;
 @synthesize categoryID, commentsCount, facebookLikes, idNumber, status, retweets, provider;
-@synthesize commentedAt, createdAt, createdTime, updatedAt;
+@synthesize commentedAt, createdAt, createdTime, updatedAt, timeAgo;
 @synthesize commentCategories, computedTags, imageURLs, keywords;
 @synthesize computedCategories;
 @synthesize url, site, origURL;

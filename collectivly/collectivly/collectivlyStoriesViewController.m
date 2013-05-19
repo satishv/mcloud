@@ -237,6 +237,7 @@
     
     // extract time difference between current time and post time, output time difference to UI
     NSString *timeDifference = [self findDifferenceBetweenCurrent:currentGMTTime AndCreatedTime:story.createdAt];
+    story.timeAgo = timeDifference;
     
     UILabel *timeAgoLabel = (UILabel *)[cell viewWithTag:103];
 //    timeAgoLabel.text = @"10 seconds ago";
