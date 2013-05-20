@@ -37,6 +37,8 @@
 		4C96F07217484F310011DF23 /* friends_darker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C96F06F17484F310011DF23 /* friends_darker.png */; };
 		4C96F07317484F310011DF23 /* hex_darker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C96F07017484F310011DF23 /* hex_darker.png */; };
 		4CA998E11746A07000C252B3 /* collectivlyExpandedContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */; };
+		4CD2A2821749AC6900824EF9 /* back_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD2A2811749AC6900824EF9 /* back_logo.png */; };
+		4CD2A2851749C50100824EF9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2A2841749C50000824EF9 /* MBProgressHUD.m */; };
 		4CD527EC17455243000101BB /* 1pxblacklinebelowimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD527CF17455243000101BB /* 1pxblacklinebelowimage.png */; };
 		4CD527ED17455243000101BB /* backbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD527D017455243000101BB /* backbutton.png */; };
 		4CD527EE17455243000101BB /* centerrecollectbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD527D117455243000101BB /* centerrecollectbutton.png */; };
@@ -128,6 +130,9 @@
 		4C96F07017484F310011DF23 /* hex_darker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hex_darker.png; sourceTree = "<group>"; };
 		4CA998DE1746A07000C252B3 /* collectivlyExpandedContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyExpandedContentViewController.h; sourceTree = "<group>"; };
 		4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyExpandedContentViewController.m; sourceTree = "<group>"; };
+		4CD2A2811749AC6900824EF9 /* back_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_logo.png; sourceTree = "<group>"; };
+		4CD2A2831749C50000824EF9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		4CD2A2841749C50000824EF9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		4CD527CF17455243000101BB /* 1pxblacklinebelowimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1pxblacklinebelowimage.png; sourceTree = "<group>"; };
 		4CD527D017455243000101BB /* backbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backbutton.png; sourceTree = "<group>"; };
 		4CD527D117455243000101BB /* centerrecollectbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centerrecollectbutton.png; sourceTree = "<group>"; };
@@ -344,6 +349,9 @@
 		4CF8D9B91710BEAD00E4FD21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CD2A2831749C50000824EF9 /* MBProgressHUD.h */,
+				4CD2A2841749C50000824EF9 /* MBProgressHUD.m */,
+				4CD2A2811749AC6900824EF9 /* back_logo.png */,
 				4CD527CE17455243000101BB /* expanded_content */,
 				4CD527DE17455243000101BB /* stories_view */,
 				4C08AF501721CDC900862911 /* ProximaNova */,
@@ -484,6 +492,7 @@
 				4C96F07117484F310011DF23 /* clock_darker.png in Resources */,
 				4C96F07217484F310011DF23 /* friends_darker.png in Resources */,
 				4C96F07317484F310011DF23 /* hex_darker.png in Resources */,
+				4CD2A2821749AC6900824EF9 /* back_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +516,7 @@
 				4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */,
 				4C3E356717454148001962D7 /* collectivlySimplifiedStory.m in Sources */,
 				4CA998E11746A07000C252B3 /* collectivlyExpandedContentViewController.m in Sources */,
+				4CD2A2851749C50100824EF9 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

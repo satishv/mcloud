@@ -16,8 +16,9 @@
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "SidebarViewController.h"
+#import "MBProgressHUD.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, SidebarViewControllerDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, SidebarViewControllerDelegate, MBProgressHUDDelegate> {
     int requestNumber;
     NSMutableData *_data;
     
@@ -27,21 +28,14 @@
 
 @property (retain) collectivlySingleton *currentUser;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
-@property (retain, nonatomic) IBOutlet UIImageView *firstCollectionBG;
-@property (retain, nonatomic) IBOutlet UIImageView *secondCollectionBG;
-@property (retain, nonatomic) IBOutlet UIImageView *thirdCollectionBG;
-@property (retain, nonatomic) IBOutlet UIImageView *fourthCollectionBG;
-
+@property (retain, nonatomic) IBOutlet UIImageView *firstCollectionImage;
 @property (retain, nonatomic) IBOutlet UILabel *firstTitle;
-@property (retain, nonatomic) IBOutlet UILabel *secondTitle;
-@property (retain, nonatomic) IBOutlet UILabel *thirdTitle;
-@property (retain, nonatomic) IBOutlet UILabel *fourthTitle;
 
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 
 @property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
+
+@property (retain, nonatomic) MBProgressHUD *HUD;
 
 -(IBAction)rightSideBarButtonTouched:(id)sender;
 

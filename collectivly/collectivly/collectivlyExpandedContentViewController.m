@@ -8,13 +8,16 @@
 
 #import "collectivlyExpandedContentViewController.h"
 
+#define NAVBARHEIGHT        44
+#define STATUSBARHEIGHT     20
+
 @interface collectivlyExpandedContentViewController ()
 
 @end
 
 @implementation collectivlyExpandedContentViewController
 
-@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel;
+@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel, articleTitleButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,18 +35,28 @@
     
     self.currentUser = [collectivlySingleton sharedDataModel];
     
+    // SET STORY to current story!
     self.story = self.currentUser.currentStory;
-//    self.expandedImageView.image = self.story.expandedImage;
+    
+    // update UI elements to match story's elements
+    self.expandedImageView.image = self.story.expandedImage;
     
     self.timeAgoLabel.text = self.story.timeAgo;
     self.totalCountLabel.text = [NSString stringWithFormat:@"%d", self.story.totalCount];
     self.friendsCountLabel.text = [NSString stringWithFormat:@"%d", self.story.friendsCount];
     
+    // TODO: fix: cuts off end of title if takes up more than 4 lines.... ideally, would like ... at the end
+    self.articleTitleButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.articleTitleButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.articleTitleButton.titleLabel.numberOfLines = 4;
+    UIFont *articleTitleFont = [UIFont fontWithName:@"ProximaNova-Bold" size:26];
+    [self.articleTitleButton setTitle:self.story.title forState:UIControlStateNormal];
+    self.articleTitleButton.titleLabel.font = articleTitleFont;
     
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    NSLog(@"screen height and width: %f and %f", screenBound.size.height, screenBound.size.width);
-
+//    CGRect screenBound = [[UIScreen mainScreen] bounds];
+//    NSLog(@"screen height and width: %f and %f", screenBound.size.height, screenBound.size.width);
     
+    // set up the nav bar, obvi
     [self setUpNavBar];
 
 }
@@ -171,5 +184,14 @@
     // TODO
     NSLog(@"!!!!!!!!!! UPVOTE !!!!!!!!!!");
 
+}
+
+- (IBAction)articleTitleTouched:(id)sender {
+    NSLog(@"!!!!!!!!!! TOUCHED ARTICLE TITLE !!!!!!!!!!");
+    NSLog(@"title: %@", self.articleTitleButton.titleLabel.text);
+    
+    NSLog(@"url to go to: %@", self.story.origURL);
+    // TODO: uncomment for actual functionality lolz
+//    [[UIApplication sharedApplication] openURL:self.story.origURL];
 }
 @end

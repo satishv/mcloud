@@ -13,7 +13,8 @@
 #define GETCERTAINCOLLECTION    3
 
 #define COLLECTIONINBETWEEN     7
-#define COLLECTIONBGALPHA       1.0f
+#define COLLECTIONBGALPHA       0.7f
+#define SCROLLVIEWPADDING       20
 
 @interface collectivlyCollectionsViewController ()
 
@@ -23,8 +24,7 @@
 
 NSInteger selectedCollection;
 
-@synthesize scrolley, currentUser, activityIndicator, rightSideBarViewController;
-@synthesize firstCollectionBG, firstTitle, secondCollectionBG, secondTitle, thirdCollectionBG, thirdTitle, fourthCollectionBG, fourthTitle;
+@synthesize scrolley, currentUser, rightSideBarViewController, firstCollectionImage, firstTitle, HUD;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,16 +55,8 @@ NSInteger selectedCollection;
     
     // clear all collection images
     firstTitle.text = @"";
-    secondTitle.text = @"";
-    thirdTitle.text = @"";
-    fourthTitle.text = @"";
     
-    firstCollectionBG.alpha = 0.0f;
-    secondCollectionBG.alpha = 0.0f;
-    thirdCollectionBG.alpha = 0.0f;
-    fourthCollectionBG.alpha = 0.0f;
-    
-    self.activityIndicator.alpha = 0.0f;
+    firstCollectionImage.alpha = 0.0f;
     
     [self setUpNavBar];
 }
@@ -174,24 +166,6 @@ NSInteger selectedCollection;
     [self getStoriesForCollection:collection];
 }
 
--(void)SecondImageTouched:(id) sender {
-    NSLog(@"image 2 has been touched and has liked it");
-    collectivlyCollection *collection = [self.currentUser.popularCollections objectAtIndex:1];
-    [self getStoriesForCollection:collection];
-}
-
--(void)ThirdImageTouched:(id) sender {
-    NSLog(@"image 3 has been touched and has liked it");
-    collectivlyCollection *collection = [self.currentUser.popularCollections objectAtIndex:2];
-    [self getStoriesForCollection:collection];
-}
-
--(void)FourthImageTouched:(id) sender {
-    NSLog(@"image 4 has been touched and has liked it");
-    collectivlyCollection *collection = [self.currentUser.popularCollections objectAtIndex:3];
-    [self getStoriesForCollection:collection];
-}
-
 -(void)ithImageTouched:(id) sender {
     NSLog(@"image i has been touched and has liked it");
     int i = ithCollectionBG.tag;
@@ -248,9 +222,6 @@ NSInteger selectedCollection;
         NSLog(@"[collectivlyCollectionsViewController] fetching story with id: %d", collection.idNumber);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
-        self.activityIndicator.alpha = 1.0f;
-        [self.activityIndicator startAnimating];
-        
         NSLog(@"id: %d", collection.idNumber);
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json", collection.idNumber]];
         
@@ -269,7 +240,12 @@ NSInteger selectedCollection;
         selectedCollection = collection.idNumber;
         
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        [connection start];   
+        [connection start];
+        
+        HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        HUD.delegate = self;
+        HUD.labelText = @"Loading";
     }
 }
 
@@ -293,8 +269,6 @@ NSInteger selectedCollection;
     NSLog(@"fetching relevant collections.....");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    self.activityIndicator.alpha = 1.0f;
-    [self.activityIndicator startAnimating];
 
     NSString *url = @"";
     
@@ -321,6 +295,12 @@ NSInteger selectedCollection;
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
     
+    
+   	HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+	
+	HUD.delegate = self;
+	HUD.labelText = @"Loading";
+    
 }
 
 
@@ -328,8 +308,10 @@ NSInteger selectedCollection;
 -(void)requestHomePage {
     NSLog(@"[collectivlyCollectionsViewController] HOME PAGE!!!");
     
-    self.activityIndicator.alpha = 1.0f;
-    [self.activityIndicator startAnimating];
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+	
+	HUD.delegate = self;
+	HUD.labelText = @"Loading";
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -366,8 +348,7 @@ NSInteger selectedCollection;
     // stop spinner
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
-    [self.activityIndicator stopAnimating];
-    self.activityIndicator.alpha = 0.0f;
+    [HUD hide:YES];
     
     // alert view for network error
     UIAlertView *alert = [[UIAlertView alloc]
@@ -389,6 +370,7 @@ NSInteger selectedCollection;
                 [self fetchRelevantCollections];
             }
             else if (requestNumber == GETCERTAINCOLLECTION){
+                // TODO
 //                [self getStoriesForCollection:self.currentUser];
             }
             break;
@@ -400,8 +382,6 @@ NSInteger selectedCollection;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"[collectivlyCollectionsViewController] connectiondidfinishloading!");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [self.activityIndicator stopAnimating];
-    self.activityIndicator.alpha = 0.0f;
     
     NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
 //    NSLog(@"response data: %@", responseString);
@@ -417,10 +397,14 @@ NSInteger selectedCollection;
             break;
         }
         case GETCOLLECTIONS: {
+            
+            float contentHeight = SCROLLVIEWPADDING;
 
             NSLog(@"[collectivlyCollectionsViewController] DICT RESPONSE FOR COLLECTTIONSS: %@", dictResponse);
             NSMutableArray *colls = [[NSMutableArray alloc] init];
+            // counter
             int i = 1;
+            
             for (NSDictionary *dict in dictResponse){
                 collectivlyCollection *cc = [[collectivlyCollection alloc] initWithDictionary:dict];
                 
@@ -428,84 +412,46 @@ NSInteger selectedCollection;
                 UIFont *customFont = [UIFont fontWithName:@"ProximaNova-Semibold" size:32];
                 
                 switch (i) {
+                    // for first collection only: use premade UI elements in STORYBOARD
                     case 1 :{
                         [UIView animateWithDuration:0.5f animations:^{
                             firstTitle.text = title;
                             firstTitle.font = customFont;
-                            firstCollectionBG.image = cc.image;
-                            firstCollectionBG.alpha = COLLECTIONBGALPHA;
+                            firstCollectionImage.image = cc.image;
+                            firstCollectionImage.alpha = COLLECTIONBGALPHA;
                             UITapGestureRecognizer *firstImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FirstImageTouched:)];
                             [firstImageViewGestureRecognizer setNumberOfTapsRequired:1];
                             [firstImageViewGestureRecognizer setDelegate:self];
                             
-                            self.firstCollectionBG.userInteractionEnabled = YES;
-                            [self.firstCollectionBG addGestureRecognizer:firstImageViewGestureRecognizer];
-                        
+                            self.firstCollectionImage.userInteractionEnabled = YES;
+                            [self.firstCollectionImage addGestureRecognizer:firstImageViewGestureRecognizer];
+                            
+                            NSLog(@"frame for %@: {%f %f %f %f}", cc.name, firstCollectionImage.frame.origin.x, firstCollectionImage.frame.origin.y, firstCollectionImage.frame.size.width, firstCollectionImage.frame.size.height);
+                            
                         }];
+                        contentHeight += firstCollectionImage.frame.size.height;
                         break;
                     }
-                    case 2 :{
-                        [UIView animateWithDuration:0.5f animations:^{
-                            secondTitle.text = title;
-                            secondTitle.font = customFont;
-                            secondCollectionBG.image = cc.image;
-                            secondCollectionBG.alpha = COLLECTIONBGALPHA;
-                            UITapGestureRecognizer *secondImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(SecondImageTouched:)];
-                            [secondImageViewGestureRecognizer setNumberOfTapsRequired:1];
-                            [secondImageViewGestureRecognizer setDelegate:self];
-                            
-                            self.secondCollectionBG.userInteractionEnabled = YES;
-                            [self.secondCollectionBG addGestureRecognizer:secondImageViewGestureRecognizer];
-                        }];
-                        break;
-                    }
-                    case 3 :{
-                        [UIView animateWithDuration:0.5f animations:^{
-                            thirdTitle.text = title;
-                            thirdTitle.font = customFont;
-                            thirdCollectionBG.image = cc.image;
-                            thirdCollectionBG.alpha = COLLECTIONBGALPHA;
-                            UITapGestureRecognizer *thirdImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ThirdImageTouched:)];
-                            [thirdImageViewGestureRecognizer setNumberOfTapsRequired:1];
-                            [thirdImageViewGestureRecognizer setDelegate:self];
-                            
-                            self.thirdCollectionBG.userInteractionEnabled = YES;
-                            [self.thirdCollectionBG addGestureRecognizer:thirdImageViewGestureRecognizer];
-                        }];
-                        break;
-                    }
-                    case 4 :{
-                        [UIView animateWithDuration:0.5f animations:^{
-                            fourthTitle.text = title;
-                            fourthTitle.font = customFont;
-                            fourthCollectionBG.image = cc.image;
-                            fourthCollectionBG.alpha = COLLECTIONBGALPHA;
-                            UITapGestureRecognizer *fourthImageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FourthImageTouched:)];
-                            [fourthImageViewGestureRecognizer setNumberOfTapsRequired:1];
-                            [fourthImageViewGestureRecognizer setDelegate:self];
-                            
-                            self.fourthCollectionBG.userInteractionEnabled = YES;
-                            [self.fourthCollectionBG addGestureRecognizer:fourthImageViewGestureRecognizer];
-                        }];
-                        break;
-                    }   
+                    // ALL i != 1: create all UI elements programatically
                     default: {
+                        NSLog(@"in here for i = %d, and collection: %@", i, cc.name);
+                        CGFloat y = firstCollectionImage.frame.origin.y + firstCollectionImage.frame.size.height + COLLECTIONINBETWEEN + (i-2)*(firstCollectionImage.frame.size.height + COLLECTIONINBETWEEN);
                         if (ithCollectionBG == nil){
-                            ithCollectionBG = [[UIImageView alloc] initWithFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
+                            ithCollectionBG = [[UIImageView alloc] initWithFrame:CGRectMake(firstCollectionImage.frame.origin.x, y, firstCollectionImage.frame.size.width, firstCollectionImage.frame.size.height)];
     
                         }
                         else {
-                            [ithCollectionBG setFrame:CGRectMake(firstCollectionBG.frame.origin.x, COLLECTIONINBETWEEN + (i-5)*(fourthCollectionBG.frame.origin.y + fourthCollectionBG.frame.size.height + COLLECTIONINBETWEEN), fourthCollectionBG.frame.size.width, fourthCollectionBG.frame.size.height)];
+                            [ithCollectionBG setFrame:CGRectMake(firstCollectionImage.frame.origin.x, y, firstCollectionImage.frame.size.width, firstCollectionImage.frame.size.height)];
 
                         }
                         ithCollectionBG.image = cc.image;
                         ithCollectionBG.userInteractionEnabled = YES;
-                        UILabel *collectionName = [[UILabel alloc] initWithFrame:CGRectMake(ithCollectionBG.frame.origin.x + 18, ithCollectionBG.frame.origin.y + 18, self.fourthTitle.frame.size.width, self.fourthTitle.frame.size.height)];
+                        UILabel *collectionName = [[UILabel alloc] initWithFrame:CGRectMake(ithCollectionBG.frame.origin.x + 18, ithCollectionBG.frame.origin.y + ithCollectionBG.frame.size.height - firstTitle.frame.size.height - 17, self.firstTitle.frame.size.width, self.firstTitle.frame.size.height)];
                         collectionName.text = title;
                         collectionName.font = customFont;
                         collectionName.userInteractionEnabled = NO;
-                        [ithCollectionBG addSubview:collectionName];
-                        [self.scrolley addSubview:ithCollectionBG];
+                        collectionName.textColor = [UIColor whiteColor];
+                        collectionName.backgroundColor = [UIColor clearColor];
                         ithCollectionBG.alpha = COLLECTIONBGALPHA;
                         UITapGestureRecognizer *imageViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ithImageTouched:)];
                         [imageViewGestureRecognizer setNumberOfTapsRequired:1];
@@ -514,17 +460,30 @@ NSInteger selectedCollection;
                         ithCollectionBG.userInteractionEnabled = YES;
                         ithCollectionBG.tag = i;
                         [ithCollectionBG addGestureRecognizer:imageViewGestureRecognizer];
+                        
+                        // add to scrollview
+                        [self.scrolley addSubview:ithCollectionBG];
+                        [self.scrolley addSubview:collectionName];
+
+                        contentHeight += COLLECTIONINBETWEEN + ithCollectionBG.frame.size.height;
+                        
                         break;
                     }
                 }
                 
+                // add collection to list of collections
                 NSLog(@"[collectivlyCollectionsViewController] ADDINGGNGGGG collection with id: %d", cc.idNumber);
-                
                 [colls addObject:cc];
                 i++;
             }
             // TODO: update...? shouldn't automatically be popular collections
             self.currentUser.popularCollections = colls;
+            
+            contentHeight += SCROLLVIEWPADDING;
+            [self.scrolley setContentSize:CGSizeMake(self.view.frame.size.width, contentHeight)];
+            
+            [HUD hide:YES];
+            
             break;
         }
         case GETCERTAINCOLLECTION: {
@@ -555,6 +514,8 @@ NSInteger selectedCollection;
                 [self.currentUser setCurrentStories:stories];
             }
             selectedCollection = -1;
+            
+            [HUD hide:YES];
             
             // SHOW COLLECTOIN ITSELF AND ITS STORIES!
             [self performSegueWithIdentifier:@"showCollection" sender:self];

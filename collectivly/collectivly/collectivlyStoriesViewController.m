@@ -261,16 +261,13 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
     NSString *resultString = [dateFormatter stringFromDate:date];
-//    NSLog(@"current time: %@", resultString);
     NSTimeZone *currentZone = [NSTimeZone localTimeZone];
     NSInteger diff = [currentZone secondsFromGMT];
     NSInteger hoursFromGMT = diff / 60 / 60;
-//    NSLog(@"hourss from gmt...      : %d", hoursFromGMT);
     
     // convert current time to GMT TIME
     NSInteger currentHour = atoi([[resultString substringWithRange:NSMakeRange(11, 2)] UTF8String]);
     NSInteger currentDay  = atoi([[resultString substringWithRange:NSMakeRange(8, 2)] UTF8String]);
-//    NSLog(@"current hour and day: %d, %d", currentHour, currentDay);
     NSInteger hourGMTadjust = currentHour - hoursFromGMT;
     if (hourGMTadjust > 23) {
         hourGMTadjust -= 24;
@@ -279,13 +276,17 @@
     
     // make new GMT time!
     NSString *currentGMTTime = [NSString stringWithFormat:@"%@%dT%d%@", [resultString substringToIndex:8], currentDay, hourGMTadjust, [resultString substringFromIndex:13]];
-//    NSLog(@"current GMT time: %@", currentGMTTime);
     
     return currentGMTTime;
 }
 
 -(NSString *)findDifferenceBetweenCurrent:(NSString *)current AndCreatedTime:(NSString *)created {
-
+    if (current.length < created.length){
+        NSMutableString *mutableGuy = [NSMutableString stringWithString:current];
+        [mutableGuy insertString:@"0" atIndex:11];
+        current = [NSString stringWithString:mutableGuy];
+    }
+        
     NSInteger createdYear = atoi([[created substringWithRange:NSMakeRange(0, 4)] UTF8String]);
     NSInteger currentYear  = atoi([[current substringWithRange:NSMakeRange(0, 4)] UTF8String]);
     

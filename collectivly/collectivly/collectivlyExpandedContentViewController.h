@@ -23,11 +23,13 @@
 
 @property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
 
+@property (weak, nonatomic) IBOutlet UIButton *articleTitleButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeAgoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalCountLabel;
 - (IBAction)centerRecollectButtonTouched:(id)sender;
 - (IBAction)downVoteButtonTouched:(id)sender;
 - (IBAction)upVoteButtonTouched:(id)sender;
+- (IBAction)articleTitleTouched:(id)sender;
 
 @end
