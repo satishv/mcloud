@@ -191,7 +191,7 @@
     NSLog(@"title: %@", self.articleTitleButton.titleLabel.text);
     
     NSLog(@"url to go to: %@", self.story.origURL);
-    // TODO: uncomment for actual functionality lolz
-//    [[UIApplication sharedApplication] openURL:self.story.origURL];
+
+    [[UIApplication sharedApplication] openURL:self.story.origURL];
 }
 @end
