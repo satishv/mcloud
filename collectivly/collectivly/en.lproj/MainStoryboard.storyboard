@@ -345,7 +345,6 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="dV1-VZ-737" id="3rn-1q-1XE"/>
                         <outlet property="firstCollectionImage" destination="vL2-c1-kbX" id="Gth-NJ-bla"/>
                         <outlet property="firstTitle" destination="kRu-Mc-x3r" id="jsM-zq-xgt"/>
                         <outlet property="scrolley" destination="kjn-Nh-Rv4" id="Qbm-sg-VVJ"/>
@@ -391,7 +390,6 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="103" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELq-yo-T8T">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="GHp-6t-i1B"/>
-                                                <constraint firstAttribute="height" constant="18" id="WdU-9X-E9x"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -446,13 +444,16 @@
                                                 <constraint firstAttribute="height" constant="15" id="gQN-UQ-OvK"/>
                                             </constraints>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="1pxblacklinebelowimage.png" translatesAutoresizingMaskIntoConstraints="NO" id="7ug-Mb-ORY"/>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="JAC-AH-7dG" firstAttribute="trailing" secondItem="q6V-yq-ooz" secondAttribute="trailing" type="default" id="3yW-DE-TbQ"/>
                                     <constraint firstAttribute="bottom" secondItem="JAC-AH-7dG" secondAttribute="bottom" constant="3" id="4t3-fK-gpB"/>
+                                    <constraint firstItem="7ug-Mb-ORY" firstAttribute="top" secondItem="q6V-yq-ooz" secondAttribute="top" constant="-1" id="7Gu-NW-BwF"/>
                                     <constraint firstAttribute="bottom" secondItem="G73-pU-zeg" secondAttribute="bottom" constant="-1" id="7YB-nj-iuk"/>
+                                    <constraint firstItem="oa3-5y-pBT" firstAttribute="top" secondItem="q6V-yq-ooz" secondAttribute="top" constant="12" id="7bs-Hf-c1F"/>
                                     <constraint firstItem="G73-pU-zeg" firstAttribute="leading" secondItem="q6V-yq-ooz" secondAttribute="leading" type="default" id="7rm-yf-2kz"/>
                                     <constraint firstItem="v6D-oP-CwK" firstAttribute="baseline" secondItem="TEc-Og-29d" secondAttribute="baseline" type="default" id="CBB-UW-ZJX"/>
                                     <constraint firstItem="Yuk-6A-LIM" firstAttribute="leading" secondItem="q6V-yq-ooz" secondAttribute="leading" constant="100" id="D1A-F0-fQd"/>
@@ -466,6 +467,7 @@
                                     <constraint firstItem="cBM-0w-6U0" firstAttribute="top" secondItem="lRC-EY-3bu" secondAttribute="top" type="default" id="Lwo-nk-UaH"/>
                                     <constraint firstItem="lRC-EY-3bu" firstAttribute="bottom" secondItem="TAf-4m-dPk" secondAttribute="bottom" type="default" id="Mns-tq-yIz"/>
                                     <constraint firstItem="v6D-oP-CwK" firstAttribute="top" secondItem="TEc-Og-29d" secondAttribute="top" type="default" id="NqX-aT-xJP"/>
+                                    <constraint firstItem="ELq-yo-T8T" firstAttribute="top" secondItem="Yuk-6A-LIM" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="RMc-fm-8oz"/>
                                     <constraint firstAttribute="trailing" secondItem="TEc-Og-29d" secondAttribute="trailing" constant="20" type="default" id="XmE-ab-Yvo"/>
                                     <constraint firstItem="G73-pU-zeg" firstAttribute="top" secondItem="q6V-yq-ooz" secondAttribute="top" constant="92" id="arY-DN-qNx"/>
                                     <constraint firstItem="z8z-oF-94F" firstAttribute="top" secondItem="q6V-yq-ooz" secondAttribute="top" type="default" id="axA-By-zyo"/>
@@ -473,8 +475,9 @@
                                     <constraint firstAttribute="trailing" secondItem="cBM-0w-6U0" secondAttribute="trailing" constant="54" id="fQ1-Nd-rJ6"/>
                                     <constraint firstAttribute="trailing" secondItem="lRC-EY-3bu" secondAttribute="trailing" constant="102" id="glN-Rg-ZV0"/>
                                     <constraint firstItem="Yuk-6A-LIM" firstAttribute="top" secondItem="q6V-yq-ooz" secondAttribute="top" type="default" id="gmE-e8-IfF"/>
-                                    <constraint firstItem="oa3-5y-pBT" firstAttribute="top" secondItem="q6V-yq-ooz" secondAttribute="top" constant="12" id="hqT-8u-OCP"/>
                                     <constraint firstItem="z8z-oF-94F" firstAttribute="bottom" secondItem="q6V-yq-ooz" secondAttribute="bottom" type="default" id="l2m-j3-1Vg"/>
+                                    <constraint firstItem="7ug-Mb-ORY" firstAttribute="leading" secondItem="q6V-yq-ooz" secondAttribute="leading" type="default" id="nzf-ce-aKT"/>
+                                    <constraint firstItem="7ug-Mb-ORY" firstAttribute="trailing" secondItem="q6V-yq-ooz" secondAttribute="trailing" type="default" id="qqD-pY-gI7"/>
                                     <constraint firstAttribute="trailing" secondItem="oa3-5y-pBT" secondAttribute="trailing" constant="7" id="t9Z-BF-ShB"/>
                                     <constraint firstItem="Yuk-6A-LIM" firstAttribute="leading" secondItem="TAf-4m-dPk" secondAttribute="leading" type="default" id="xAn-Ey-WL3"/>
                                 </constraints>
@@ -660,10 +663,13 @@
                     <navigationItem key="navigationItem" id="cX2-1s-QRd"/>
                     <connections>
                         <outlet property="articleTitleButton" destination="xWS-Jn-pzT" id="1gD-QG-zyb"/>
+                        <outlet property="downVoteButton" destination="CQg-IS-IXv" id="THe-oS-eXT"/>
                         <outlet property="expandedImageView" destination="kNS-t4-CE0" id="3NW-79-vaU"/>
                         <outlet property="friendsCountLabel" destination="nmy-QO-is0" id="nwJ-sW-QpK"/>
+                        <outlet property="recollectButton" destination="o1z-ji-xZF" id="ZSk-Da-9Q8"/>
                         <outlet property="timeAgoLabel" destination="ZhZ-hq-ZkR" id="OCr-Jr-i3q"/>
                         <outlet property="totalCountLabel" destination="dHj-7I-2mb" id="vBG-bL-GTr"/>
+                        <outlet property="upVoteButton" destination="MmI-js-2se" id="nRW-KD-1BM"/>
                         <segue destination="2" kind="modal" identifier="loginsignupfromstory" id="UvC-Sz-jjS"/>
                     </connections>
                 </viewController>
@@ -702,7 +708,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="rightSideBarButtonTouched:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="firstCollectionImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="firstTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="SidebarViewController"/>
@@ -715,13 +720,18 @@
                 <relationship kind="action" name="articleTitleTouched:"/>
                 <relationship kind="action" name="centerRecollectButtonTouched:"/>
                 <relationship kind="action" name="downVoteButtonTouched:"/>
+                <relationship kind="action" name="leftBarButtonItemTouched:"/>
+                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="action" name="upVoteButtonTouched:"/>
                 <relationship kind="outlet" name="articleTitleButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="downVoteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="expandedImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="friendsCountLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recollectButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="SidebarViewController"/>
                 <relationship kind="outlet" name="timeAgoLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="totalCountLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upVoteButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
@@ -761,7 +771,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VKb-ee-R7e"/>
+        <segue reference="2kM-eC-ete"/>
         <segue reference="UvC-Sz-jjS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,7 +17,7 @@
 
 @implementation collectivlyExpandedContentViewController
 
-@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel, articleTitleButton;
+@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel, articleTitleButton, recollectButton, recollected, upVoteButton, upVoted, downVoteButton, downVoted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,9 +64,9 @@
 -(void)setUpNavBar {
     
     // customize LEFT / BACK bar button item
-    UIImage* logo = [UIImage imageNamed:@"logo.png"];
-    NSInteger logoOffset = 26;
-    CGRect logoframe = CGRectMake(logoOffset*2, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
+    UIImage* logo = [UIImage imageNamed:@"back_logo.png"];
+    NSInteger logoOffset = 32;
+    CGRect logoframe = CGRectMake(logoOffset, logoOffset*4, logo.size.width - logoOffset*2, logo.size.height - logoOffset);
     UIButton *logoButton = [[UIButton alloc] initWithFrame:logoframe];
     [logoButton setBackgroundImage:logo forState:UIControlStateNormal];
     [logoButton addTarget:self action:@selector(leftBarButtonItemTouched:) forControlEvents:UIControlEventTouchUpInside];
@@ -170,19 +170,54 @@
 }
 
 - (IBAction)centerRecollectButtonTouched:(id)sender {
-    // TODO
     NSLog(@"!!!!!!!!!! RECOLLECT !!!!!!!!!!");
+    if (!recollected){
+        self.recollected = YES;
+        [self.recollectButton setImage:[UIImage imageNamed:@"centerrecollectbuttononclick.png"] forState:UIControlStateNormal];
+        self.recollectButton.userInteractionEnabled = NO;
+        // TODO: actual recollect action stuff
+    }
+    
 }
 
 - (IBAction)downVoteButtonTouched:(id)sender {
-    // TODO
     NSLog(@"!!!!!!!!!! DOWNVOTE !!!!!!!!!!");
+    if (!downVoted){
+        self.downVoted = YES;
+        [self.downVoteButton setImage:[UIImage imageNamed:@"downvoteonclick.png"] forState:UIControlStateNormal];
+        self.downVoteButton.userInteractionEnabled = NO;
+        // TODO: actual downvote action stuff
+        
+        
+        
+        //
+        if (upVoted){
+            self.upVoted = NO;
+            [self.upVoteButton setImage:[UIImage imageNamed:@"upvote.png"] forState:UIControlStateNormal];
+            self.upVoteButton.userInteractionEnabled = YES;
+        }
+    }
+    
     
 }
 
 - (IBAction)upVoteButtonTouched:(id)sender {
-    // TODO
     NSLog(@"!!!!!!!!!! UPVOTE !!!!!!!!!!");
+    if (!upVoted){
+        self.upVoted = YES;
+        [self.upVoteButton setImage:[UIImage imageNamed:@"upvoteonclick.png"] forState:UIControlStateNormal];
+        self.upVoteButton.userInteractionEnabled = NO;
+        // TODO: actual upvote action stuff
+        
+        
+        
+        //
+        if (downVoted){
+            self.downVoted = NO;
+            [self.downVoteButton setImage:[UIImage imageNamed:@"downvote.png"] forState:UIControlStateNormal];
+            self.downVoteButton.userInteractionEnabled = YES;
+        }
+    }
 
 }
 

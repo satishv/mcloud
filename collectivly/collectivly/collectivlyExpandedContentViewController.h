@@ -23,6 +23,14 @@
 
 @property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
 
+@property (weak, nonatomic) IBOutlet UIButton *recollectButton;
+@property (weak, nonatomic) IBOutlet UIButton *upVoteButton;
+@property (weak, nonatomic) IBOutlet UIButton *downVoteButton;
+
+@property (nonatomic, readwrite) BOOL recollected;
+@property (nonatomic, readwrite) BOOL upVoted;
+@property (nonatomic, readwrite) BOOL downVoted;
+
 @property (weak, nonatomic) IBOutlet UIButton *articleTitleButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeAgoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;

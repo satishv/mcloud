@@ -65,8 +65,8 @@ NSInteger selectedCollection;
     
     // customize LEFT / BACK bar button item
     UIImage* logo = [UIImage imageNamed:@"logo.png"];
-    NSInteger logoOffset = 26;
-    CGRect logoframe = CGRectMake(logoOffset*2, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
+    NSInteger logoOffset = 28;
+    CGRect logoframe = CGRectMake(logoOffset*4, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
     UIButton *logoButton = [[UIButton alloc] initWithFrame:logoframe];
     logoButton.userInteractionEnabled = NO;
     [logoButton setBackgroundImage:logo forState:UIControlStateNormal];

@@ -36,6 +36,9 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshStories) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
+    
+    // add background behind tableview
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cream_pixels.png"]];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -61,9 +64,9 @@
     NSLog(@"[collectivlyStoriesViewController] setting up nav bar");
     
     // customize LEFT / BACK bar button item
-    UIImage* logo = [UIImage imageNamed:@"logo.png"];
-    NSInteger logoOffset = 26;
-    CGRect logoframe = CGRectMake(logoOffset*2, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
+    UIImage* logo = [UIImage imageNamed:@"back_logo.png"];
+    NSInteger logoOffset = 32;
+    CGRect logoframe = CGRectMake(logoOffset, logoOffset*4, logo.size.width - logoOffset*2, logo.size.height - logoOffset);
     UIButton *logoButton = [[UIButton alloc] initWithFrame:logoframe];
     [logoButton setBackgroundImage:logo forState:UIControlStateNormal];
     [logoButton addTarget:self action:@selector(leftBarButtonItemTouched:) forControlEvents:UIControlEventTouchUpInside];
