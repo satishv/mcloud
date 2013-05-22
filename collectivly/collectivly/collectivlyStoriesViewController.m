@@ -35,6 +35,7 @@
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshStories) forControlEvents:UIControlEventValueChanged];
+    [refreshControl setTintColor:[UIColor magentaColor]];
     self.refreshControl = refreshControl;
     
     // add background behind tableview

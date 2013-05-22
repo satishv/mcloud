@@ -219,7 +219,7 @@ NSInteger selectedCollection;
     }
     // OTHERWISE: fetch collection via network
     else {
-        NSLog(@"[collectivlyCollectionsViewController] fetching story with id: %d", collection.idNumber);
+        NSLog(@"[collectivlyCollectionsViewController] GETTING NEW STORIES!!! FOR COLLECTIN ID: %d WITH TITLE: %@", collection.idNumber, collection.name);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
         NSLog(@"id: %d", collection.idNumber);
