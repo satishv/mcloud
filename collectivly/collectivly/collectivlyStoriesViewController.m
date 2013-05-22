@@ -170,6 +170,8 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
+//    self.tableView.userInteractionEnabled = NO;
+    
     //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/11.json"]];
     NSLog(@"refreshing collection with id: %d", self.currentUser.currentCollection.idNumber);
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json", self.currentUser.currentCollection.idNumber]];
@@ -230,7 +232,7 @@
     collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
-    storyImageView.image = story.articleImage;
+    storyImageView.image = (story.articleImage == nil) ? story.image : story.articleImage;
     
     UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
     storyNameLabel.text = story.title;
@@ -412,6 +414,7 @@
     for (int i = 0; i < array.count; i++){
         NSLog(@"STORYYY %d out of %d", i, array.count);
         collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
         NSLog(@"STORYYY %d out of %d DONE", i, array.count);
         [lolz addObject:story];
         
@@ -481,6 +484,8 @@
         
         self.stories = newStories;
     }
+    
+//    self.tableView.userInteractionEnabled = YES;
     
     [self.tableView reloadData];
 }

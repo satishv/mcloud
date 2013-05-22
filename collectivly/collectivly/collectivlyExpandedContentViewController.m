@@ -39,7 +39,8 @@
     self.story = self.currentUser.currentStory;
     
     // update UI elements to match story's elements
-    self.expandedImageView.image = self.story.expandedImage;
+    
+    self.expandedImageView.image = (self.story.expandedImage == nil) ? self.story.image : self.story.expandedImage;
     
     self.timeAgoLabel.text = self.story.timeAgo;
     self.totalCountLabel.text = [NSString stringWithFormat:@"%d", self.story.totalCount];
