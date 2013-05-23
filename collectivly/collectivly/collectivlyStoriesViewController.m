@@ -54,7 +54,6 @@
 //    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]];
     NSLog(@"stories for id %d: %@", self.currentUser.currentCollection.idNumber, self.stories);
     
-    
     // SET UP NAV BAR
     [self setUpNavBar];
 
@@ -170,7 +169,7 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-//    self.tableView.userInteractionEnabled = NO;
+    self.tableView.userInteractionEnabled = NO;
     
     //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/11.json"]];
     NSLog(@"refreshing collection with id: %d", self.currentUser.currentCollection.idNumber);
@@ -485,9 +484,9 @@
         self.stories = newStories;
     }
     
-//    self.tableView.userInteractionEnabled = YES;
-    
     [self.tableView reloadData];
+    
+    self.tableView.userInteractionEnabled = YES;
 }
 
 
