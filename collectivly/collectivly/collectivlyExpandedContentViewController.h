@@ -12,16 +12,16 @@
 #import "JTRevealSidebarV2Delegate.h"
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
-#import "SidebarViewController.h"
+#import "collectivlySidebarViewController.h"
 
-@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, SidebarViewControllerDelegate>
+@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate>
 
 @property (retain) collectivlySingleton *currentUser;
 
 @property (nonatomic, retain) collectivlyStory *story;
 @property (weak, nonatomic) IBOutlet UIImageView *expandedImageView;
 
-@property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
+@property (retain, nonatomic) IBOutlet collectivlySidebarViewController *rightSideBarViewController;
 
 @property (weak, nonatomic) IBOutlet UIButton *recollectButton;
 @property (weak, nonatomic) IBOutlet UIButton *upVoteButton;

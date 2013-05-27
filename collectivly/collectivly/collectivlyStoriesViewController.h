@@ -15,10 +15,10 @@
 #import "JTRevealSidebarV2Delegate.h"
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
-#import "SidebarViewController.h"
+#import "collectivlySidebarViewController.h"
 
 
-@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, JTRevealSidebarV2Delegate, SidebarViewControllerDelegate> {
+@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate> {
 
     NSMutableData *_data;
 }
@@ -27,7 +27,7 @@
 
 @property (nonatomic, retain) NSArray *stories;
 
-@property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
+@property (retain, nonatomic) IBOutlet collectivlySidebarViewController *rightSideBarViewController;
 
 
 @end

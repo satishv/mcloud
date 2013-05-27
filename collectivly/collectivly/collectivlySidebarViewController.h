@@ -8,6 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@interface collectivlySidebarViewController : UIViewController
+@protocol collectivlySidebarViewControllerDelegate;
+
+
+@interface collectivlySidebarViewController : UIViewController <UITableViewDelegate, UITableViewDelegate> {
+    NSIndexPath *selectedCollectionsIndex;
+    NSIndexPath *selectedCollectorIndex;
+}
+
+@property (nonatomic, assign) id <collectivlySidebarViewControllerDelegate> sidebarDelegate;
+@property (nonatomic, retain) IBOutlet UITableView *table;
 
 @end
+
+@protocol collectivlySidebarViewControllerDelegate <NSObject>
+
+- (void)sidebarViewController:(collectivlySidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+- (NSIndexPath *)lastSelectedIndexPathForSidebarViewController:(collectivlySidebarViewController *)sidebarViewController;
+
+@end
+

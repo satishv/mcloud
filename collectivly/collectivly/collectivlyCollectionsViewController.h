@@ -15,10 +15,10 @@
 #import "JTRevealSidebarV2Delegate.h"
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
-#import "SidebarViewController.h"
+#import "collectivlySidebarViewController.h"
 #import "MBProgressHUD.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, SidebarViewControllerDelegate, MBProgressHUDDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, MBProgressHUDDelegate> {
     int requestNumber;
     NSMutableData *_data;
     
@@ -33,7 +33,7 @@
 
 @property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
 
-@property (retain, nonatomic) IBOutlet SidebarViewController *rightSideBarViewController;
+@property (retain, nonatomic) collectivlySidebarViewController *rightSideBarViewController;
 
 @property (retain, nonatomic) MBProgressHUD *HUD;
 

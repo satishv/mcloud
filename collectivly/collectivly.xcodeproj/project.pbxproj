@@ -26,12 +26,12 @@
 		4C08AF721721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C08AF611721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf */; };
 		4C143D5217168A6000B5A210 /* collectivlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C143D5117168A6000B5A210 /* collectivlyCollection.m */; };
 		4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */; };
+		4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */; };
 		4C3E356717454148001962D7 /* collectivlySimplifiedStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E356617454148001962D7 /* collectivlySimplifiedStory.m */; };
 		4C5F3131171EB30E001027F8 /* nyc_sunset.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */; };
 		4C6B5B001721D661009C3986 /* collectivly_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6B5AFF1721D661009C3986 /* collectivly_logo.png */; };
 		4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */; };
 		4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */; };
-		4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */; };
 		4C7CF06B174EE273009B0494 /* bottom_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7CF062174EE273009B0494 /* bottom_logo.png */; };
 		4C7CF06C174EE273009B0494 /* check_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7CF063174EE273009B0494 /* check_selected.png */; };
 		4C7CF06D174EE273009B0494 /* greyback-no-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7CF064174EE273009B0494 /* greyback-no-shadow.png */; };
@@ -124,6 +124,8 @@
 		4C143D5117168A6000B5A210 /* collectivlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyCollection.m; sourceTree = "<group>"; };
 		4C2F88F81721EF15009006EF /* collectivlyStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyStoriesViewController.h; sourceTree = "<group>"; };
 		4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyStoriesViewController.m; sourceTree = "<group>"; };
+		4C319C821753FDCF0037C84D /* collectivlySidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySidebarViewController.h; sourceTree = "<group>"; };
+		4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlySidebarViewController.m; sourceTree = "<group>"; };
 		4C3E356517454148001962D7 /* collectivlySimplifiedStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySimplifiedStory.h; sourceTree = "<group>"; };
 		4C3E356617454148001962D7 /* collectivlySimplifiedStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlySimplifiedStory.m; sourceTree = "<group>"; };
 		4C5F3130171EB30E001027F8 /* nyc_sunset.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nyc_sunset.jpg; sourceTree = "<group>"; };
@@ -133,8 +135,6 @@
 		4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+JTRevealSidebarV2.m"; sourceTree = "<group>"; };
 		4C6D358A172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JTRevealSidebarV2.h"; sourceTree = "<group>"; };
 		4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JTRevealSidebarV2.m"; sourceTree = "<group>"; };
-		4C6D358E172CB0F700AB7F3B /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SidebarViewController.h; path = JTRevealSidebarV2/SidebarViewController.h; sourceTree = "<group>"; };
-		4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SidebarViewController.m; path = JTRevealSidebarV2/SidebarViewController.m; sourceTree = "<group>"; };
 		4C7CF062174EE273009B0494 /* bottom_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_logo.png; sourceTree = "<group>"; };
 		4C7CF063174EE273009B0494 /* check_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_selected.png; sourceTree = "<group>"; };
 		4C7CF064174EE273009B0494 /* greyback-no-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyback-no-shadow.png"; sourceTree = "<group>"; };
@@ -370,14 +370,14 @@
 				4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */,
 				4CA998DE1746A07000C252B3 /* collectivlyExpandedContentViewController.h */,
 				4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */,
-				4C6D358E172CB0F700AB7F3B /* SidebarViewController.h */,
-				4C6D358F172CB0F700AB7F3B /* SidebarViewController.m */,
 				4C3E356517454148001962D7 /* collectivlySimplifiedStory.h */,
 				4C3E356617454148001962D7 /* collectivlySimplifiedStory.m */,
 				4CF8D9F01710C0EB00E4FD21 /* collectivlyStory.h */,
 				4CF8D9F11710C0EB00E4FD21 /* collectivlyStory.m */,
 				4C143D5017168A6000B5A210 /* collectivlyCollection.h */,
 				4C143D5117168A6000B5A210 /* collectivlyCollection.m */,
+				4C319C821753FDCF0037C84D /* collectivlySidebarViewController.h */,
+				4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */,
 				4C6D3586172CAD5E00AB7F3B /* JTRevealSidebarV2 */,
 				4CF8D9B91710BEAD00E4FD21 /* Supporting Files */,
 			);
@@ -566,10 +566,10 @@
 				4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */,
 				4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */,
 				4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */,
-				4C6D3590172CB0F700AB7F3B /* SidebarViewController.m in Sources */,
 				4C3E356717454148001962D7 /* collectivlySimplifiedStory.m in Sources */,
 				4CA998E11746A07000C252B3 /* collectivlyExpandedContentViewController.m in Sources */,
 				4CD2A2851749C50100824EF9 /* MBProgressHUD.m in Sources */,
+				4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

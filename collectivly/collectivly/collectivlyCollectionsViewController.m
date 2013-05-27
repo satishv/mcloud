@@ -108,9 +108,9 @@ NSInteger selectedCollection;
 
 #pragma mark SidebarViewControllerDelegate
 
-- (void)sidebarViewController:(SidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
+- (void)sidebarViewController:(collectivlySidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
     
-    [sidebarViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [sidebarViewController.table deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController setRevealedState:JTRevealedStateNo];
 
@@ -135,7 +135,7 @@ NSInteger selectedCollection;
     // Use applicationViewFrame to get the correctly calculated view's frame
     // for use as a reference to our sidebar's view
     CGRect viewFrame = self.navigationController.applicationViewFrame;
-    SidebarViewController *controller = self.rightSideBarViewController;
+    collectivlySidebarViewController *controller = self.rightSideBarViewController;
     if ( ! controller) {
         self.rightSideBarViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RIGHT"];
         self.rightSideBarViewController.sidebarDelegate = self;
