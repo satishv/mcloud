@@ -214,37 +214,50 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="subsubmenu_darkergrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="KAH-wz-onD">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="7Pm-IA-nEa"/>
+                                    <constraint firstAttribute="height" constant="107" id="NDA-3I-XMg"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bottom_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="aac-ga-8wq">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="Vw1-Zr-5HV"/>
-                                </constraints>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="f2d-A3-dob">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="f2d-A3-dob">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="433" id="3kx-ld-TY4"/>
+                                    <constraint firstAttribute="height" constant="387" id="7P1-vz-6tt"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="rightSideCollections" id="YEs-2q-XFr">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="subsubmenu_darkergrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zsh-f0-nDr"/>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="Zsh-f0-nDr" firstAttribute="bottom" secondItem="YEs-2q-XFr" secondAttribute="bottom" type="default" id="JmY-nM-NGB"/>
+                                            <constraint firstItem="Zsh-f0-nDr" firstAttribute="top" secondItem="YEs-2q-XFr" secondAttribute="top" type="default" id="KvY-pU-JqD"/>
+                                            <constraint firstItem="Zsh-f0-nDr" firstAttribute="leading" secondItem="YEs-2q-XFr" secondAttribute="leading" type="default" id="n3u-s6-sQA"/>
+                                            <constraint firstItem="Zsh-f0-nDr" firstAttribute="trailing" secondItem="YEs-2q-XFr" secondAttribute="trailing" type="default" id="ttB-rn-cQZ"/>
+                                        </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="rightSideCollectors" id="11Y-bz-Gsk">
-                                        <rect key="frame" x="0.0" y="67" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="62" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="subsubmenu_darkergrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="6oK-q0-kaT"/>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="6oK-q0-kaT" firstAttribute="top" secondItem="11Y-bz-Gsk" secondAttribute="top" type="default" id="EPp-D7-9pD"/>
+                                            <constraint firstItem="6oK-q0-kaT" firstAttribute="bottom" secondItem="11Y-bz-Gsk" secondAttribute="bottom" type="default" id="KN8-HU-akz"/>
+                                            <constraint firstItem="6oK-q0-kaT" firstAttribute="trailing" secondItem="11Y-bz-Gsk" secondAttribute="trailing" type="default" id="ttQ-kV-T32"/>
+                                            <constraint firstItem="6oK-q0-kaT" firstAttribute="leading" secondItem="11Y-bz-Gsk" secondAttribute="leading" type="default" id="v1i-v0-nL7"/>
+                                        </constraints>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -252,21 +265,45 @@
                                     <outlet property="delegate" destination="8Rf-pU-UzT" id="W6e-CI-IZp"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profileback.png" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-5H-wIF">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="ybB-vE-a1c"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profileimageexample.png" translatesAutoresizingMaskIntoConstraints="NO" id="sP6-G1-N5g">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="a3M-v0-fs5"/>
+                                    <constraint firstAttribute="height" constant="70" id="w13-yb-J9g"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JUN LEE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVM-WJ-cFH">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="YQQ-OH-wmu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aac-ga-8wq" firstAttribute="leading" secondItem="eV6-yG-QGk" secondAttribute="leading" type="default" id="0l4-ig-vcJ"/>
-                            <constraint firstItem="KAH-wz-onD" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" type="default" id="ApI-yF-Rj7"/>
+                            <constraint firstItem="KAH-wz-onD" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="5cb-Aa-4Df"/>
+                            <constraint firstItem="f2d-A3-dob" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="107" id="9sU-6A-OFT"/>
+                            <constraint firstItem="KAH-wz-onD" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" type="default" id="A6y-NA-Tis"/>
                             <constraint firstItem="f2d-A3-dob" firstAttribute="leading" secondItem="eV6-yG-QGk" secondAttribute="leading" type="default" id="CjY-nB-F8q"/>
+                            <constraint firstItem="QVM-WJ-cFH" firstAttribute="centerY" secondItem="KAH-wz-onD" secondAttribute="centerY" type="default" id="OCn-R5-XvP"/>
+                            <constraint firstItem="f2d-A3-dob" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="OZH-6G-9Y5"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="top" secondItem="sP6-G1-N5g" secondAttribute="top" type="default" id="UAT-QC-L9s"/>
                             <constraint firstItem="KAH-wz-onD" firstAttribute="leading" secondItem="eV6-yG-QGk" secondAttribute="leading" type="default" id="UGm-ix-Jaj"/>
-                            <constraint firstItem="f2d-A3-dob" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="hSl-xi-dlh"/>
-                            <constraint firstItem="aac-ga-8wq" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="hdM-q6-kZ0"/>
-                            <constraint firstItem="aac-ga-8wq" firstAttribute="bottom" secondItem="eV6-yG-QGk" secondAttribute="bottom" type="default" id="qEV-EX-qfY"/>
-                            <constraint firstItem="KAH-wz-onD" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="vqh-vO-nI3"/>
-                            <constraint firstItem="f2d-A3-dob" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="60" id="w6w-vI-KRk"/>
+                            <constraint firstItem="sP6-G1-N5g" firstAttribute="leading" secondItem="QPj-5H-wIF" secondAttribute="leading" type="default" id="bw1-85-52k"/>
+                            <constraint firstItem="QVM-WJ-cFH" firstAttribute="leading" secondItem="sP6-G1-N5g" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="cFx-PC-3eF"/>
+                            <constraint firstItem="sP6-G1-N5g" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="19" id="dM6-Dt-tpw"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="centerX" secondItem="KAH-wz-onD" secondAttribute="centerX" type="default" id="lc7-Ru-tWO"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="bottom" secondItem="sP6-G1-N5g" secondAttribute="bottom" type="default" id="xeY-1C-L8d"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nameLabel" destination="QVM-WJ-cFH" id="GEV-Bp-X50"/>
                         <outlet property="table" destination="f2d-A3-dob" id="S1A-ff-kYj"/>
                     </connections>
                 </viewController>
@@ -721,7 +758,6 @@
     </scenes>
     <resources>
         <image name="1pxblacklinebelowimage.png" width="640" height="1"/>
-        <image name="bottom_logo.png" width="582" height="121"/>
         <image name="centerrecollectbutton.png" width="120" height="140"/>
         <image name="clock.png" width="27" height="27"/>
         <image name="clock_darker.png" width="27" height="27"/>
@@ -732,6 +768,8 @@
         <image name="hexfortotalsharecount.png" width="29" height="25"/>
         <image name="intro_logo.png" width="176" height="47"/>
         <image name="manhattan_skyline.jpg" width="1600" height="1200"/>
+        <image name="profileback.png" width="507" height="147"/>
+        <image name="profileimageexample.png" width="168" height="146"/>
         <image name="red_triangle.png" width="37" height="64"/>
         <image name="request_invite_webSS.png" width="89" height="27"/>
         <image name="sampleimage640x573.png" width="640" height="573"/>
@@ -776,13 +814,13 @@
         <class className="collectivlySidebarViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlySidebarViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="table" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
             <relationships>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="collectivlySidebarViewController"/>
             </relationships>
         </class>

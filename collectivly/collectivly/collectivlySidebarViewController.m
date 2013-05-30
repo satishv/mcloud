@@ -8,13 +8,18 @@
 
 #import "collectivlySidebarViewController.h"
 
+#define HEADERHEIGHT    40
+#define FOOTERHEIGHT    57
+#define CHECKMARKWIDTH  32
+#define CHECKMARKHEIGHT 24
+
 @interface collectivlySidebarViewController ()
 
 @end
 
 @implementation collectivlySidebarViewController
 
-@synthesize table, sidebarDelegate;
+@synthesize table, sidebarDelegate, nameLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +48,11 @@
     
     selectedCollectionsIndex = nil;
     selectedCollectorIndex = nil;
+    
+    self.nameLabel.font = [UIFont fontWithName:@"ProximaNova-Bold" size:20];
+    
+    // TODO: get actual name
+//    self.nameLabel.text = @"????";
 }
 
 #pragma mark TableViewDataSourceDelegate methods
@@ -142,26 +152,21 @@
         }
     }
     
-    CGRect t = cell.textLabel.frame;
-    cell.textLabel.frame = CGRectMake(t.origin.x + 100, t.origin.y, t.size.width, t.size.height);
     
-    checkMark.frame = CGRectMake(t.origin.x, checkMark.frame.origin.y, checkMark.frame.size.width, checkMark.frame.size.height);
+//    UIImageView *cellBG = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"subsubmenu_darkergrey.png"]];
+//    cellBG.frame = cell.frame;
+//    [cell insertSubview:cellBG atIndex:0];
+    cell.textLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:20];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     
-    cell.textLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:22];
+    cell.accessoryView.frame = CGRectMake(0, 0, CHECKMARKWIDTH, CHECKMARKHEIGHT);
     
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"Collections";
-        case 1:
-            return @"Collectors";
-        default:
-            break;
-    }
-    return self.title;
+#pragma mark header methods
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return HEADERHEIGHT;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -171,22 +176,32 @@
             headerLabel.text = @"Collections";
             break;
         case 1:
-            headerLabel.text = @"Collectors";
+            headerLabel.text = @"Collector";
             break;
         default:
             break;
     }
-    headerLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:22];
+    headerLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:20];
     headerLabel.backgroundColor = [UIColor clearColor];
     UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"submenu_lightgrey.png"]];
-    bg.frame = CGRectMake(0, 0, 320, 60);
+    bg.frame = CGRectMake(0, 0, 320, HEADERHEIGHT);
     [bg addSubview:headerLabel];
-    headerLabel.frame = CGRectMake(0, 0, 300, 45);
+    headerLabel.frame = CGRectMake(10, HEADERHEIGHT / 8, 270, HEADERHEIGHT * 3 / 4);
     return bg;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section:(NSInteger)section {
-    
+
+#pragma mark footer methods
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIImageView *footer = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_logo.png"]];
+    footer.frame = CGRectMake(0, 0, 270, FOOTERHEIGHT);
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, FOOTERHEIGHT)];
+    [footerView addSubview:footer];
+    return (section == 1) ? footerView : [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return (section == 1) ? 90 : 0;
 }
 
 #pragma mark TableViewDelegate methods
@@ -199,7 +214,7 @@
             selectedCollectionsIndex = indexPath;
             UITableViewCell *cell2 = [self.table cellForRowAtIndexPath:indexPath];
             cell2.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check_selected.png"]];
-            
+            cell2.accessoryView.frame = CGRectMake(0, 0, CHECKMARKWIDTH, CHECKMARKHEIGHT);
             
         }
         else if (indexPath.section == 1) {
@@ -208,6 +223,7 @@
             selectedCollectorIndex = indexPath;
             UITableViewCell *cell2 = [self.table cellForRowAtIndexPath:indexPath];
             cell2.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check_selected.png"]];
+            cell2.accessoryView.frame = CGRectMake(0, 0, CHECKMARKWIDTH, CHECKMARKHEIGHT);
             
             
         }

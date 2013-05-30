@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign) id <collectivlySidebarViewControllerDelegate> sidebarDelegate;
 @property (nonatomic, retain) IBOutlet UITableView *table;
+@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 
 @end
 
