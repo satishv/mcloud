@@ -288,10 +288,16 @@
 -(NSString *)findDifferenceBetweenCurrent:(NSString *)current AndCreatedTime:(NSString *)created {
     if (current.length < created.length){
         NSMutableString *mutableGuy = [NSMutableString stringWithString:current];
-        [mutableGuy insertString:@"0" atIndex:11];
+        NSString *tee = [mutableGuy substringWithRange:NSMakeRange(9, 1)];
+        if ([tee isEqualToString:@"T"]){
+            [mutableGuy insertString:@"0" atIndex:8];
+        }
+        if (mutableGuy.length < created.length) {
+            [mutableGuy insertString:@"0" atIndex:11];
+        }
         current = [NSString stringWithString:mutableGuy];
     }
-        
+    
     NSInteger createdYear = atoi([[created substringWithRange:NSMakeRange(0, 4)] UTF8String]);
     NSInteger currentYear  = atoi([[current substringWithRange:NSMakeRange(0, 4)] UTF8String]);
     

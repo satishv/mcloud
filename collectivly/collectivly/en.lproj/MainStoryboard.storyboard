@@ -350,7 +350,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0UQ-3p-wcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-316" y="-289"/>
+            <point key="canvasLocation" x="-421" y="-309"/>
         </scene>
         <!--Collectivly Collections View Controller - Collections-->
         <scene sceneID="1Rk-jy-LpN">
@@ -361,61 +361,62 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" image="manhattan_skyline.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-1d-DrE"/>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="kjn-Nh-Rv4">
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vL2-c1-kbX">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="96" id="eu7-Kz-oYd"/>
-                                            <constraint firstAttribute="width" constant="279" id="zFu-li-2WN"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRu-Mc-x3r">
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="23a-pI-R1I"/>
-                                            <constraint firstAttribute="width" constant="205" id="fKi-nT-QeC"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="32"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="shadowColor" red="0.0" green="0.028664994629999999" blue="0.38457455839999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="vL2-c1-kbX" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="F93-Tz-Xlk"/>
-                                    <constraint firstItem="kRu-Mc-x3r" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="72" id="FVK-rd-Chq"/>
-                                    <constraint firstAttribute="bottom" secondItem="kRu-Mc-x3r" secondAttribute="bottom" constant="403" id="NIP-3b-maT"/>
-                                    <constraint firstItem="vL2-c1-kbX" firstAttribute="top" secondItem="kjn-Nh-Rv4" secondAttribute="top" constant="20" symbolic="YES" type="default" id="aJW-MV-rgw"/>
-                                    <constraint firstAttribute="trailing" secondItem="vL2-c1-kbX" secondAttribute="trailing" constant="21" id="bh2-3G-dqe"/>
-                                    <constraint firstItem="kRu-Mc-x3r" firstAttribute="leading" secondItem="kjn-Nh-Rv4" secondAttribute="leading" constant="37" id="v0c-u9-rXv"/>
-                                </constraints>
-                            </scrollView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dV1-VZ-737">
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xnt-Zw-Igt">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="collectionCell" id="Dwu-qE-xfM">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cec-vt-fjV">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="xWk-70-L2k"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qX-Ha-S52">
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="9qX-Ha-S52" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="B4E-zc-Q2r"/>
+                                            <constraint firstItem="Cec-vt-fjV" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="Iq8-jv-wwd"/>
+                                            <constraint firstItem="9qX-Ha-S52" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="WhZ-g4-VRK"/>
+                                            <constraint firstItem="Cec-vt-fjV" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="-1" id="cNj-lt-9uv"/>
+                                            <constraint firstItem="9qX-Ha-S52" firstAttribute="bottom" secondItem="Dwu-qE-xfM" secondAttribute="bottom" type="default" id="cgk-ax-M3U"/>
+                                            <constraint firstItem="9qX-Ha-S52" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="94" id="hhQ-7P-awu"/>
+                                            <constraint firstItem="Cec-vt-fjV" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="j09-YJ-XNT"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.74930695560000005" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kjn-Nh-Rv4" firstAttribute="leading" secondItem="4vS-EN-Ohe" secondAttribute="leading" type="default" id="0X6-5a-sPn"/>
-                            <constraint firstItem="kjn-Nh-Rv4" firstAttribute="top" secondItem="4vS-EN-Ohe" secondAttribute="top" type="default" id="N6c-gn-kk3"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="bottom" secondItem="4vS-EN-Ohe" secondAttribute="bottom" type="default" id="4HE-YN-sAa"/>
+                            <constraint firstItem="xnt-Zw-Igt" firstAttribute="leading" secondItem="4vS-EN-Ohe" secondAttribute="leading" type="default" id="6IG-a3-KGp"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="top" secondItem="4vS-EN-Ohe" secondAttribute="top" type="default" id="CqQ-zW-cqd"/>
+                            <constraint firstItem="xnt-Zw-Igt" firstAttribute="top" secondItem="4vS-EN-Ohe" secondAttribute="top" type="default" id="IUc-rS-WYc"/>
                             <constraint firstItem="Ucw-1d-DrE" firstAttribute="leading" secondItem="4vS-EN-Ohe" secondAttribute="leading" type="default" id="Oag-Kn-O2M"/>
                             <constraint firstItem="Ucw-1d-DrE" firstAttribute="trailing" secondItem="4vS-EN-Ohe" secondAttribute="trailing" type="default" id="Ope-kL-p0J"/>
-                            <constraint firstItem="kjn-Nh-Rv4" firstAttribute="centerY" secondItem="Ucw-1d-DrE" secondAttribute="centerY" type="default" id="QdT-DE-4Bb"/>
-                            <constraint firstItem="dV1-VZ-737" firstAttribute="centerX" secondItem="kjn-Nh-Rv4" secondAttribute="centerX" type="default" id="ecU-Oj-pFl"/>
-                            <constraint firstItem="kjn-Nh-Rv4" firstAttribute="centerY" secondItem="4vS-EN-Ohe" secondAttribute="centerY" type="default" id="jJD-90-wwY"/>
                             <constraint firstAttribute="bottom" secondItem="dV1-VZ-737" secondAttribute="bottom" constant="144" id="od0-rf-RpR"/>
-                            <constraint firstItem="kjn-Nh-Rv4" firstAttribute="trailing" secondItem="4vS-EN-Ohe" secondAttribute="trailing" type="default" id="qaf-P8-kLp"/>
-                            <constraint firstItem="kjn-Nh-Rv4" firstAttribute="top" secondItem="Ucw-1d-DrE" secondAttribute="top" type="default" id="uJu-hb-zJG"/>
+                            <constraint firstItem="xnt-Zw-Igt" firstAttribute="trailing" secondItem="4vS-EN-Ohe" secondAttribute="trailing" type="default" id="vY2-0z-nrv"/>
+                            <constraint firstItem="xnt-Zw-Igt" firstAttribute="bottom" secondItem="4vS-EN-Ohe" secondAttribute="bottom" type="default" id="y7D-rc-vXV"/>
+                            <constraint firstItem="Ucw-1d-DrE" firstAttribute="centerX" secondItem="dV1-VZ-737" secondAttribute="centerX" type="default" id="zcM-Eb-VJW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Collections" id="JAe-pl-2ss"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="firstCollectionImage" destination="vL2-c1-kbX" id="Gth-NJ-bla"/>
-                        <outlet property="firstTitle" destination="kRu-Mc-x3r" id="jsM-zq-xgt"/>
-                        <outlet property="scrolley" destination="kjn-Nh-Rv4" id="Qbm-sg-VVJ"/>
+                        <outlet property="collectionsTableView" destination="xnt-Zw-Igt" id="gAZ-gX-XAs"/>
                         <segue destination="sJW-NR-vuB" kind="modal" identifier="loginsignup" id="VKb-ee-R7e"/>
                         <segue destination="zXo-41-V8Q" kind="push" identifier="showCollection" id="yoo-7g-DUy"/>
                     </connections>
@@ -753,7 +754,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALc-b8-YwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="-320"/>
+            <point key="canvasLocation" x="1057" y="-418"/>
         </scene>
     </scenes>
     <resources>
@@ -786,9 +787,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="rightSideBarButtonTouched:"/>
-                <relationship kind="outlet" name="firstCollectionImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="firstTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="collectionsTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="collectivlyExpandedContentViewController" superclassName="UIViewController">
@@ -821,6 +820,8 @@
         <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
             <relationships>
+                <relationship kind="action" name="leftBarButtonItemTouched:"/>
+                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="collectivlySidebarViewController"/>
             </relationships>
         </class>

@@ -19,7 +19,7 @@
 
 @property (nonatomic, readwrite) BOOL isLoggedIn;
 @property (nonatomic, readwrite) collectivlyCollection *currentCollection;
-@property (nonatomic, retain) NSMutableArray *personalStories, *popularCollections;
+@property (nonatomic, retain) NSMutableArray *personalStories, *collections;
 @property (nonatomic, retain) NSMutableDictionary *storiesForCollectionWithId;
 @property (nonatomic, retain) NSArray *currentStories;
 @property (nonatomic, retain) collectivlyStory *currentStory;

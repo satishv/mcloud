@@ -10,7 +10,7 @@
 
 @implementation collectivlySingleton
 
-@synthesize personalStories, isLoggedIn, authToken, currentStories, popularCollections, storiesForCollectionWithId, currentCollection, currentStory;
+@synthesize personalStories, isLoggedIn, authToken, currentStories, collections, storiesForCollectionWithId, currentCollection, currentStory;
 
 static collectivlySingleton *sharedDataModel = nil;
 

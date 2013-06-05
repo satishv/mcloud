@@ -18,7 +18,7 @@
 #import "collectivlySidebarViewController.h"
 #import "MBProgressHUD.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, MBProgressHUDDelegate> {
+@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, MBProgressHUDDelegate> {
     int requestNumber;
     NSMutableData *_data;
     
@@ -28,14 +28,13 @@
 
 @property (retain) collectivlySingleton *currentUser;
 
-@property (retain, nonatomic) IBOutlet UIImageView *firstCollectionImage;
-@property (retain, nonatomic) IBOutlet UILabel *firstTitle;
-
-@property (retain, nonatomic) IBOutlet UIScrollView *scrolley;
+@property (weak, nonatomic) IBOutlet UITableView *collectionsTableView;
 
 @property (retain, nonatomic) collectivlySidebarViewController *rightSideBarViewController;
 
 @property (retain, nonatomic) MBProgressHUD *HUD;
+
+@property (retain, nonatomic) UIRefreshControl *refresherController;
 
 -(IBAction)rightSideBarButtonTouched:(id)sender;
 
