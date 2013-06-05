@@ -379,6 +379,9 @@
                                                         <constraint firstAttribute="height" constant="100" id="xWk-70-L2k"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osI-EF-5Dm">
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qX-Ha-S52">
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -386,13 +389,17 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="osI-EF-5Dm" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="0Dk-gX-KNo"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="B4E-zc-Q2r"/>
+                                            <constraint firstItem="osI-EF-5Dm" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="-6" id="Guq-eu-hXC"/>
                                             <constraint firstItem="Cec-vt-fjV" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="Iq8-jv-wwd"/>
+                                            <constraint firstAttribute="bottom" secondItem="osI-EF-5Dm" secondAttribute="bottom" constant="100" id="Re4-e4-G01"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="WhZ-g4-VRK"/>
                                             <constraint firstItem="Cec-vt-fjV" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="-1" id="cNj-lt-9uv"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="bottom" secondItem="Dwu-qE-xfM" secondAttribute="bottom" type="default" id="cgk-ax-M3U"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="94" id="hhQ-7P-awu"/>
                                             <constraint firstItem="Cec-vt-fjV" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="j09-YJ-XNT"/>
+                                            <constraint firstItem="osI-EF-5Dm" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="lcE-zT-AiY"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -796,8 +803,6 @@
                 <relationship kind="action" name="articleTitleTouched:"/>
                 <relationship kind="action" name="centerRecollectButtonTouched:"/>
                 <relationship kind="action" name="downVoteButtonTouched:"/>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="action" name="upVoteButtonTouched:"/>
                 <relationship kind="outlet" name="articleTitleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="downVoteButton" candidateClass="UIButton"/>
