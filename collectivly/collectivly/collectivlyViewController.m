@@ -67,15 +67,12 @@
     return (range.location == NSNotFound);
 }
 
--(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
-    NSMutableArray *stories = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i++){
-        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
-        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
-        [stories addObject:story];
-        
-    }
-    return stories;
+-(NSString*)extractAuthToken:(NSString *)string {
+    
+    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
+    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSLog(@"AUTH TOKEN: %@", auth);
+    return auth;
 }
 
 #pragma mark textField functions
@@ -231,7 +228,7 @@
     [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
     
-    NSString *url = @"https://collecvitly.com/users/sign_in";
+    NSString *url = @"https://collectivly.com/users/sign_in";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSString *data = [NSString stringWithFormat:@""];
@@ -296,11 +293,7 @@
     // act based on what the request was (requestinvite, requestsignin, etc)
     switch (requestNumber)
     {
-            //        case REQUESTHOMEPAGE:
-            //            // SET auth token
-            //            auth_token = [self extractAuthToken:responseString];
-            //            break;
-        case REQUESTINVITE:
+        case REQUESTINVITE: {
             if ([[dictResponse objectForKey:@"status"] isEqualToString:@"success"]){
                 // pop up success alert view
                 UIAlertView *alert = [[UIAlertView alloc]
@@ -311,8 +304,12 @@
                                       otherButtonTitles:nil];
                 [alert show];
             }
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self.parent refreshView];
+            }];
             break;
-        case REQUESTSIGNIN:
+        }
+        case REQUESTSIGNIN: {
             // if BAD SIGN IN
             if (![self checkValidityOfSignIn:(NSString *)responseString]){
                 // THEN, disply red text
@@ -322,16 +319,10 @@
                 }];
             }
             else {
-                // O.W, display content!!! YEEE!!!
-                NSMutableArray *stories = [[NSMutableArray alloc] init];
-                
-                NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-                
-                stories = [self createStoriesFromResponse:array];
                 
                 // POPULATE SINGLETON STORIES FOR LOGGED IN USER
-                currentUser.isLoggedIn = TRUE;
-                currentUser.personalStories = stories;
+                self.currentUser.isLoggedIn = TRUE;
+                self.currentUser.authToken = [self extractAuthToken:responseString];
                 
                 [self dismissViewControllerAnimated:YES completion:^{
                     [self.parent refreshView];
@@ -339,6 +330,7 @@
                 
             }
             break;
+        }
         default:
             break;
     }

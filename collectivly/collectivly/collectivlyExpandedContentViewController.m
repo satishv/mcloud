@@ -11,6 +11,10 @@
 #define NAVBARHEIGHT        44
 #define STATUSBARHEIGHT     20
 
+#define REQUESTRECOLLECT    1
+#define REQUESTUPVOTE       2
+#define REQUESTDOWNVOTE     3
+
 @interface collectivlyExpandedContentViewController ()
 
 @end
@@ -54,12 +58,27 @@
     [self.articleTitleButton setTitle:self.story.title forState:UIControlStateNormal];
     self.articleTitleButton.titleLabel.font = articleTitleFont;
     
-//    CGRect screenBound = [[UIScreen mainScreen] bounds];
-//    NSLog(@"screen height and width: %f and %f", screenBound.size.height, screenBound.size.width);
+    // check if user logged in or not for BUTTONS
+    [self enableButtonsIfUserLoggedIn];
     
     // set up the nav bar, obvi
     [self setUpNavBar];
+    
+    requestNumber = -1;
 
+}
+
+-(void)enableButtonsIfUserLoggedIn {
+    if (self.currentUser.isLoggedIn){
+        self.recollectButton.alpha = 1.0f;
+        self.recollectButton.enabled = YES;
+        
+        self.upVoteButton.alpha = 1.0f;
+        self.upVoteButton.enabled = YES;
+        
+        self.downVoteButton.alpha = 1.0f;
+        self.downVoteButton.enabled = YES;
+    }
 }
 
 -(void)setUpNavBar {
@@ -177,6 +196,10 @@
         [self.recollectButton setImage:[UIImage imageNamed:@"centerrecollectbuttononclick.png"] forState:UIControlStateNormal];
         self.recollectButton.userInteractionEnabled = NO;
         // TODO: actual recollect action stuff
+        
+        [self makeRecollectRequest];
+        
+        //
     }
     
 }
@@ -189,7 +212,7 @@
         self.downVoteButton.userInteractionEnabled = NO;
         // TODO: actual downvote action stuff
         
-        
+        [self makeDownVoteRequest];
         
         //
         if (upVoted){
@@ -210,7 +233,7 @@
         self.upVoteButton.userInteractionEnabled = NO;
         // TODO: actual upvote action stuff
         
-        
+        [self makeUpVoteRequest];
         
         //
         if (downVoted){
@@ -230,4 +253,185 @@
 
     [[UIApplication sharedApplication] openURL:self.story.origURL];
 }
+
+-(void)makeRecollectRequest {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // set up parameters
+    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
+    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
+    [dataDict setValue:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber] forKey:@"cl_category"];
+    [dataDict setValue:@"" forKey:@"cl_comment"];
+    [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
+    [dataDict setValue:@"1" forKey:@"scope"]; // DEFAULT: 1 = public
+    
+    NSString *url = @"https://collectivly.com/stories/recloud";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    NSString *data = [NSString stringWithFormat:@""];
+    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"%@", postData);
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    // HTTP request, setting stuff
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = REQUESTRECOLLECT;
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+}
+
+-(void)makeUpVoteRequest {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // set up parameters
+    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
+    [dataDict setValue:@"click" forKey:@"type"];
+    [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
+    [dataDict setValue:@"like" forKey:@"value"];
+    
+    NSString *url = @"https://collectivly.com/stories/recloud";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    NSString *data = [NSString stringWithFormat:@""];
+    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
+//    NSLog(@"%@", postData);
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    // HTTP request, setting stuff
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = REQUESTUPVOTE;
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+}
+
+-(void)makeDownVoteRequest {
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // set up parameters
+    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
+    [dataDict setValue:@"click" forKey:@"type"];
+    [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
+    [dataDict setValue:@"un_like" forKey:@"value"];
+    
+    NSString *url = @"https://collectivly.com/stories/recloud";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    NSString *data = [NSString stringWithFormat:@""];
+    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
+    //    NSLog(@"%@", postData);
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    // HTTP request, setting stuff
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    // SET REQUEST NUMBER TO APPROPRIATE VALUE
+    requestNumber = REQUESTDOWNVOTE;
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+    
+}
+
+
+#pragma mark connection protocol functions
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"conection did receive response!");
+    _data = [[NSMutableData alloc] init];
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"conection did receive data!");
+    [_data appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // Please do something sensible here, like log the error.
+    NSLog(@"connection failed with error: %@", error.description);
+    
+    // stop spinner
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    // alert view for network error
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Network Error"
+                          message: @"There was a network error :\\"
+                          delegate: self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Retry", nil];
+    [alert show];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connectiondidfinishloading!");
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+    NSLog(@"response data: %@", responseString);
+    
+    NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
+
+    UIAlertView *alert;
+    // act based on what the request was
+    switch (requestNumber)
+    {
+            //        case REQUESTHOMEPAGE:
+            //            // SET auth token
+            //            auth_token = [self extractAuthToken:responseString];
+            //            break;
+        case REQUESTRECOLLECT:
+            alert = [[UIAlertView alloc]
+                                  initWithTitle: @"Success!"
+                                  message: @"RECOLLECT"
+                                  delegate: self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        case REQUESTUPVOTE:
+            alert = [[UIAlertView alloc]
+                     initWithTitle: @"Success!"
+                     message: @"up"
+                     delegate: self
+                     cancelButtonTitle:@"OK"
+                     otherButtonTitles:nil];
+            [alert show];
+            break;
+        case REQUESTDOWNVOTE:
+            alert = [[UIAlertView alloc]
+                     initWithTitle: @"Success!"
+                     message: @"down"
+                     delegate: self
+                     cancelButtonTitle:@"OK"
+                     otherButtonTitles:nil];
+            [alert show];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+
 @end

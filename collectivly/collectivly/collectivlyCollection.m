@@ -22,14 +22,14 @@
         
         self.createdAt = [NSString stringWithFormat:@"%@", [collection objectForKey:@"created_at"]];
         self.domain = [NSString stringWithFormat:@"%@", [collection objectForKey:@"domain"]];
-        self.idNumber = atoi([[NSString stringWithFormat:@"%@", [collection objectForKey:@"id"]] cStringUsingEncoding:NSUTF8StringEncoding]);
+        self.idNumber = [[NSString stringWithFormat:@"%@", [collection objectForKey:@"id"]] integerValue];
         self.image = [self imageFromURLString:[NSString stringWithFormat:@"%@", [collection objectForKey:@"image"]]];
         self.keywords = [collection objectForKey:@"keywords"];
-        if ([keywords isKindOfClass:[NSArray class]]){
-            for (NSString *word in keywords){
-                NSLog(@"word: %@", word);
-            }
-        }
+//        if ([keywords isKindOfClass:[NSArray class]]){
+//            for (NSString *word in keywords){
+//                NSLog(@"word: %@", word);
+//            }
+//        }
         self.name = [NSString stringWithFormat:@"%@", [collection objectForKey:@"name"]];
         self.parentID= (NSInteger)[collection objectForKey:@"parent_id"];
         self.postCount = (NSInteger)[collection objectForKey:@"post_count"];
@@ -38,11 +38,11 @@
         self.updatedAt = [collection objectForKey:@"updated_at"];
         self.userID = (NSInteger)[collection objectForKey:@"user_id"];
         self.websites = [collection objectForKey:@"websites"];
-        if ([websites isKindOfClass:[NSArray class]]){
-            for (NSString *site in websites){
-                NSLog(@"website: %@", site);
-            }
-        }
+//        if ([websites isKindOfClass:[NSArray class]]){
+//            for (NSString *site in websites){
+//                NSLog(@"website: %@", site);
+//            }
+//        }
         // done!
     }
     return self;

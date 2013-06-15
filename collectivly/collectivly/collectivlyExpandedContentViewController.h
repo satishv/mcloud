@@ -14,7 +14,10 @@
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "collectivlySidebarViewController.h"
 
-@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate>
+@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate> {
+    NSMutableData *_data;
+    int requestNumber;
+}
 
 @property (retain) collectivlySingleton *currentUser;
 

@@ -481,7 +481,7 @@
     
     newStories = [self createStoriesFromResponse:array];
     
-    if (self.currentUser.currentCollection != NULL) {
+    if (self.currentUser.currentCollection != nil) {
         // update singleton dictionary of stories for a collection
         //                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
         [self.currentUser setCurrentStories:newStories];

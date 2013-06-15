@@ -70,7 +70,7 @@ NSInteger selectedCollection;
     NSInteger logoOffset = 28;
     CGRect logoframe = CGRectMake(logoOffset*4, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
     UIButton *logoButton = [[UIButton alloc] initWithFrame:logoframe];
-    logoButton.userInteractionEnabled = NO;
+//    logoButton.userInteractionEnabled = NO;
     [logoButton setBackgroundImage:logo forState:UIControlStateNormal];
     [logoButton addTarget:self action:@selector(leftBarButtonItemTouched:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setShowsTouchWhenHighlighted:YES];
@@ -101,6 +101,19 @@ NSInteger selectedCollection;
     
     // set up delegate for sidebar actions
     self.navigationItem.revealSidebarDelegate = self;
+}
+
+
+-(NSString*)extractAuthToken:(NSString *)string {
+    
+    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
+    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSLog(@"AUTH TOKEN: %@", auth);
+    return auth;
+}
+
+-(IBAction)leftBarButtonItemTouched:(id)sender {
+    [self performSegueWithIdentifier:@"loginsignup" sender:self];
 }
 
 - (IBAction)rightSideBarButtonTouched:(id)sender {
@@ -253,7 +266,9 @@ NSInteger selectedCollection;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
         NSLog(@"id: %d", collection.idNumber);
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json", collection.idNumber]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json?page=1", collection.idNumber]];
+        
+        NSLog(@"\"%@\"", url);
         
         NSLog(@"[collectivlyCollectionsViewController] fetching stories for collection with id: %d and name: %@", collection.idNumber, collection.name);
         
@@ -277,14 +292,6 @@ NSInteger selectedCollection;
         HUD.delegate = self;
         HUD.labelText = @"Loading";
     }
-}
-
--(NSString*)extractAuthToken:(NSString *)string {
-    
-    NSRange range = [string rangeOfString:@"authenticity_token"];
-    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length + 23, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    return auth;
 }
 
 -(BOOL)someoneIsLoggedIn{
@@ -463,7 +470,7 @@ NSInteger selectedCollection;
             stories = [self createStoriesFromResponse:array];
             
             // UPDATE STORIES DICTIONARY IN SINGLETON 
-            if (self.currentUser.currentCollection != NULL) {
+            if (self.currentUser.currentCollection != nil) {
                 NSLog(@"[collectivlyCollectionsViewController] ADDING A GUY for this collection: %d", selectedCollection);
                 
                 // update singleton dictionary of stories for a collection
