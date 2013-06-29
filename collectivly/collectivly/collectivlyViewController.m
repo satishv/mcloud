@@ -171,10 +171,7 @@
 }
 
 -(IBAction)closeButtonTouched:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        
-    }];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 
@@ -229,7 +226,12 @@
     [dataDict setValue:user forKey:@"user"];
     
     NSString *url = @"https://collectivly.com/users/sign_in";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
+    
+//    NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.emailAddressSignInTextField.text, self.passwordTextField.text];
+//    NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+//    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+//    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     
     NSString *data = [NSString stringWithFormat:@""];
     NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
@@ -242,6 +244,12 @@
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
+    
+    // enable cookies for HTTPCookieStorage
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    // handle cookies
+    request.HTTPShouldHandleCookies = YES;
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
     requestNumber = REQUESTSIGNIN;
@@ -263,12 +271,14 @@
     [_data appendData:data];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // Please do something sensible here, like log the error.
-    NSLog(@"connection failed with error: %@", error.description);
-    
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {    
     // stop spinner
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    // inform the user
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
     // alert view for network error
     UIAlertView *alert = [[UIAlertView alloc]
@@ -320,6 +330,8 @@
             }
             else {
                 
+                
+                
                 // POPULATE SINGLETON STORIES FOR LOGGED IN USER
                 self.currentUser.isLoggedIn = TRUE;
                 self.currentUser.authToken = [self extractAuthToken:responseString];
@@ -336,6 +348,26 @@
     }
     
 }
+
+//-(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+//{
+//    NSLog(@"CANAUTH AGAINST PROTECTION SPACE");
+//    //return YES to say that we have the necessary credentials to access the requested resource
+//    return YES;
+//}
+//
+//-(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+//{
+//    //some code here, continue reading to find out what comes here
+//    
+//    NSLog(@"DIDRECEIVE AUTH CHALLENGE");
+//    NSURLCredential *credential = [NSURLCredential credentialWithUser:self.emailAddressSignInTextField.text
+//                                                             password:self.passwordTextField.text
+//                                                          persistence:NSURLCredentialPersistenceForSession];
+//    
+//	[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+//
+//}
 
 
 #pragma mark memory stuffs

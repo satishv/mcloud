@@ -19,14 +19,16 @@
 
 @interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate> {
 
+    NSInteger pageOfStories; // STARTS AT 1
     NSMutableData *_data;
 }
 
 @property (retain) collectivlySingleton *currentUser;
 
-@property (nonatomic, retain) NSArray *stories;
+@property (nonatomic, retain) NSMutableArray *stories;
 
 @property (retain, nonatomic) IBOutlet collectivlySidebarViewController *rightSideBarViewController;
 
+@property (retain, nonatomic) UIActivityIndicatorView *activityIndicatorForLoadingMoreStories;
 
 @end

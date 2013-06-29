@@ -44,6 +44,11 @@
     
     // update UI elements to match story's elements
     
+    if (self.story.expandedImage == nil)
+        self.story.expandedImage = [self.story imageFromURLString:self.story.expandedImageString];
+    if (self.story.image == nil)
+        self.story.image = [self.story imageFromURLString:self.story.imageString];
+
     self.expandedImageView.image = (self.story.expandedImage == nil) ? self.story.image : self.story.expandedImage;
     
     self.timeAgoLabel.text = self.story.timeAgo;
@@ -278,6 +283,7 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
     [request setHTTPBody:postData];
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
@@ -291,11 +297,13 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
+    NSLog(@"AUTHHHHHHHHH: %@", self.currentUser.authToken);
     // set up parameters
     NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
     [dataDict setValue:@"click" forKey:@"type"];
     [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
     [dataDict setValue:@"like" forKey:@"value"];
+    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
     
     NSString *url = @"https://collectivly.com/stories/recloud";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -308,8 +316,10 @@
     
     // HTTP request, setting stuff
     [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"%@", self.currentUser.authToken] forHTTPHeaderField:@"Authorization"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
@@ -328,6 +338,7 @@
     [dataDict setValue:@"click" forKey:@"type"];
     [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
     [dataDict setValue:@"un_like" forKey:@"value"];
+    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
     
     NSString *url = @"https://collectivly.com/stories/recloud";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -341,7 +352,8 @@
     // HTTP request, setting stuff
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
@@ -395,10 +407,6 @@
     // act based on what the request was
     switch (requestNumber)
     {
-            //        case REQUESTHOMEPAGE:
-            //            // SET auth token
-            //            auth_token = [self extractAuthToken:responseString];
-            //            break;
         case REQUESTRECOLLECT:
             alert = [[UIAlertView alloc]
                                   initWithTitle: @"Success!"

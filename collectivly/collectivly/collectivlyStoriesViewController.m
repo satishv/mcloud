@@ -8,13 +8,15 @@
 
 #import "collectivlyStoriesViewController.h"
 
+#define INITIALSTORYPAGENUMBER      1
+
 @interface collectivlyStoriesViewController ()
 
 @end
 
 @implementation collectivlyStoriesViewController
 
-@synthesize currentUser, stories, rightSideBarViewController;
+@synthesize currentUser, stories, rightSideBarViewController, activityIndicatorForLoadingMoreStories;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,8 +35,10 @@
     
     NSLog(@"[collectivlyStoriesViewController] viewdidload");
     
+    pageOfStories = INITIALSTORYPAGENUMBER;
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(refreshStories) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(refreshStoriesTable) forControlEvents:UIControlEventValueChanged];
     [refreshControl setTintColor:[UIColor magentaColor]];
     self.refreshControl = refreshControl;
     
@@ -50,7 +54,7 @@
     
     self.currentUser = [collectivlySingleton sharedDataModel];
         
-    self.stories = self.currentUser.currentStories;
+    self.stories = [NSMutableArray arrayWithArray:self.currentUser.currentStories];
 //    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]];
     NSLog(@"stories for id %d: %@", self.currentUser.currentCollection.idNumber, self.stories);
     
@@ -59,6 +63,7 @@
 
 }
 
+#pragma mark nav bar customization
 -(void)setUpNavBar {
     
     NSLog(@"[collectivlyStoriesViewController] setting up nav bar");
@@ -134,7 +139,6 @@
 //}
 
 #pragma mark JTRevealSidebarDelegate
-
 // This is an examle to configure your sidebar view through a custom UIViewController
 - (UIView *)viewForRightSidebar {
     // Use applicationViewFrame to get the correctly calculated view's frame
@@ -164,38 +168,36 @@
 }
 
 
--(void)refreshStories {
+#pragma mark HTTP requesting
+-(void)refreshStoriesTable {
     NSLog(@"[collectivlyStoriesViewController] REFRESHING STORIES");
     
+    // reset page number
+    pageOfStories = INITIALSTORYPAGENUMBER;
+    
+    // get stories for page 1!
+    [self fetchStoriesForPage:INITIALSTORYPAGENUMBER];
+}
+
+-(void)fetchStoriesForPage:(NSInteger)page {
+    NSLog(@"[collectivlyStoriesViewController] STORIES for page %d", page);
+    
+    // spinnaz
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    self.tableView.userInteractionEnabled = NO;
-    
-    //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/11.json"]];
-    NSLog(@"refreshing collection with id: %d", self.currentUser.currentCollection.idNumber);
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json", self.currentUser.currentCollection.idNumber]];
-    
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    NSLog(@"id: %d", collection.idNumber);
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json?page=%d", self.currentUser.currentCollection.idNumber, page]];
     
     // HTTP request, setting stuff
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-    
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 //#warning Potentially incomplete method implementation.
@@ -207,11 +209,27 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.stories.count;
+    return self.stories.count + 1; // ONE FOR REFRESH CELL
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == self.stories.count) {
+        // Configure the cell...
+        static NSString *CellIdentifier = @"loadMoreCell";
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        self.activityIndicatorForLoadingMoreStories = (UIActivityIndicatorView*)[cell viewWithTag:100];
+        [self.activityIndicatorForLoadingMoreStories startAnimating];
+        
+        [self fetchStoriesForPage:++pageOfStories];
+        return cell;
+    }
+    
     // set up fonts
     UIFont *customFont = [UIFont fontWithName:@"ProximaNovaCond-Semibold" size:17];
     UIFont *smallCustomFont = [UIFont fontWithName:@"ProximaNovaCond-Regular" size:11.5];
@@ -228,10 +246,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
+    collectivlySimplifiedStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
-    storyImageView.image = (story.articleImage == nil) ? story.image : story.articleImage;
+    storyImageView.image = story.articleImage;
     
     UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
     storyNameLabel.text = story.title;
@@ -260,6 +278,151 @@
     friendsCountLabel.font = smallCustomFont;
     
     return cell;
+}
+
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Navigation logic may go here. Create and push another view controller.
+//    collectivlyExpandedContentViewController *detailViewController = [[collectivlyExpandedContentViewController alloc] initWithNibName:@"collectivlyExpandedContentViewController" bundle:nil];
+    collectivlySimplifiedStory *selected = [self.stories objectAtIndex:indexPath.row];
+    [self.currentUser setCurrentStory:selected];
+    NSLog(@"selected story title: %@", selected.title);
+    // ...
+     // Pass the selected object to the new view controller.
+//     [self.navigationController pushViewController:detailViewController animated:YES];
+    [self performSegueWithIdentifier:@"pushexpandedstory" sender:self];
+}
+
+
+#pragma mark connection protocol functions
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"[collectivlyStoriesViewController] conection did receive response!");
+    _data = [[NSMutableData alloc] init];
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"[collectivlyStoriesViewController] conection did receive data!");
+    [_data appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // Please do something sensible here, like log the error.
+    NSLog(@"[collectivlyStoriesViewController] connection failed with error: %@", error.description);
+    
+    // stop spinner
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    [self.refreshControl endRefreshing];
+    
+    // alert view for network error
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Network Error"
+                          message: @"There was a network error :\\"
+                          delegate: self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Retry", nil];
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            [self refreshStoriesTable];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"[collectivlyStoriesViewController] connectiondidfinishloading!");
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.refreshControl endRefreshing];
+    
+    NSMutableArray *newStories = [[NSMutableArray alloc] init];
+    
+    if (self.activityIndicatorForLoadingMoreStories != nil){
+        [self.activityIndicatorForLoadingMoreStories stopAnimating];
+    }
+    
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
+    newStories = [self createStoriesFromResponse:array];
+    
+    if (self.currentUser.currentCollection != nil) {
+        // update singleton dictionary of stories for a collection
+        if (pageOfStories == INITIALSTORYPAGENUMBER){
+            self.stories = newStories;
+        }
+        else {
+            [self.stories addObjectsFromArray:newStories];
+        }
+        [self.currentUser setCurrentStories:self.stories];
+        [self.currentUser.storiesForCollectionWithId setObject:self.stories forKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber]];
+    }
+    
+    [self.tableView reloadData];
+    
+    self.tableView.userInteractionEnabled = YES;
+}
+
+#pragma helpers
+-(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
+    NSLog(@"[collectivlyStoriesViewController] creating stories.");
+    NSMutableArray *lolz = [[NSMutableArray alloc] init];
+    for (int i = 0; i < array.count; i++){
+        NSLog(@"STORYYY %d out of %d", i, array.count);
+        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionary:[array objectAtIndex:i]];
+//        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
+        NSLog(@"STORYYY %d out of %d DONE", i, array.count);
+        [lolz addObject:story];
+        
+    }
+    NSLog(@"[collectivlyStoriesViewController] DONE creating stories.");
+    return lolz;
 }
 
 -(NSString *)convertToGMTTime:(NSDate *)date {
@@ -359,141 +522,14 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+
+#pragma cleanup
+- (void)didReceiveMemoryWarning
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-//    collectivlyExpandedContentViewController *detailViewController = [[collectivlyExpandedContentViewController alloc] initWithNibName:@"collectivlyExpandedContentViewController" bundle:nil];
-    collectivlyStory *selected = [self.stories objectAtIndex:indexPath.row];
-    [self.currentUser setCurrentStory:selected];
-    NSLog(@"selected story title: %@", selected.title);
-    // ...
-     // Pass the selected object to the new view controller.
-//     [self.navigationController pushViewController:detailViewController animated:YES];
-    [self performSegueWithIdentifier:@"pushexpandedstory" sender:self];
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
--(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
-    NSLog(@"[collectivlyStoriesViewController] creating stories.");
-    NSMutableArray *lolz = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i++){
-        NSLog(@"STORYYY %d out of %d", i, array.count);
-        collectivlyStory *story = [[collectivlyStory alloc] initWithDictionary:[array objectAtIndex:i]];
-        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
-        NSLog(@"STORYYY %d out of %d DONE", i, array.count);
-        [lolz addObject:story];
-        
-    }
-    NSLog(@"[collectivlyStoriesViewController] DONE creating stories.");
-    return lolz;
-}
-
-#pragma mark connection protocol functions
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"[collectivlyStoriesViewController] conection did receive response!");
-    _data = [[NSMutableData alloc] init];
-    
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"[collectivlyStoriesViewController] conection did receive data!");
-    [_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // Please do something sensible here, like log the error.
-    NSLog(@"[collectivlyStoriesViewController] connection failed with error: %@", error.description);
-    
-    // stop spinner
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    [self.refreshControl endRefreshing];
-    
-    // alert view for network error
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Network Error"
-                          message: @"There was a network error :\\"
-                          delegate: self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Retry", nil];
-    [alert show];
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 1:
-            [self refreshStories];
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"[collectivlyStoriesViewController] connectiondidfinishloading!");
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    [self.refreshControl endRefreshing];
-    
-    NSMutableArray *newStories = [[NSMutableArray alloc] init];
-    
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-    
-    newStories = [self createStoriesFromResponse:array];
-    
-    if (self.currentUser.currentCollection != nil) {
-        // update singleton dictionary of stories for a collection
-        //                [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
-        [self.currentUser setCurrentStories:newStories];
-        [self.currentUser.storiesForCollectionWithId setObject:newStories forKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber]];
-        
-        self.stories = newStories;
-    }
-    
-    [self.tableView reloadData];
-    
-    self.tableView.userInteractionEnabled = YES;
-}
 
 
 @end

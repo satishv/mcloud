@@ -21,7 +21,7 @@
 
 @property (retain) collectivlySingleton *currentUser;
 
-@property (nonatomic, retain) collectivlyStory *story;
+@property (nonatomic, retain) collectivlySimplifiedStory *story;
 @property (weak, nonatomic) IBOutlet UIImageView *expandedImageView;
 
 @property (retain, nonatomic) IBOutlet collectivlySidebarViewController *rightSideBarViewController;
