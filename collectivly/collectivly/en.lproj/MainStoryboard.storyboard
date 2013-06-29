@@ -775,11 +775,77 @@
                         <outlet property="totalCountLabel" destination="dHj-7I-2mb" id="vBG-bL-GTr"/>
                         <outlet property="upVoteButton" destination="MmI-js-2se" id="nRW-KD-1BM"/>
                         <segue destination="2" kind="modal" identifier="loginsignupfromstory" id="UvC-Sz-jjS"/>
+                        <segue destination="1hp-gC-bsU" kind="push" identifier="showWebView" id="w34-tF-0aY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALc-b8-YwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1057" y="-418"/>
+        </scene>
+        <!--Collectivly Web View Controller-->
+        <scene sceneID="4w4-St-FFy">
+            <objects>
+                <viewController storyboardIdentifier="webViewController" id="1hp-gC-bsU" customClass="collectivlyWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ndx-hA-xCz">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y2Y-Ar-CMc">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="1sj-sG-3HS">
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="ZlK-wi-fEz">
+                                        <connections>
+                                            <action selector="goBack" destination="Y2Y-Ar-CMc" id="kll-cE-Qiz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Id9-t6-vD6"/>
+                                    <barButtonItem systemItem="stop" id="dQS-FA-ydL">
+                                        <connections>
+                                            <action selector="stopLoading" destination="Y2Y-Ar-CMc" id="Zqr-KQ-7re"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ece-EI-X6y"/>
+                                    <barButtonItem systemItem="refresh" id="mQi-Qg-SR8">
+                                        <connections>
+                                            <action selector="reload" destination="Y2Y-Ar-CMc" id="WgV-AJ-DwX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bM1-B3-R1y"/>
+                                    <barButtonItem systemItem="fastForward" id="FZR-Ml-eXL">
+                                        <connections>
+                                            <action selector="goForward" destination="Y2Y-Ar-CMc" id="Eeu-cR-X4I"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1sj-sG-3HS" firstAttribute="top" secondItem="Y2Y-Ar-CMc" secondAttribute="bottom" type="default" id="1Mp-6p-9gg"/>
+                            <constraint firstItem="1sj-sG-3HS" firstAttribute="trailing" secondItem="ndx-hA-xCz" secondAttribute="trailing" type="default" id="eAR-j9-9zY"/>
+                            <constraint firstItem="1sj-sG-3HS" firstAttribute="leading" secondItem="ndx-hA-xCz" secondAttribute="leading" type="default" id="eqR-Mj-ivw"/>
+                            <constraint firstItem="1sj-sG-3HS" firstAttribute="bottom" secondItem="ndx-hA-xCz" secondAttribute="bottom" type="default" id="mWc-WV-lch"/>
+                            <constraint firstItem="Y2Y-Ar-CMc" firstAttribute="leading" secondItem="ndx-hA-xCz" secondAttribute="leading" type="default" id="mwM-Pt-7WE"/>
+                            <constraint firstItem="Y2Y-Ar-CMc" firstAttribute="top" secondItem="ndx-hA-xCz" secondAttribute="top" type="default" id="nCW-9B-0bp"/>
+                            <constraint firstItem="Y2Y-Ar-CMc" firstAttribute="trailing" secondItem="ndx-hA-xCz" secondAttribute="trailing" type="default" id="v6a-VU-7oW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dhe-KU-gNV"/>
+                    <connections>
+                        <outlet property="backButton" destination="ZlK-wi-fEz" id="Ibt-Yu-emh"/>
+                        <outlet property="forwardButton" destination="FZR-Ml-eXL" id="SGe-ne-Tr4"/>
+                        <outlet property="refreshButton" destination="mQi-Qg-SR8" id="Vj0-TH-q6O"/>
+                        <outlet property="stopButton" destination="dQS-FA-ydL" id="TvL-nV-tGV"/>
+                        <outlet property="toolbar" destination="1sj-sG-3HS" id="AKV-lI-YNQ"/>
+                        <outlet property="webView" destination="Y2Y-Ar-CMc" id="ZNT-aq-D2k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="08b-rs-dMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="-532"/>
         </scene>
     </scenes>
     <resources>
@@ -820,8 +886,6 @@
                 <relationship kind="action" name="articleTitleTouched:"/>
                 <relationship kind="action" name="centerRecollectButtonTouched:"/>
                 <relationship kind="action" name="downVoteButtonTouched:"/>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="action" name="upVoteButtonTouched:"/>
                 <relationship kind="outlet" name="articleTitleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="downVoteButton" candidateClass="UIButton"/>
@@ -844,16 +908,12 @@
         <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
             <relationships>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
-                <relationship kind="outlet" name="activityIndicatorForLoadingMoreStories" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="collectivlySidebarViewController"/>
             </relationships>
         </class>
         <class className="collectivlyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyViewController.h"/>
             <relationships>
-                <relationship kind="action" name="closeButtonTouched:"/>
                 <relationship kind="action" name="requestButtonTouched:"/>
                 <relationship kind="action" name="signInButtonTouched:"/>
                 <relationship kind="outlet" name="closeButtonTouched" candidateClass="UIBarButtonItem"/>
@@ -870,6 +930,17 @@
                 <relationship kind="outlet" name="requestInviteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scrolley" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="signInErrorsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="collectivlyWebViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyWebViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="forwardButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="stopButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
     </classes>

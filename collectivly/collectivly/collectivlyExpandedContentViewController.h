@@ -13,6 +13,7 @@
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "collectivlySidebarViewController.h"
+#import "collectivlyWebViewController.h"
 
 @interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate> {
     NSMutableData *_data;

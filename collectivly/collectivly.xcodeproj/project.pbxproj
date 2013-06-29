@@ -32,6 +32,7 @@
 		4C6B5B001721D661009C3986 /* collectivly_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6B5AFF1721D661009C3986 /* collectivly_logo.png */; };
 		4C6D358C172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */; };
 		4C6D358D172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */; };
+		4C78C96B177F9748007166BF /* collectivlyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C78C96A177F9748007166BF /* collectivlyWebViewController.m */; };
 		4C7CF06B174EE273009B0494 /* bottom_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7CF062174EE273009B0494 /* bottom_logo.png */; };
 		4C7CF06C174EE273009B0494 /* check_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7CF063174EE273009B0494 /* check_selected.png */; };
 		4C7CF06D174EE273009B0494 /* greyback-no-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7CF064174EE273009B0494 /* greyback-no-shadow.png */; };
@@ -135,6 +136,8 @@
 		4C6D3589172CAD5E00AB7F3B /* UINavigationItem+JTRevealSidebarV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+JTRevealSidebarV2.m"; sourceTree = "<group>"; };
 		4C6D358A172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JTRevealSidebarV2.h"; sourceTree = "<group>"; };
 		4C6D358B172CAD5E00AB7F3B /* UIViewController+JTRevealSidebarV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JTRevealSidebarV2.m"; sourceTree = "<group>"; };
+		4C78C969177F9748007166BF /* collectivlyWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyWebViewController.h; sourceTree = "<group>"; };
+		4C78C96A177F9748007166BF /* collectivlyWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyWebViewController.m; sourceTree = "<group>"; };
 		4C7CF062174EE273009B0494 /* bottom_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_logo.png; sourceTree = "<group>"; };
 		4C7CF063174EE273009B0494 /* check_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_selected.png; sourceTree = "<group>"; };
 		4C7CF064174EE273009B0494 /* greyback-no-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyback-no-shadow.png"; sourceTree = "<group>"; };
@@ -380,6 +383,8 @@
 				4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */,
 				4C6D3586172CAD5E00AB7F3B /* JTRevealSidebarV2 */,
 				4CF8D9B91710BEAD00E4FD21 /* Supporting Files */,
+				4C78C969177F9748007166BF /* collectivlyWebViewController.h */,
+				4C78C96A177F9748007166BF /* collectivlyWebViewController.m */,
 			);
 			path = collectivly;
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				4CA998E11746A07000C252B3 /* collectivlyExpandedContentViewController.m in Sources */,
 				4CD2A2851749C50100824EF9 /* MBProgressHUD.m in Sources */,
 				4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */,
+				4C78C96B177F9748007166BF /* collectivlyWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

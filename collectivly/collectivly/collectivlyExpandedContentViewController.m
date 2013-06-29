@@ -73,19 +73,7 @@
 
 }
 
--(void)enableButtonsIfUserLoggedIn {
-    if (self.currentUser.isLoggedIn){
-        self.recollectButton.alpha = 1.0f;
-        self.recollectButton.enabled = YES;
-        
-        self.upVoteButton.alpha = 1.0f;
-        self.upVoteButton.enabled = YES;
-        
-        self.downVoteButton.alpha = 1.0f;
-        self.downVoteButton.enabled = YES;
-    }
-}
-
+#pragma nav bar and bar button item setup
 -(void)setUpNavBar {
     
     // customize LEFT / BACK bar button item
@@ -187,78 +175,7 @@
     }
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)centerRecollectButtonTouched:(id)sender {
-    NSLog(@"!!!!!!!!!! RECOLLECT !!!!!!!!!!");
-    if (!recollected){
-        self.recollected = YES;
-        [self.recollectButton setImage:[UIImage imageNamed:@"centerrecollectbuttononclick.png"] forState:UIControlStateNormal];
-        self.recollectButton.userInteractionEnabled = NO;
-        // TODO: actual recollect action stuff
-        
-        [self makeRecollectRequest];
-        
-        //
-    }
-    
-}
-
-- (IBAction)downVoteButtonTouched:(id)sender {
-    NSLog(@"!!!!!!!!!! DOWNVOTE !!!!!!!!!!");
-    if (!downVoted){
-        self.downVoted = YES;
-        [self.downVoteButton setImage:[UIImage imageNamed:@"downvoteonclick.png"] forState:UIControlStateNormal];
-        self.downVoteButton.userInteractionEnabled = NO;
-        // TODO: actual downvote action stuff
-        
-        [self makeDownVoteRequest];
-        
-        //
-        if (upVoted){
-            self.upVoted = NO;
-            [self.upVoteButton setImage:[UIImage imageNamed:@"upvote.png"] forState:UIControlStateNormal];
-            self.upVoteButton.userInteractionEnabled = YES;
-        }
-    }
-    
-    
-}
-
-- (IBAction)upVoteButtonTouched:(id)sender {
-    NSLog(@"!!!!!!!!!! UPVOTE !!!!!!!!!!");
-    if (!upVoted){
-        self.upVoted = YES;
-        [self.upVoteButton setImage:[UIImage imageNamed:@"upvoteonclick.png"] forState:UIControlStateNormal];
-        self.upVoteButton.userInteractionEnabled = NO;
-        // TODO: actual upvote action stuff
-        
-        [self makeUpVoteRequest];
-        
-        //
-        if (downVoted){
-            self.downVoted = NO;
-            [self.downVoteButton setImage:[UIImage imageNamed:@"downvote.png"] forState:UIControlStateNormal];
-            self.downVoteButton.userInteractionEnabled = YES;
-        }
-    }
-
-}
-
-- (IBAction)articleTitleTouched:(id)sender {
-    NSLog(@"!!!!!!!!!! TOUCHED ARTICLE TITLE !!!!!!!!!!");
-    NSLog(@"title: %@", self.articleTitleButton.titleLabel.text);
-    
-    NSLog(@"url to go to: %@", self.story.origURL);
-
-    [[UIApplication sharedApplication] openURL:self.story.origURL];
-}
-
+#pragma mark HTTP requesting
 -(void)makeRecollectRequest {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -438,6 +355,104 @@
             break;
     }
     
+}
+
+#pragma mark IBActions / button touch recognizers
+
+- (IBAction)centerRecollectButtonTouched:(id)sender {
+    NSLog(@"!!!!!!!!!! RECOLLECT !!!!!!!!!!");
+    if (!recollected){
+        self.recollected = YES;
+        [self.recollectButton setImage:[UIImage imageNamed:@"centerrecollectbuttononclick.png"] forState:UIControlStateNormal];
+        self.recollectButton.userInteractionEnabled = NO;
+        // TODO: actual recollect action stuff
+        
+        [self makeRecollectRequest];
+        
+        //
+    }
+    
+}
+
+- (IBAction)downVoteButtonTouched:(id)sender {
+    NSLog(@"!!!!!!!!!! DOWNVOTE !!!!!!!!!!");
+    if (!downVoted){
+        self.downVoted = YES;
+        [self.downVoteButton setImage:[UIImage imageNamed:@"downvoteonclick.png"] forState:UIControlStateNormal];
+        self.downVoteButton.userInteractionEnabled = NO;
+        // TODO: actual downvote action stuff
+        
+        [self makeDownVoteRequest];
+        
+        //
+        if (upVoted){
+            self.upVoted = NO;
+            [self.upVoteButton setImage:[UIImage imageNamed:@"upvote.png"] forState:UIControlStateNormal];
+            self.upVoteButton.userInteractionEnabled = YES;
+        }
+    }
+    
+    
+}
+
+- (IBAction)upVoteButtonTouched:(id)sender {
+    NSLog(@"!!!!!!!!!! UPVOTE !!!!!!!!!!");
+    if (!upVoted){
+        self.upVoted = YES;
+        [self.upVoteButton setImage:[UIImage imageNamed:@"upvoteonclick.png"] forState:UIControlStateNormal];
+        self.upVoteButton.userInteractionEnabled = NO;
+        // TODO: actual upvote action stuff
+        
+        [self makeUpVoteRequest];
+        
+        //
+        if (downVoted){
+            self.downVoted = NO;
+            [self.downVoteButton setImage:[UIImage imageNamed:@"downvote.png"] forState:UIControlStateNormal];
+            self.downVoteButton.userInteractionEnabled = YES;
+        }
+    }
+    
+}
+
+- (IBAction)articleTitleTouched:(id)sender {
+    NSLog(@"!!!!!!!!!! TOUCHED ARTICLE TITLE !!!!!!!!!!");
+    NSLog(@"title: %@", self.articleTitleButton.titleLabel.text);
+    
+    NSLog(@"url to go to: %@", self.story.origURL);
+    
+    [self performSegueWithIdentifier:@"showWebView" sender:self];
+    
+//    [[UIApplication sharedApplication] openURL:self.story.origURL];
+}
+
+#pragma mark helpers
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showWebView"]) {
+        collectivlyWebViewController *w = (collectivlyWebViewController*)segue.destinationViewController;
+        w.url = self.story.origURL;
+        w.contentTitle = self.story.title;
+    }
+}
+
+-(void)enableButtonsIfUserLoggedIn {
+    if (self.currentUser.isLoggedIn){
+        self.recollectButton.alpha = 1.0f;
+        self.recollectButton.enabled = YES;
+        
+        self.upVoteButton.alpha = 1.0f;
+        self.upVoteButton.enabled = YES;
+        
+        self.downVoteButton.alpha = 1.0f;
+        self.downVoteButton.enabled = YES;
+    }
+}
+
+#pragma mark cleanup
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
