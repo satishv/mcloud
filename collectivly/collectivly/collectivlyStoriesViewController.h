@@ -21,6 +21,8 @@
 
     NSInteger pageOfStories; // STARTS AT 1
     NSMutableData *_data;
+    
+    BOOL hasReachedTheEnd;
 }
 
 @property (retain) collectivlySingleton *currentUser;

@@ -70,6 +70,8 @@
     [self setUpNavBar];
     
     requestNumber = -1;
+    
+    NSLog(@"EXPANDEDSTORY: %@", self.story);
 
 }
 

@@ -381,6 +381,18 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qX-Ha-S52">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <view alpha="0.40000000000000013" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENy-LN-jiw">
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                </view>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gw2-fr-8FV">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="jw4-gg-R6R"/>
+                                                        <constraint firstAttribute="width" constant="310" id="thc-6j-B6d"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -389,13 +401,19 @@
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="B4E-zc-Q2r"/>
                                             <constraint firstItem="osI-EF-5Dm" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="-6" id="Guq-eu-hXC"/>
                                             <constraint firstItem="Cec-vt-fjV" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="Iq8-jv-wwd"/>
+                                            <constraint firstItem="ENy-LN-jiw" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="JP0-6F-iCg"/>
+                                            <constraint firstItem="gw2-fr-8FV" firstAttribute="top" secondItem="Cec-vt-fjV" secondAttribute="top" type="default" id="PTh-Mr-5sJ"/>
                                             <constraint firstAttribute="bottom" secondItem="osI-EF-5Dm" secondAttribute="bottom" constant="100" id="Re4-e4-G01"/>
+                                            <constraint firstItem="gw2-fr-8FV" firstAttribute="top" secondItem="ENy-LN-jiw" secondAttribute="top" type="default" id="Vlh-E4-Edc"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="WhZ-g4-VRK"/>
-                                            <constraint firstItem="Cec-vt-fjV" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="-1" id="cNj-lt-9uv"/>
+                                            <constraint firstItem="gw2-fr-8FV" firstAttribute="trailing" secondItem="Dwu-qE-xfM" secondAttribute="trailing" type="default" id="ZLG-ca-aHu"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="bottom" secondItem="Dwu-qE-xfM" secondAttribute="bottom" type="default" id="cgk-ax-M3U"/>
                                             <constraint firstItem="9qX-Ha-S52" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="94" id="hhQ-7P-awu"/>
+                                            <constraint firstItem="gw2-fr-8FV" firstAttribute="bottom" secondItem="ENy-LN-jiw" secondAttribute="bottom" type="default" id="hyS-vr-pVg"/>
                                             <constraint firstItem="Cec-vt-fjV" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="j09-YJ-XNT"/>
+                                            <constraint firstItem="ENy-LN-jiw" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="kyy-0i-GBM"/>
                                             <constraint firstItem="osI-EF-5Dm" firstAttribute="leading" secondItem="Dwu-qE-xfM" secondAttribute="leading" type="default" id="lcE-zT-AiY"/>
+                                            <constraint firstItem="gw2-fr-8FV" firstAttribute="top" secondItem="Dwu-qE-xfM" secondAttribute="top" constant="-1" id="pi2-48-9Jh"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -584,6 +602,32 @@
                                     <constraint firstItem="hJM-ys-MVV" firstAttribute="centerY" secondItem="p6m-Qv-g7Y" secondAttribute="centerY" type="default" id="2rU-4l-Zta"/>
                                     <constraint firstItem="hJM-ys-MVV" firstAttribute="leading" secondItem="p6m-Qv-g7Y" secondAttribute="leading" type="default" id="E7r-bs-tMS"/>
                                     <constraint firstItem="hJM-ys-MVV" firstAttribute="trailing" secondItem="p6m-Qv-g7Y" secondAttribute="trailing" type="default" id="nAu-5o-kmO"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="endCell" rowHeight="40" id="H7A-1f-cZK">
+                                <rect key="frame" x="0.0" y="157" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="THE END." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGd-Mj-Ozy">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="sju-5c-snl"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <size key="shadowOffset" width="0.0" height="1"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="DGd-Mj-Ozy" firstAttribute="trailing" secondItem="H7A-1f-cZK" secondAttribute="trailing" type="default" id="IpZ-Dy-myM"/>
+                                    <constraint firstItem="DGd-Mj-Ozy" firstAttribute="top" secondItem="H7A-1f-cZK" secondAttribute="top" constant="9" id="ZQi-Xp-JbJ"/>
+                                    <constraint firstItem="DGd-Mj-Ozy" firstAttribute="leading" secondItem="H7A-1f-cZK" secondAttribute="leading" type="default" id="exd-CP-kN6"/>
                                 </constraints>
                             </tableViewCell>
                         </prototypes>
@@ -796,29 +840,20 @@
                             </webView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="1sj-sG-3HS">
                                 <items>
-                                    <barButtonItem systemItem="rewind" id="ZlK-wi-fEz">
+                                    <barButtonItem enabled="NO" style="plain" systemItem="rewind" id="ZlK-wi-fEz">
                                         <connections>
                                             <action selector="goBack" destination="Y2Y-Ar-CMc" id="kll-cE-Qiz"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Id9-t6-vD6"/>
-                                    <barButtonItem systemItem="stop" id="dQS-FA-ydL">
-                                        <connections>
-                                            <action selector="stopLoading" destination="Y2Y-Ar-CMc" id="Zqr-KQ-7re"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ece-EI-X6y"/>
-                                    <barButtonItem systemItem="refresh" id="mQi-Qg-SR8">
-                                        <connections>
-                                            <action selector="reload" destination="Y2Y-Ar-CMc" id="WgV-AJ-DwX"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bM1-B3-R1y"/>
-                                    <barButtonItem systemItem="fastForward" id="FZR-Ml-eXL">
+                                    <barButtonItem enabled="NO" style="plain" systemItem="fastForward" id="FZR-Ml-eXL">
                                         <connections>
                                             <action selector="goForward" destination="Y2Y-Ar-CMc" id="Eeu-cR-X4I"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ece-EI-X6y"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bM1-B3-R1y"/>
+                                    <barButtonItem style="plain" systemItem="organize" id="fhe-aX-vxD"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -837,15 +872,13 @@
                     <connections>
                         <outlet property="backButton" destination="ZlK-wi-fEz" id="Ibt-Yu-emh"/>
                         <outlet property="forwardButton" destination="FZR-Ml-eXL" id="SGe-ne-Tr4"/>
-                        <outlet property="refreshButton" destination="mQi-Qg-SR8" id="Vj0-TH-q6O"/>
-                        <outlet property="stopButton" destination="dQS-FA-ydL" id="TvL-nV-tGV"/>
                         <outlet property="toolbar" destination="1sj-sG-3HS" id="AKV-lI-YNQ"/>
                         <outlet property="webView" destination="Y2Y-Ar-CMc" id="ZNT-aq-D2k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08b-rs-dMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="-532"/>
+            <point key="canvasLocation" x="1613" y="-517"/>
         </scene>
     </scenes>
     <resources>
@@ -876,6 +909,7 @@
         <class className="collectivlyCollectionsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="leftBarButtonItemTouched:"/>
                 <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="outlet" name="collectionsTableView" candidateClass="UITableView"/>
             </relationships>
@@ -886,6 +920,8 @@
                 <relationship kind="action" name="articleTitleTouched:"/>
                 <relationship kind="action" name="centerRecollectButtonTouched:"/>
                 <relationship kind="action" name="downVoteButtonTouched:"/>
+                <relationship kind="action" name="leftBarButtonItemTouched:"/>
+                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="action" name="upVoteButtonTouched:"/>
                 <relationship kind="outlet" name="articleTitleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="downVoteButton" candidateClass="UIButton"/>
@@ -908,12 +944,15 @@
         <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
             <relationships>
+                <relationship kind="action" name="leftBarButtonItemTouched:"/>
+                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="collectivlySidebarViewController"/>
             </relationships>
         </class>
         <class className="collectivlyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyViewController.h"/>
             <relationships>
+                <relationship kind="action" name="closeButtonTouched:"/>
                 <relationship kind="action" name="requestButtonTouched:"/>
                 <relationship kind="action" name="signInButtonTouched:"/>
                 <relationship kind="outlet" name="closeButtonTouched" candidateClass="UIBarButtonItem"/>
@@ -935,6 +974,8 @@
         <class className="collectivlyWebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyWebViewController.h"/>
             <relationships>
+                <relationship kind="action" name="leftBarButtonItemTouched:"/>
+                <relationship kind="outlet" name="activity" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="forwardButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
@@ -950,7 +991,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="2kM-eC-ete"/>
+        <segue reference="VKb-ee-R7e"/>
         <segue reference="UvC-Sz-jjS"/>
     </inferredMetricsTieBreakers>
 </document>

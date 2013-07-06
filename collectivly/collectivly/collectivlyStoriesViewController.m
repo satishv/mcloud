@@ -215,19 +215,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == self.stories.count) {
-        // Configure the cell...
-        static NSString *CellIdentifier = @"loadMoreCell";
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        if (self.stories.count < 5 || hasReachedTheEnd) {
+            // Configure the cell...
+            static NSString *CellIdentifier = @"endCell";
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            return cell;
         }
-        
-        self.activityIndicatorForLoadingMoreStories = (UIActivityIndicatorView*)[cell viewWithTag:100];
-        [self.activityIndicatorForLoadingMoreStories startAnimating];
-        
-        [self fetchStoriesForPage:++pageOfStories];
-        return cell;
+        else {
+            // Configure the cell...
+            static NSString *CellIdentifier = @"loadMoreCell";
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            
+            self.activityIndicatorForLoadingMoreStories = (UIActivityIndicatorView*)[cell viewWithTag:100];
+            [self.activityIndicatorForLoadingMoreStories startAnimating];
+            
+            [self fetchStoriesForPage:++pageOfStories];
+            return cell;
+
+        }
     }
     
     // set up fonts
@@ -391,6 +405,9 @@
     
     NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
     newStories = [self createStoriesFromResponse:array];
+    
+    if (newStories.count < 5)
+        hasReachedTheEnd = YES;
     
     if (self.currentUser.currentCollection != nil) {
         // update singleton dictionary of stories for a collection

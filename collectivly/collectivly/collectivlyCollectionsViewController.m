@@ -221,7 +221,6 @@ NSInteger selectedCollection;
         return nil;
     
     static NSString *collectionCellIdentifier = @"collectionCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:collectionCellIdentifier forIndexPath:indexPath];
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:collectionCellIdentifier];
@@ -230,22 +229,9 @@ NSInteger selectedCollection;
 
     UIImageView *collectionImage = (UIImageView *)[cell viewWithTag:10];
     
-    float height = cell.frame.size.height / 2;
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 10, height)];
-    title.font = [UIFont fontWithName:@"ProximaNova-Light" size:36];
+    UILabel *title = (UILabel*)[cell viewWithTag:100];
+    title.font = [UIFont fontWithName:@"ProximaNova-Light" size:21];
     title.text = cc.name.uppercaseString;
-    title.backgroundColor = [UIColor clearColor];
-    [title sizeToFit];
-    title.frame = CGRectMake(title.frame.origin.x, (height - title.frame.size.height) / 2, title.frame.size.width, title.frame.size.height);
-    
-    UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, title.frame.origin.x + title.frame.size.width + 25, height)];
-    bg.backgroundColor = [UIColor whiteColor];
-    bg.alpha = 0.5f;
-    
-    [cell addSubview:bg];
-    [cell addSubview:title];
-
     collectionImage.image = cc.image;
 
     return cell;
@@ -337,13 +323,14 @@ NSInteger selectedCollection;
 
     // set URL
     NSString *url = @"";
+    // TODO: once implemented, add different link for signed in person
     if ([self someoneIsLoggedIn]){
         NSLog(@"[collectivlyCollectionsViewController] SOMEONE LOGGED IN --> personalized collections!");
-        url = @"https://collectivly.com/categories.json?order=rank";
+        url = @"https://www.collectivly.com/clubb.json";
     }
     else {
         NSLog(@"[collectivlyCollectionsViewController] NO ONE LOGGED IN --> popular collections!");
-        url = @"https://collectivly.com/categories.json";
+        url = @"https://www.collectivly.com/clubb.json";
     }
     
     // HTTP request, setting stuff

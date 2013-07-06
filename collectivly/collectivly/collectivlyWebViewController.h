@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface collectivlyWebViewController : UIViewController
+@interface collectivlyWebViewController : UIViewController <UIWebViewDelegate> {
+    UIActivityIndicatorView *busy;
+}
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) NSString *contentTitle;
 @property (strong, nonatomic) NSURL *url;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton, *forwardButton, *stopButton, *refreshButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *backButton, *forwardButton, *stopButton, *refreshButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 
 @end
