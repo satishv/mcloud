@@ -62,6 +62,9 @@ NSInteger selectedCollection;
     self.collectionsTableView.dataSource = self;
     
     [self setUpNavBar];
+    
+    NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+
 }
 
 

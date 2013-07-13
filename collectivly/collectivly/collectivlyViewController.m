@@ -330,7 +330,7 @@
             }
             else {
                 
-                
+                NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
                 
                 // POPULATE SINGLETON STORIES FOR LOGGED IN USER
                 self.currentUser.isLoggedIn = TRUE;

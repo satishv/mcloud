@@ -214,6 +214,8 @@
 
 -(void)makeUpVoteRequest {
     
+    NSLog(@"COOKIES: %@", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSLog(@"AUTHHHHHHHHH: %@", self.currentUser.authToken);
@@ -222,7 +224,7 @@
     [dataDict setValue:@"click" forKey:@"type"];
     [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
     [dataDict setValue:@"like" forKey:@"value"];
-    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
+//    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
     
     NSString *url = @"https://collectivly.com/stories/recloud";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -235,16 +237,24 @@
     
     // HTTP request, setting stuff
     [request setHTTPMethod:@"POST"];
-    [request setValue:[NSString stringWithFormat:@"%@", self.currentUser.authToken] forHTTPHeaderField:@"Authorization"];
+//    [request setValue:[NSString stringWithFormat:@"%@", self.currentUser.authToken] forHTTPHeaderField:@"Authorization"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
 //    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:self.currentUser.authToken forHTTPHeaderField:@"X-CSRF-Token"];
     [request setHTTPBody:postData];
+    
+    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+    [request setAllHTTPHeaderFields:dict];
+    
+    request.HTTPShouldHandleCookies = YES;
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
     requestNumber = REQUESTUPVOTE;
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
     [connection start];
 }
 
@@ -289,6 +299,12 @@
     NSLog(@"conection did receive response!");
     _data = [[NSMutableData alloc] init];
     
+        NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
+        NSDictionary *fields = [HTTPResponse allHeaderFields];
+    NSString *cookie = [fields valueForKey:@"Set-Cookie"]; // It is your cookie
+    
+    NSLog(@"DIDRECEIVERESPONSECOOKIE: %@", cookie);
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -328,7 +344,7 @@
     {
         case REQUESTRECOLLECT:
             alert = [[UIAlertView alloc]
-                                  initWithTitle: @"Success!"
+                                  initWithTitle: @"recollected!"
                                   message: @"RECOLLECT"
                                   delegate: self
                                   cancelButtonTitle:@"OK"
@@ -337,7 +353,7 @@
             break;
         case REQUESTUPVOTE:
             alert = [[UIAlertView alloc]
-                     initWithTitle: @"Success!"
+                     initWithTitle: @"upvted!"
                      message: @"up"
                      delegate: self
                      cancelButtonTitle:@"OK"
@@ -346,7 +362,7 @@
             break;
         case REQUESTDOWNVOTE:
             alert = [[UIAlertView alloc]
-                     initWithTitle: @"Success!"
+                     initWithTitle: @"downvoted!"
                      message: @"down"
                      delegate: self
                      cancelButtonTitle:@"OK"

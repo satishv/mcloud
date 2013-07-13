@@ -920,8 +920,6 @@
                 <relationship kind="action" name="articleTitleTouched:"/>
                 <relationship kind="action" name="centerRecollectButtonTouched:"/>
                 <relationship kind="action" name="downVoteButtonTouched:"/>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="action" name="upVoteButtonTouched:"/>
                 <relationship kind="outlet" name="articleTitleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="downVoteButton" candidateClass="UIButton"/>
@@ -944,8 +942,6 @@
         <class className="collectivlyStoriesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyStoriesViewController.h"/>
             <relationships>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
-                <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="outlet" name="rightSideBarViewController" candidateClass="collectivlySidebarViewController"/>
             </relationships>
         </class>
