@@ -15,6 +15,7 @@
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "collectivlySidebarViewController.h"
+#import "AsyncImageView.h"
 
 
 @interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate> {

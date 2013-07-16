@@ -12,12 +12,12 @@
 
 @synthesize articleImage, title, summary, profileImage, friendsCount, totalCount, site, url, idNumber, createdAt, keywords, origURL, articleImageString, imageString, expandedImageString, profileImageString, expandedImage, image, timeAgo;
 
-- (id)initWithDictionary:(NSDictionary *)story {
+- (id)initWithDictionaryWithoutFetchingImages:(NSDictionary *)story {
     self = [super init];
     if (self) {
         
         self.articleImageString = [NSString stringWithFormat:@"%@", [story objectForKey:@"article_image"]];
-        self.articleImage = [self imageFromURLString:self.articleImageString];
+        self.articleImage = nil;
         self.createdAt = [NSString stringWithFormat:@"%@", [story objectForKey:@"created_at"]];
         self.expandedImageString =  [NSString stringWithFormat:@"%@", [story objectForKey:@"expanded_image"]];
         self.expandedImage = nil;
@@ -39,24 +39,6 @@
         self.timeAgo = nil;
     }
     return self;
-}
-
-// HELPER - returns image from url. so sexy
-- (UIImage *)imageFromURLString:(NSString *)urlString
-{
-    NSURL *imageURL = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:imageURL];
-    [request setHTTPMethod:@"GET"];
-    
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    //    [request release];
-    //    [self handleError:error];
-    UIImage *resultImage = [UIImage imageWithData:(NSData *)result];
-    
-    //    NSLog(@"urlString: %@",urlString);
-    return resultImage;
 }
 
 

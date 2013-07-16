@@ -14,6 +14,7 @@
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "collectivlySidebarViewController.h"
 #import "collectivlyWebViewController.h"
+#import "AsyncImageView.h"
 
 @interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate> {
     NSMutableData *_data;
@@ -23,7 +24,7 @@
 @property (retain) collectivlySingleton *currentUser;
 
 @property (nonatomic, retain) collectivlySimplifiedStory *story;
-@property (weak, nonatomic) IBOutlet UIImageView *expandedImageView;
+@property (weak, nonatomic) IBOutlet AsyncImageView *expandedImageView;
 
 @property (retain, nonatomic) IBOutlet collectivlySidebarViewController *rightSideBarViewController;
 

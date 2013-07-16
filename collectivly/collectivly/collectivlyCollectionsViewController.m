@@ -58,9 +58,6 @@ NSInteger selectedCollection;
     self.currentUser = [collectivlySingleton sharedDataModel];
     self.currentUser.authToken = @"";
     
-    self.collectionsTableView.delegate = self;
-    self.collectionsTableView.dataSource = self;
-    
     [self setUpNavBar];
     
     NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
@@ -85,7 +82,7 @@ NSInteger selectedCollection;
     NSMutableArray *stories = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
         NSLog(@"[collectivlyCollectionsViewController] STORYYY %d out of %d", i, array.count);
-        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionaryWithoutFetchingImages:[array objectAtIndex:i]];
         NSLog(@"[collectivlyCollectionsViewController] STORYYY %d out of %d DONE", i, array.count);
         [stories addObject:story];
         

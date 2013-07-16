@@ -27,7 +27,6 @@
 @property (retain, nonatomic) NSArray *keywords;
 @property (retain, nonatomic) NSURL *url, *site, *origURL;
 
--(id)initWithDictionary:(NSDictionary *)story;
-- (UIImage *)imageFromURLString:(NSString *)urlString;
+-(id)initWithDictionaryWithoutFetchingImages:(NSDictionary *)story;
 
 @end

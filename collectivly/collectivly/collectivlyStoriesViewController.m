@@ -60,8 +60,17 @@
     
     // SET UP NAV BAR
     [self setUpNavBar];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageDoneLoadingFromAsyncImageView:) name:AsyncImageLoadDidFinish object:nil];
 
 }
+
+//-(void)imageDoneLoadingFromAsyncImageView:(NSNotification*)notif {
+//    NSLog(@"NOTIF!!!!!: %@ %@ %@", notif.object, notif.userInfo, notif);
+//    AsyncImageView *async = notif.object;
+//    collectivlySimplifiedStory *cStory = async.cStory;
+//    cStory.articleImage = async.image;
+//}
 
 #pragma mark nav bar customization
 -(void)setUpNavBar {
@@ -262,15 +271,17 @@
     
     collectivlySimplifiedStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
-    UIImageView *storyImageView = (UIImageView *)[cell viewWithTag:100];
-    storyImageView.image = story.articleImage;
+    AsyncImageView *storyImageView = (AsyncImageView *)[cell viewWithTag:100];
+    [storyImageView setImage:[UIImage imageNamed:@"white_square.png"]];
+    [storyImageView setImageURL:[NSURL URLWithString:story.articleImageString]];
     
     UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
     storyNameLabel.text = story.title;
     storyNameLabel.font = customFont;
     
-    UIImageView *sourceImage = (UIImageView *)[cell viewWithTag:102];
-    sourceImage.image = story.profileImage;
+    AsyncImageView *sourceImage = (AsyncImageView *)[cell viewWithTag:102];
+    [sourceImage setImage:[UIImage imageNamed:@"white_square.png"]];
+    [sourceImage setImageURL:[NSURL URLWithString:story.profileImageString]];
     
     // extract time difference between current time and post time, output time difference to UI
     NSString *timeDifference = [self findDifferenceBetweenCurrent:currentGMTTime AndCreatedTime:story.createdAt];
@@ -293,46 +304,6 @@
     
     return cell;
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -432,7 +403,7 @@
     NSMutableArray *lolz = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i++){
         NSLog(@"STORYYY %d out of %d", i, array.count);
-        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionary:[array objectAtIndex:i]];
+        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionaryWithoutFetchingImages:[array objectAtIndex:i]];
 //        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
         NSLog(@"STORYYY %d out of %d DONE", i, array.count);
         [lolz addObject:story];
