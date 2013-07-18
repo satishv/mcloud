@@ -210,7 +210,7 @@
 
 -(void)makeUpVoteRequest {
     
-    NSLog(@"COOKIES: %@", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+//    NSLog(@"COOKIES: %@", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -241,10 +241,10 @@
 //    [request setValue:self.currentUser.authToken forHTTPHeaderField:@"X-CSRF-Token"];
     [request setHTTPBody:postData];
     
-    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
-    [request setAllHTTPHeaderFields:dict];
+//    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+//    [request setAllHTTPHeaderFields:dict];
     
-    request.HTTPShouldHandleCookies = YES;
+//    request.HTTPShouldHandleCookies = YES;
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
     requestNumber = REQUESTUPVOTE;

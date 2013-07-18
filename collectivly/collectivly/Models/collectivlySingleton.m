@@ -10,7 +10,7 @@
 
 @implementation collectivlySingleton
 
-@synthesize personalStories, isLoggedIn, authToken, currentStories, collections, storiesForCollectionWithId, currentCollection, currentStory;
+@synthesize authToken, stories, collections, storiesForCollectionWithId, currentCollection, currentStory, email;
 
 static collectivlySingleton *sharedDataModel = nil;
 
@@ -21,6 +21,10 @@ static collectivlySingleton *sharedDataModel = nil;
         }
     }
     return sharedDataModel;
+}
+
+-(BOOL)isLoggedIn {
+    return (self.email && ![self.email isEqualToString:@""] && self.authToken && ![self.authToken isEqualToString:@""]);
 }
 
 @end

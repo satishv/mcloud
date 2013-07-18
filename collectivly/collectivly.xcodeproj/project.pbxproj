@@ -122,6 +122,7 @@
 		4C08AF5F1721CDC900862911 /* ProximaNovaCond-RegularIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-RegularIt.otf"; sourceTree = "<group>"; };
 		4C08AF601721CDC900862911 /* ProximaNovaCond-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Semibold.otf"; sourceTree = "<group>"; };
 		4C08AF611721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-SemiboldIt.otf"; sourceTree = "<group>"; };
+		4C1BF7931797A5A100AAAEDF /* DataConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataConstants.h; sourceTree = "<group>"; };
 		4C2F88F81721EF15009006EF /* collectivlyStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyStoriesViewController.h; sourceTree = "<group>"; };
 		4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyStoriesViewController.m; sourceTree = "<group>"; };
 		4C319C821753FDCF0037C84D /* collectivlySidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySidebarViewController.h; sourceTree = "<group>"; };
@@ -465,6 +466,7 @@
 				4CF8D9BB1710BEAD00E4FD21 /* InfoPlist.strings */,
 				4CF8D9BE1710BEAD00E4FD21 /* main.m */,
 				4CF8D9C01710BEAD00E4FD21 /* collectivly-Prefix.pch */,
+				4C1BF7931797A5A100AAAEDF /* DataConstants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

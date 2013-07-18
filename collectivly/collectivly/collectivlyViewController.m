@@ -67,13 +67,13 @@
     return (range.location == NSNotFound);
 }
 
--(NSString*)extractAuthToken:(NSString *)string {
-    
-    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
-    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSLog(@"AUTH TOKEN: %@", auth);
-    return auth;
-}
+//-(NSString*)extractAuthToken:(NSString *)string {
+//    
+//    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
+//    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    NSLog(@"AUTH TOKEN: %@", auth);
+//    return auth;
+//}
 
 #pragma mark textField functions
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -218,38 +218,15 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    NSMutableDictionary *user = [[NSMutableDictionary alloc] init];
-    [user setValue:self.emailAddressSignInTextField.text forKey:@"email"];
-    [user setValue:self.passwordTextField.text forKey:@"password"];
-    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
-    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
-    [dataDict setValue:user forKey:@"user"];
+    NSLog(@"sign in auth token param: %@", self.currentUser.authToken);
     
     NSString *url = @"https://collectivly.com/users/sign_in";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
     
-//    NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.emailAddressSignInTextField.text, self.passwordTextField.text];
-//    NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-//    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
-//    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
-    
-    NSString *data = [NSString stringWithFormat:@""];
-    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@", postData);
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    // HTTP request, setting stuff
+    NSString *params = [NSString stringWithFormat:@"email=%@&password=%@", self.emailAddressSignInTextField.text, self.passwordTextField.text];
     [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    // enable cookies for HTTPCookieStorage
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    
-    // handle cookies
-    request.HTTPShouldHandleCookies = YES;
+    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     // SET REQUEST NUMBER TO APPROPRIATE VALUE
     requestNumber = REQUESTSIGNIN;
@@ -329,17 +306,27 @@
                 }];
             }
             else {
-                
-                NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
-                
-                // POPULATE SINGLETON STORIES FOR LOGGED IN USER
-                self.currentUser.isLoggedIn = TRUE;
-                self.currentUser.authToken = [self extractAuthToken:responseString];
-                
-                [self dismissViewControllerAnimated:YES completion:^{
-                    [self.parent refreshView];
-                }];
-                
+                BOOL success = [dictResponse objectForKey:kJsonResponseKeyLoginSuccess];
+                if (success) {
+                    NSString *auth = [dictResponse objectForKey:kJsonResponseKeyLoginAuthToken];
+                    NSString *email = [dictResponse objectForKey:kJsonResponseKeyLoginEmail];
+                    
+                    self.currentUser.authToken = auth;
+                    self.currentUser.email = email;
+                    
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        [self.parent refreshView];
+                    }];
+                }
+                else {
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle: @"Login Error"
+                                          message: @"There was an error with your login. Please try again."
+                                          delegate: self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+                    [alert show];
+                }
             }
             break;
         }

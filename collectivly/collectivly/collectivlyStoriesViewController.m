@@ -54,7 +54,7 @@
     
     self.currentUser = [collectivlySingleton sharedDataModel];
         
-    self.stories = [NSMutableArray arrayWithArray:self.currentUser.currentStories];
+    self.stories = [NSMutableArray arrayWithArray:self.currentUser.stories];
 //    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]];
     NSLog(@"stories for id %d: %@", self.currentUser.currentCollection.idNumber, self.stories);
     
@@ -388,7 +388,7 @@
         else {
             [self.stories addObjectsFromArray:newStories];
         }
-        [self.currentUser setCurrentStories:self.stories];
+        [self.currentUser setStories:self.stories];
         [self.currentUser.storiesForCollectionWithId setObject:self.stories forKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber]];
     }
     

@@ -54,13 +54,13 @@ NSInteger selectedCollection;
 
     // request number 0 initially
     requestNumber = 0;
-        
+            
     self.currentUser = [collectivlySingleton sharedDataModel];
     self.currentUser.authToken = @"";
     
     [self setUpNavBar];
     
-    NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+//    NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
 
 }
 
@@ -91,13 +91,13 @@ NSInteger selectedCollection;
     return stories;
 }
 
--(NSString*)extractAuthToken:(NSString *)string {
-    
-    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
-    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSLog(@"AUTH TOKEN: %@", auth);
-    return auth;
-}
+//-(NSString*)extractAuthToken:(NSString *)string {
+//    
+//    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
+//    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    NSLog(@"AUTH TOKEN: %@", auth);
+//    return auth;
+//}
 
 
 -(BOOL)someoneIsLoggedIn{
@@ -256,7 +256,7 @@ NSInteger selectedCollection;
         NSMutableArray *stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", collection.idNumber]];
         
         // update current stuff for singleton
-        [self.currentUser setCurrentStories:stories];
+        [self.currentUser setStories:stories];
         selectedCollection = -1;
         
         // show collection! 
@@ -433,11 +433,11 @@ NSInteger selectedCollection;
     // act based on what the request was (requestinvite, requestsignin, etc)
     switch (requestNumber)
     {
-        case REQUESTHOMEPAGE: {
-            // SET auth token
-            self.currentUser.authToken = [self extractAuthToken:responseString];
-            break;
-        }
+//        case REQUESTHOMEPAGE: {
+//            // SET auth token
+//            self.currentUser.authToken = [self extractAuthToken:responseString];
+//            break;
+//        }
         case GETCOLLECTIONS: {
             
             float contentHeight = SCROLLVIEWPADDING;
@@ -487,7 +487,7 @@ NSInteger selectedCollection;
                     [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
                 }
 //                NSLog(@"[collectivlyCollectionsViewController] storiesforcollectionwithid: %@", self.currentUser.storiesForCollectionWithId);
-                [self.currentUser setCurrentStories:stories];
+                [self.currentUser setStories:stories];
             }
             selectedCollection = -1;
             

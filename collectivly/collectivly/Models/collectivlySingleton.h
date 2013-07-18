@@ -11,23 +11,17 @@
 #import "collectivlyStory.h"
 #import "collectivlySimplifiedStory.h"
 
-@interface collectivlySingleton : NSObject {
-    NSMutableArray *personalStories, *popularCollections;
-    NSMutableDictionary *storiesForCollectionWithId;
-    
-    BOOL isLoggedIn;
-}
+@interface collectivlySingleton : NSObject 
 
-@property (nonatomic, readwrite) BOOL isLoggedIn;
-@property (nonatomic, readwrite) collectivlyCollection *currentCollection;
-@property (nonatomic, retain) NSMutableArray *personalStories, *collections;
-@property (nonatomic, retain) NSMutableDictionary *storiesForCollectionWithId;
-@property (nonatomic, retain) NSArray *currentStories;
-@property (nonatomic, retain) collectivlySimplifiedStory *currentStory;
-
-@property (nonatomic, retain) NSString *authToken;
+@property (nonatomic, strong) collectivlyCollection *currentCollection;
+@property (nonatomic, strong) NSMutableDictionary *storiesForCollectionWithId;
+@property (nonatomic, strong) NSArray *stories, *collections;
+@property (nonatomic, strong) collectivlySimplifiedStory *currentStory;
+@property (nonatomic, strong) NSString *authToken, *email;
 
 + (collectivlySingleton *) sharedDataModel;
+
+-(BOOL)isLoggedIn;
 
 
 @end
