@@ -24,6 +24,10 @@
 		4C08AF701721CDC900862911 /* ProximaNovaCond-RegularIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C08AF5F1721CDC900862911 /* ProximaNovaCond-RegularIt.otf */; };
 		4C08AF711721CDC900862911 /* ProximaNovaCond-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C08AF601721CDC900862911 /* ProximaNovaCond-Semibold.otf */; };
 		4C08AF721721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C08AF611721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf */; };
+		4C1BF796179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF795179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.m */; };
+		4C1BF799179AFCE100AAAEDF /* SignUserInCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF798179AFCE100AAAEDF /* SignUserInCommand.m */; };
+		4C1BF79C179B049400AAAEDF /* RequestInviteCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF79B179B049400AAAEDF /* RequestInviteCommand.m */; };
+		4C1BF79F179B0C1100AAAEDF /* collectivlyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF79E179B0C1100AAAEDF /* collectivlyUtilities.m */; };
 		4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */; };
 		4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */; };
 		4C3532251794F6F400C8DB98 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3532241794F6F400C8DB98 /* AsyncImageView.m */; };
@@ -85,7 +89,6 @@
 		4C8D7AAA17925C7600B8D8A6 /* topbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8D7A7317925C7600B8D8A6 /* topbar.png */; };
 		4C8D7AAB17925C7600B8D8A6 /* topbar_320x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8D7A7417925C7600B8D8A6 /* topbar_320x44.png */; };
 		4C8D7AB517925CC500B8D8A6 /* collectivlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7AAE17925CC500B8D8A6 /* collectivlyCollection.m */; };
-		4C8D7AB617925CC500B8D8A6 /* collectivlySimplifiedStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7AB017925CC500B8D8A6 /* collectivlySimplifiedStory.m */; };
 		4C8D7AB717925CC500B8D8A6 /* collectivlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7AB217925CC500B8D8A6 /* collectivlySingleton.m */; };
 		4C8D7AB817925CC500B8D8A6 /* collectivlyStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7AB417925CC500B8D8A6 /* collectivlyStory.m */; };
 		4C8D7AC217925D4900B8D8A6 /* UINavigationItem+JTRevealSidebarV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7ABD17925D4900B8D8A6 /* UINavigationItem+JTRevealSidebarV2.m */; };
@@ -123,6 +126,14 @@
 		4C08AF601721CDC900862911 /* ProximaNovaCond-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Semibold.otf"; sourceTree = "<group>"; };
 		4C08AF611721CDC900862911 /* ProximaNovaCond-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-SemiboldIt.otf"; sourceTree = "<group>"; };
 		4C1BF7931797A5A100AAAEDF /* DataConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataConstants.h; sourceTree = "<group>"; };
+		4C1BF794179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetStoriesForCollectionCommand.h; sourceTree = "<group>"; };
+		4C1BF795179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetStoriesForCollectionCommand.m; sourceTree = "<group>"; };
+		4C1BF797179AFCE100AAAEDF /* SignUserInCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUserInCommand.h; sourceTree = "<group>"; };
+		4C1BF798179AFCE100AAAEDF /* SignUserInCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUserInCommand.m; sourceTree = "<group>"; };
+		4C1BF79A179B049400AAAEDF /* RequestInviteCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestInviteCommand.h; sourceTree = "<group>"; };
+		4C1BF79B179B049400AAAEDF /* RequestInviteCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestInviteCommand.m; sourceTree = "<group>"; };
+		4C1BF79D179B0C1100AAAEDF /* collectivlyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyUtilities.h; sourceTree = "<group>"; };
+		4C1BF79E179B0C1100AAAEDF /* collectivlyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyUtilities.m; sourceTree = "<group>"; };
 		4C2F88F81721EF15009006EF /* collectivlyStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyStoriesViewController.h; sourceTree = "<group>"; };
 		4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyStoriesViewController.m; sourceTree = "<group>"; };
 		4C319C821753FDCF0037C84D /* collectivlySidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySidebarViewController.h; sourceTree = "<group>"; };
@@ -189,8 +200,6 @@
 		4C8D7A7417925C7600B8D8A6 /* topbar_320x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar_320x44.png; sourceTree = "<group>"; };
 		4C8D7AAD17925CC500B8D8A6 /* collectivlyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyCollection.h; sourceTree = "<group>"; };
 		4C8D7AAE17925CC500B8D8A6 /* collectivlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyCollection.m; sourceTree = "<group>"; };
-		4C8D7AAF17925CC500B8D8A6 /* collectivlySimplifiedStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySimplifiedStory.h; sourceTree = "<group>"; };
-		4C8D7AB017925CC500B8D8A6 /* collectivlySimplifiedStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlySimplifiedStory.m; sourceTree = "<group>"; };
 		4C8D7AB117925CC500B8D8A6 /* collectivlySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySingleton.h; sourceTree = "<group>"; };
 		4C8D7AB217925CC500B8D8A6 /* collectivlySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlySingleton.m; sourceTree = "<group>"; };
 		4C8D7AB317925CC500B8D8A6 /* collectivlyStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyStory.h; sourceTree = "<group>"; };
@@ -362,8 +371,6 @@
 			children = (
 				4C8D7AAD17925CC500B8D8A6 /* collectivlyCollection.h */,
 				4C8D7AAE17925CC500B8D8A6 /* collectivlyCollection.m */,
-				4C8D7AAF17925CC500B8D8A6 /* collectivlySimplifiedStory.h */,
-				4C8D7AB017925CC500B8D8A6 /* collectivlySimplifiedStory.m */,
 				4C8D7AB117925CC500B8D8A6 /* collectivlySingleton.h */,
 				4C8D7AB217925CC500B8D8A6 /* collectivlySingleton.m */,
 				4C8D7AB317925CC500B8D8A6 /* collectivlyStory.h */,
@@ -400,6 +407,12 @@
 			children = (
 				4C8D7AC617932CBD00B8D8A6 /* GetCollectionsCommand.h */,
 				4C8D7AC717932CBD00B8D8A6 /* GetCollectionsCommand.m */,
+				4C1BF794179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.h */,
+				4C1BF795179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.m */,
+				4C1BF797179AFCE100AAAEDF /* SignUserInCommand.h */,
+				4C1BF798179AFCE100AAAEDF /* SignUserInCommand.m */,
+				4C1BF79A179B049400AAAEDF /* RequestInviteCommand.h */,
+				4C1BF79B179B049400AAAEDF /* RequestInviteCommand.m */,
 			);
 			path = DataAccess;
 			sourceTree = "<group>";
@@ -467,6 +480,8 @@
 				4CF8D9BE1710BEAD00E4FD21 /* main.m */,
 				4CF8D9C01710BEAD00E4FD21 /* collectivly-Prefix.pch */,
 				4C1BF7931797A5A100AAAEDF /* DataConstants.h */,
+				4C1BF79D179B0C1100AAAEDF /* collectivlyUtilities.h */,
+				4C1BF79E179B0C1100AAAEDF /* collectivlyUtilities.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -618,7 +633,6 @@
 				4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */,
 				4C78C96B177F9748007166BF /* collectivlyWebViewController.m in Sources */,
 				4C8D7AB517925CC500B8D8A6 /* collectivlyCollection.m in Sources */,
-				4C8D7AB617925CC500B8D8A6 /* collectivlySimplifiedStory.m in Sources */,
 				4C8D7AB717925CC500B8D8A6 /* collectivlySingleton.m in Sources */,
 				4C8D7AB817925CC500B8D8A6 /* collectivlyStory.m in Sources */,
 				4C8D7AC217925D4900B8D8A6 /* UINavigationItem+JTRevealSidebarV2.m in Sources */,
@@ -626,6 +640,10 @@
 				4C8D7AC417925D4900B8D8A6 /* MBProgressHUD.m in Sources */,
 				4C8D7AC817932CBD00B8D8A6 /* GetCollectionsCommand.m in Sources */,
 				4C3532251794F6F400C8DB98 /* AsyncImageView.m in Sources */,
+				4C1BF796179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.m in Sources */,
+				4C1BF799179AFCE100AAAEDF /* SignUserInCommand.m in Sources */,
+				4C1BF79C179B049400AAAEDF /* RequestInviteCommand.m in Sources */,
+				4C1BF79F179B0C1100AAAEDF /* collectivlyUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,6 @@
 
 #import "collectivlyCollectionsViewController.h"
 
-#define REQUESTHOMEPAGE         1
-#define GETCOLLECTIONS          2
-#define GETCERTAINCOLLECTION    3
-
 #define COLLECTIONINBETWEEN     7
 #define COLLECTIONBGALPHA       0.7f
 #define SCROLLVIEWPADDING       20
@@ -21,8 +17,6 @@
 @end
 
 @implementation collectivlyCollectionsViewController
-
-NSInteger selectedCollection;
 
 @synthesize collectionsTableView, currentUser, HUD, rightSideBarViewController, refresherController;
 
@@ -35,6 +29,7 @@ NSInteger selectedCollection;
     return self;
 }
 
+#pragma mark - VIEW STUFF
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,17 +46,10 @@ NSInteger selectedCollection;
     [self.collectionsTableView addSubview:refreshControl];
     self.refresherController = refreshControl;
     self.refresherController.enabled = NO;
-
-    // request number 0 initially
-    requestNumber = 0;
-            
+    
     self.currentUser = [collectivlySingleton sharedDataModel];
-    self.currentUser.authToken = @"";
     
     [self setUpNavBar];
-    
-//    NSLog(@"COLLECTIVLY COOKIEs: %@ ", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
-
 }
 
 
@@ -73,37 +61,7 @@ NSInteger selectedCollection;
 
 -(void)refreshView {
     [self fetchRelevantCollections];
-    //    [self checkForCookiesAndSession];
 }
-
-#pragma mark helpers
--(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
-    NSLog(@"[collectivlyCollectionsViewController] creating stories from array.");
-    NSMutableArray *stories = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i++){
-        NSLog(@"[collectivlyCollectionsViewController] STORYYY %d out of %d", i, array.count);
-        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionaryWithoutFetchingImages:[array objectAtIndex:i]];
-        NSLog(@"[collectivlyCollectionsViewController] STORYYY %d out of %d DONE", i, array.count);
-        [stories addObject:story];
-        
-    }
-    NSLog(@"[collectivlyCollectionsViewController] DONE creating stories from array.");
-    return stories;
-}
-
-//-(NSString*)extractAuthToken:(NSString *)string {
-//    
-//    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
-//    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//    NSLog(@"AUTH TOKEN: %@", auth);
-//    return auth;
-//}
-
-
--(BOOL)someoneIsLoggedIn{
-    return (self.currentUser.isLoggedIn);
-}
-
 
 #pragma mark nav bar and button items related
 -(void)setUpNavBar {
@@ -155,7 +113,7 @@ NSInteger selectedCollection;
     [self.navigationController toggleRevealState:JTRevealedStateRight];
 }
 
-
+#pragma mark - SIDEBAR
 #pragma mark SidebarViewControllerDelegate
 
 - (void)sidebarViewController:(collectivlySidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
@@ -208,6 +166,7 @@ NSInteger selectedCollection;
     }
 }
 
+#pragma mark - TABLE VIEW STUFF
 #pragma mark table view delegate methods
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     collectivlyCollection *cc = [self.currentUser.collections objectAtIndex:indexPath.row];
@@ -241,26 +200,31 @@ NSInteger selectedCollection;
     return self.currentUser.collections.count;
 }
 
-#pragma mark HTTP requests
+-(void)populateDisplayWithStories:(NSArray*)storyz {
+    // update current stuff for singleton
+    [self.currentUser setStories:storyz];
+    selectedCollection = -1;
+    
+    // show collection!
+    [self performSegueWithIdentifier:@"showCollection" sender:self];
+}
+
+#pragma mark - COMMAND execution
 -(void)getStoriesForCollection:(collectivlyCollection *)collection {
     
     self.currentUser.currentCollection = collection;
     selectedCollection = collection.idNumber;
     
-    // IF collection has already been clicked and cached: just get it from data structure
-    // instead of fetching again via same network call
-    if ([[self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", collection.idNumber]] isKindOfClass:[NSMutableArray class]]){
+    BOOL alreadyStoriesForThatCollection = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", selectedCollection]] != nil;
+    
+    if (alreadyStoriesForThatCollection){
         NSLog(@"[collectivlyCollectionsViewController] GETTING OLD STORIES!!! FOR COLLECTION ID: %d WITH TITLE: %@", collection.idNumber, collection.name);
         
         // get stories
-        NSMutableArray *stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", collection.idNumber]];
+        NSMutableArray *stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", selectedCollection]];
         
-        // update current stuff for singleton
-        [self.currentUser setStories:stories];
-        selectedCollection = -1;
-        
-        // show collection! 
-        [self performSegueWithIdentifier:@"showCollection" sender:self];
+        [self populateDisplayWithStories:stories];
+
     }
     
     // OTHERWISE: fetch collection via network
@@ -268,248 +232,72 @@ NSInteger selectedCollection;
         NSLog(@"[collectivlyCollectionsViewController] GETTING NEW STORIES!!! FOR COLLECTIN ID: %d WITH TITLE: %@", collection.idNumber, collection.name);
         
         // spinnaz
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         HUD.delegate = self;
-        HUD.labelText = @"Loading";
+        HUD.labelText = @"Loading Stories";
         
-//        NSLog(@"id: %d", collection.idNumber);
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json?page=1", collection.idNumber]];
-        
-//        NSLog(@"\"%@\"", url);
-        
-        NSLog(@"[collectivlyCollectionsViewController] fetching stories for collection with id: %d and name: %@", collection.idNumber, collection.name);
-        
-        // HTTP request, setting stuff
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"GET"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        // SET REQUEST NUMBER TO APPROPRIATE VALUE
-        requestNumber = GETCERTAINCOLLECTION;
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        [connection start];
+        GetStoriesForCollectionCommand *cmd = [[GetStoriesForCollectionCommand alloc] initWithCollection:collection andPageNumber:1];
+        cmd.delegate = self;
+        [cmd fetchStoriesForCollectionFromPage];
     }
 }
-
-
-//-(void)checkForCookiesAndSession {
-//    NSLog(@"COOKIES????????/");
-//    
-//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//    NSString *url = @"https://collectivly.com/stories/count.json";
-//    
-//    // HTTP request, setting stuff
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-//    [request setHTTPMethod:@"GET"];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    
-//    // SET REQUEST NUMBER TO APPROPRIATE VALUE
-//    requestNumber = 100;
-//    
-//    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-//    [connection start];
-//}
 
 -(void)fetchRelevantCollections {
-    NSLog(@"fetching relevant collections.....");
-
-    // spinnaz
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-   	HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-	HUD.delegate = self;
-	HUD.labelText = @"Loading";
-
-    // set URL
-    NSString *url = @"";
-    // TODO: once implemented, add different link for signed in person
-    if ([self someoneIsLoggedIn]){
-        NSLog(@"[collectivlyCollectionsViewController] SOMEONE LOGGED IN --> personalized collections!");
-        url = @"https://www.collectivly.com/clubb.json";
-    }
-    else {
-        NSLog(@"[collectivlyCollectionsViewController] NO ONE LOGGED IN --> popular collections!");
-        url = @"https://www.collectivly.com/clubb.json";
-    }
-    
-    // HTTP request, setting stuff
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.timeoutInterval = 10;
-
-    // SET REQUEST NUMBER TO APPROPRIATE VALUE
-    requestNumber = GETCOLLECTIONS;
-    
-    // start connection
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
-}
-
--(void)requestHomePage {
-    NSLog(@"[collectivlyCollectionsViewController] HOME PAGE!!!");
-    
     HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-	
 	HUD.delegate = self;
 	HUD.labelText = @"Loading";
-
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    NSString *url = @"https://collectivly.com/";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
-    // HTTP request, setting stuff
-    [request setHTTPMethod:@"GET"];
-    
-    // SET REQUEST NUMBER TO APPROPRIATE VALUE
-    requestNumber = REQUESTHOMEPAGE;
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
-    
+    GetCollectionsCommand *cmd = [[GetCollectionsCommand alloc] initWithUserAlreadyLoggedInBool:self.currentUser.isLoggedIn];
+    cmd.delegate = self;
+    [cmd fetchCollections];
 }
 
-#pragma mark connection protocol functions
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"[collectivlyCollectionsViewController] conection did receive response!");
-    _data = [[NSMutableData alloc] init];
+#pragma mark - COMMAND DELEGATES for data retrieval
+#pragma mark Get Collections
+-(void)reactToGetCollectionsResponse:(NSArray *)collections {
     
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"[collectivlyCollectionsViewController] conection did receive data!");
-    [_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // Please do something sensible here, like log the error.
-    NSLog(@"[collectivlyCollectionsViewController] connection failed with error: %@", error.description);
+    self.currentUser.collections = collections;
     
-    // stop spinners
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.collectionsTableView reloadData];
+
     [HUD hide:YES];
+    if (!self.refresherController.enabled)
+        self.refresherController.enabled = YES;
     [self.refresherController endRefreshing];
-    
-    // alert view for network error
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Network Error"
-                          message: @"There was a network error :\\"
-                          delegate: self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Retry", nil];
-    [alert show];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 1:
-            if (requestNumber == REQUESTHOMEPAGE){
-                [self requestHomePage];
-            }
-            else if (requestNumber == GETCOLLECTIONS){
-                [self fetchRelevantCollections];
-            }
-            else if (requestNumber == GETCERTAINCOLLECTION){
-                // TODO
-                [self getStoriesForCollection:self.currentUser.currentCollection];
-            }
-            break;
-        default:
-            break;
-    }
+-(void)reactToGetCollectionsError:(NSError *)error {
+    [HUD hide:YES];
+    if (!self.refresherController.enabled)
+        self.refresherController.enabled = YES;
+    [self.refresherController endRefreshing];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"[collectivlyCollectionsViewController] connectiondidfinishloading!");
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-//    NSLog(@"response data: %@", responseString);
-    
-    NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-    
-    // act based on what the request was (requestinvite, requestsignin, etc)
-    switch (requestNumber)
-    {
-//        case REQUESTHOMEPAGE: {
-//            // SET auth token
-//            self.currentUser.authToken = [self extractAuthToken:responseString];
-//            break;
-//        }
-        case GETCOLLECTIONS: {
-            
-            float contentHeight = SCROLLVIEWPADDING;
-
-//            NSLog(@"[collectivlyCollectionsViewController] DICT RESPONSE FOR COLLECTTIONSS: %@", dictResponse);
-            NSMutableArray *colls = [[NSMutableArray alloc] init];
-            // counter            
-            for (NSDictionary *dict in dictResponse){
-                collectivlyCollection *cc = [[collectivlyCollection alloc] initWithDictionary:dict];
-                
-                // add collection to list of collections
-//                NSLog(@"[collectivlyCollectionsViewController] ADDINGGNGGGG collection with id: %d", cc.idNumber);
-                [colls addObject:cc];
-            }
-            // TODO: update...? shouldn't automatically be popular collections
-            self.currentUser.collections = colls;
-            
-            [self.collectionsTableView reloadData];
-                        
-            [HUD hide:YES];
-            if (!self.refresherController.enabled)
-                self.refresherController.enabled = YES;
-            [self.refresherController endRefreshing];
-            
-            break;
+#pragma mark Get Stories For Collection
+-(void)reactToGetStoriesResponse:(NSArray *)stories {
+    // UPDATE STORIES DICTIONARY IN SINGLETON
+    if (self.currentUser.currentCollection != nil) {
+        if (self.currentUser.storiesForCollectionWithId == nil) {
+            self.currentUser.storiesForCollectionWithId = [[NSMutableDictionary alloc] initWithObjectsAndKeys:stories, [NSString stringWithFormat:@"%d", selectedCollection], nil];        }
+        else {
+            [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
         }
-        case GETCERTAINCOLLECTION: {
-//            NSLog(@"[collectivlyCollectionsViewController] CERTAIN COLLECTION WITH RESPONSE: %@", dictResponse);
-            
-            NSMutableArray *stories = [[NSMutableArray alloc] init];
-            
-            NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-            
-            
-            // stories for the relevant collection!
-            stories = [self createStoriesFromResponse:array];
-            
-            // UPDATE STORIES DICTIONARY IN SINGLETON 
-            if (self.currentUser.currentCollection != nil) {
-//                NSLog(@"[collectivlyCollectionsViewController] ADDING A GUY for this collection: %d", selectedCollection);
-                
-                // update singleton dictionary of stories for a collection
-                if (self.currentUser.storiesForCollectionWithId == nil) {
-                    self.currentUser.storiesForCollectionWithId = [[NSMutableDictionary alloc] initWithObjectsAndKeys:stories, [NSString stringWithFormat:@"%d", selectedCollection], nil];
-                }
-                else {
-                    [self.currentUser.storiesForCollectionWithId setObject:stories forKey:[NSString stringWithFormat:@"%d", selectedCollection]];
-                }
-//                NSLog(@"[collectivlyCollectionsViewController] storiesforcollectionwithid: %@", self.currentUser.storiesForCollectionWithId);
-                [self.currentUser setStories:stories];
-            }
-            selectedCollection = -1;
-            
-            [HUD hide:YES];
-            
-            // SHOW COLLECTOIN ITSELF AND ITS STORIES!
-            [self performSegueWithIdentifier:@"showCollection" sender:self];
-            break;
-        }
-//        case 100:
-//            NSLog(@"COOKES: %@", dictResponse);
-//            [HUD hide:YES];
-//            
-//            [self.refresherController endRefreshing];
-//            break;
-        default:
-            break;
+        
     }
     
+    [HUD hide:YES];
+    
+    [self populateDisplayWithStories:stories];
+
+}
+-(void)reactToGetStoriesError:(NSError *)error {
+    [HUD hide:YES];
+    if (!self.refresherController.enabled)
+        self.refresherController.enabled = YES;
+    [self.refresherController endRefreshing];
 }
 
-#pragma mark cleanup
+#pragma mark - cleanup
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

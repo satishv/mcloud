@@ -52,8 +52,6 @@
     NATHAN FRAENKEL
  FOR COLLECTIVLY
  
- ONLY CHANGE THAT HAS BEEN MADE: adding the "collectivlySimplifiedStory" property and it's subsequent use in the .m file.
- 
  THAT IS ALL. thank you for reading. stay thirsty my friends.
  
  */
@@ -75,7 +73,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "collectivlySimplifiedStory.h"
+#import "collectivlyStory.h"
 
 extern NSString *const AsyncImageLoadDidFinish;
 extern NSString *const AsyncImageLoadDidFail;
@@ -122,6 +120,6 @@ extern NSString *const AsyncImageErrorKey;
 @property (nonatomic, assign) UIActivityIndicatorViewStyle activityIndicatorStyle;
 @property (nonatomic, assign) BOOL crossfadeImages;
 @property (nonatomic, assign) NSTimeInterval crossfadeDuration;
-@property (nonatomic, retain) collectivlySimplifiedStory *cStory;
+@property (nonatomic, retain) collectivlyStory *cStory;
 
 @end

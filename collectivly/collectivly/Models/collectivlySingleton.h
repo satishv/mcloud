@@ -9,14 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "collectivlyCollection.h"
 #import "collectivlyStory.h"
-#import "collectivlySimplifiedStory.h"
 
 @interface collectivlySingleton : NSObject 
 
 @property (nonatomic, strong) collectivlyCollection *currentCollection;
 @property (nonatomic, strong) NSMutableDictionary *storiesForCollectionWithId;
 @property (nonatomic, strong) NSArray *stories, *collections;
-@property (nonatomic, strong) collectivlySimplifiedStory *currentStory;
+@property (nonatomic, strong) collectivlyStory *currentStory;
 @property (nonatomic, strong) NSString *authToken, *email;
 
 + (collectivlySingleton *) sharedDataModel;

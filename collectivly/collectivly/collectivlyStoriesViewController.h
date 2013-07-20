@@ -10,15 +10,16 @@
 
 #import "collectivlySingleton.h"
 #import "collectivlyStory.h"
-#import "collectivlySimplifiedStory.h"
 #import "JTRevealSidebarV2Delegate.h"
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "collectivlySidebarViewController.h"
 #import "AsyncImageView.h"
 
+#import "GetStoriesForCollectionCommand.h"
 
-@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate> {
+
+@interface collectivlyStoriesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, GetStoriesDelegate> {
 
     NSInteger pageOfStories; // STARTS AT 1
     NSMutableData *_data;

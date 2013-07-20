@@ -22,6 +22,7 @@
 @property (nonatomic, readwrite) BOOL userIsLoggedIn;
 @property (nonatomic, strong) id<GetCollectionsDelegate> delegate;
 
+-(id)initWithUserAlreadyLoggedInBool:(BOOL)booleano;
 -(void)fetchCollections;
 
 @end

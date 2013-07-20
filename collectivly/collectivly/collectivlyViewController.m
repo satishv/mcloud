@@ -11,10 +11,6 @@
 #define SIGNINFIELDSCONTENTOFFSET   5
 #define INVITEFIELDSCONTENTOFFSET   200
 
-//#define REQUESTHOMEPAGE             1
-#define REQUESTINVITE               2
-#define REQUESTSIGNIN               3
-
 @interface collectivlyViewController ()
 
 @end
@@ -34,48 +30,14 @@
     
     self.currentUser = [collectivlySingleton sharedDataModel];
     
-    self.firstNameTextField.delegate = self;
-    self.lastNameTextField.delegate = self;
-    self.emailAddressTextField.delegate = self;
-    self.emailAddressSignInTextField.delegate = self;
-    self.passwordTextField.delegate = self;
-    self.invitePasswordTextField.delegate = self;
-    self.inviteConfirmPasswordTextField.delegate = self;
-    
     self.scrolley.scrollEnabled = NO;
     
     self.greyBGView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.greyBGView.layer.borderWidth = 1.0;
-    
-    // gets updated every time a request is made
-    // checked in connectionDidFinishLoading
-    requestNumber = 0;
+
 }
 
-#pragma mark helper functions
-- (BOOL)validateEmail: (NSString *) candidate {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    
-    return [emailTest evaluateWithObject:candidate];
-}
-
--(BOOL)checkValidityOfSignIn:(NSString *)string {
-    NSRange range = [string rangeOfString:@"Invalid email or password."];
-    // if NOT FOUND --> good email  --> email is VALID  --> return TRUE
-    // if found     --> bad email   --> email not VALID --> return false
-    return (range.location == NSNotFound);
-}
-
-//-(NSString*)extractAuthToken:(NSString *)string {
-//    
-//    NSRange range = [string rangeOfString:@"authenticity_token\" type=\"hidden\" value=\""];
-//    NSString *auth = [[string substringWithRange:NSMakeRange(range.location + range.length, 44)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//    NSLog(@"AUTH TOKEN: %@", auth);
-//    return auth;
-//}
-
-#pragma mark textField functions
+#pragma mark - textField functions
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField == self.firstNameTextField || textField == self.lastNameTextField || textField == self.emailAddressTextField || textField == self.invitePasswordTextField || textField == self.inviteConfirmPasswordTextField){
         [UIView animateWithDuration:0.5 animations:^{
@@ -120,29 +82,30 @@
 
 
 
-#pragma mark button listeners
+#pragma mark - button listeners
 - (IBAction)requestButtonTouched:(id)sender {
     
+    BOOL someFieldIsEmpty = firstNameTextField.text.length == 0 || lastNameTextField.text.length == 0 || self.emailAddressTextField.text.length == 0 || self.invitePasswordTextField.text.length == 0 || self.inviteConfirmPasswordTextField.text.length == 0;
+    BOOL passwordsMatch = [self.invitePasswordTextField.text isEqualToString:self.inviteConfirmPasswordTextField.text];
+    BOOL emailIsAValidEmail = [collectivlyUtilities validateEmail:emailAddressTextField.text];
+    
+    
     // check for empty names, last names
-    if (firstNameTextField.text.length == 0 || lastNameTextField.text.length == 0 || self.emailAddressTextField.text.length == 0 || self.invitePasswordTextField.text.length == 0 || self.inviteConfirmPasswordTextField.text.length == 0){
-        [UIView animateWithDuration:0.5 animations:^{
-            inviteErrorsLabel.text = @"these fields are required.";
-            inviteErrorsLabel.alpha = 1.0f;
-        }];
+    if (someFieldIsEmpty){
+        [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Empty Fields"
+                                                              andMessage:@"Please complete the missing form fields for requesting an invite."];
     }
     // check that passwords match
-    else if (![self.invitePasswordTextField.text isEqualToString:self.inviteConfirmPasswordTextField.text]){
-        [UIView animateWithDuration:0.5 animations:^{
-            inviteErrorsLabel.text = @"please enter matching passwords.";
-            inviteErrorsLabel.alpha = 1.0f;
-        }];
+    else if (!passwordsMatch){
+        [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Passwords Don't Match"
+                                                              andMessage:@"Please enter matching passwords."];
+
     }
     // check for valid email
-    else if (![self validateEmail:emailAddressTextField.text]){
-        [UIView animateWithDuration:0.5 animations:^{
-            inviteErrorsLabel.text = @"please enter a valid e-mail address.";
-            inviteErrorsLabel.alpha = 1.0f;
-        }];
+    else if (!emailIsAValidEmail){
+        [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Bad Email"
+                                                              andMessage:@"Please enter a valid email address."];
+
     }
     else {
         [self requestInvite];
@@ -152,18 +115,20 @@
 - (IBAction)signInButtonTouched:(id)sender {
     NSLog(@"SIGN IN!!!!");
     // check for empty email, password
-    if (emailAddressSignInTextField.text.length == 0 || passwordTextField.text.length == 0){
-        [UIView animateWithDuration:0.5 animations:^{
-            signInErrorsLabel.text = @"these fields are required.";
-            signInErrorsLabel.alpha = 1.0f;
-        }];
+    BOOL someFieldsAreEmpty = emailAddressSignInTextField.text.length == 0 || passwordTextField.text.length == 0;
+    BOOL emailFollowsFormatOfAnEmail = [collectivlyUtilities validateEmail:emailAddressSignInTextField.text];
+    
+    UIAlertView *al;
+    
+    if (someFieldsAreEmpty){
+        [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Empty Fields"
+                                                              andMessage:@"Please complete the missing form fields for sign in."];
+        [self.view endEditing:YES];
     }
-    // check for valid email
-    else if (![self validateEmail:emailAddressSignInTextField.text]){
-        [UIView animateWithDuration:0.5 animations:^{
-            signInErrorsLabel.text = @"please enter a valid e-mail address.";
-            signInErrorsLabel.alpha = 1.0f;
-        }];
+    else if (!emailFollowsFormatOfAnEmail){
+        [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Bad Email"
+                                                              andMessage:@"Please enter a valid email address."];
+        [self.view endEditing:YES];
     }
     else {
         [self signUserIn];
@@ -175,186 +140,72 @@
 }
 
 
-#pragma mark HTTP requests
--(void)requestInvite {
-    NSLog(@"requesting invite...");
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    NSMutableDictionary *user = [[NSMutableDictionary alloc] init];
-    [user setValue:self.firstNameTextField.text forKey:@"first_name"];
-    [user setValue:self.lastNameTextField.text forKey:@"last_name"];
-    [user setValue:self.emailAddressTextField.text forKey:@"email"];
-    [user setValue:self.invitePasswordTextField.text forKey:@"password"];
-    [user setValue:self.inviteConfirmPasswordTextField.text forKey:@"password_confirmation"];
-    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
-    [dataDict setValue:self.currentUser.authToken forKey:@"authenticity_token"];
-    [dataDict setValue:user forKey:@"user"];
-    
-    NSString *url = @"https://collectivly.com/users/invitation";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
-    NSString *data = [NSString stringWithFormat:@""];
-    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@", postData);
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    // HTTP request, setting stuff
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    // SET REQUEST NUMBER TO APPROPRIATE VALUE
-    requestNumber = REQUESTINVITE;
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
-}
-
+#pragma mark - COMMAND execution
 -(void)signUserIn {
     NSLog(@"signing in...");
     
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    NSLog(@"sign in auth token param: %@", self.currentUser.authToken);
-    
-    NSString *url = @"https://collectivly.com/users/sign_in";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
-    
-    NSString *params = [NSString stringWithFormat:@"email=%@&password=%@", self.emailAddressSignInTextField.text, self.passwordTextField.text];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    // SET REQUEST NUMBER TO APPROPRIATE VALUE
-    requestNumber = REQUESTSIGNIN;
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+    SignUserInCommand *cmd = [[SignUserInCommand alloc] initWithEmail:emailAddressSignInTextField.text andPass:passwordTextField.text];
+    cmd.delegate = self;
+    [cmd signUserIn];
     
 }
 
-#pragma mark connection protocol functions
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"conection did receive response!");
-    _data = [[NSMutableData alloc] init];
+-(void)requestInvite {
+    NSLog(@"requesting invite...");
+    
+    NSString *f = self.firstNameTextField.text;
+    NSString *l = self.lastNameTextField.text;
+    NSString *e = self.emailAddressTextField.text;
+    NSString *p = self.invitePasswordTextField.text;
+    
+    RequestInviteCommand *cmd = [[RequestInviteCommand alloc] initWithFirst:f andLast:l andEmail:e andPass:p];
+    cmd.delegate = self;
+    [cmd requestInvite];
     
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"conection did receive data!");
-    [_data appendData:data];
+#pragma mark - COMMAND DELEGATES
+#pragma mark sign user in
+-(void)successfulSignInWithAuth:(NSString *)token andEmail:(NSString *)e {
+    
+    self.currentUser.authToken = token;
+    self.currentUser.email = e;
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.parent refreshView];
+    }];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {    
-    // stop spinner
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    // alert view for network error
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Network Error"
-                          message: @"There was a network error :\\"
-                          delegate: self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Retry", nil];
-    [alert show];
+-(void)errorOccuredDuringSignIn:(NSError *)error {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Sign In Error"
+                                                          andMessage:error.localizedDescription];
+    [self.view endEditing:YES];
 }
+-(void)unsuccessfulSignInWithMessage:(NSString *)msg {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Sign In Unsuccessful"
+                                                          andMessage:msg];
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connectiondidfinishloading!");
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-    NSLog(@"response data: %@", responseString);
-    
-    NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-    
-    
-    // act based on what the request was (requestinvite, requestsignin, etc)
-    switch (requestNumber)
-    {
-        case REQUESTINVITE: {
-            if ([[dictResponse objectForKey:@"status"] isEqualToString:@"success"]){
-                // pop up success alert view
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle: @"Success!"
-                                      message: [dictResponse objectForKey:@"msg"]
-                                      delegate: self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                [alert show];
-            }
-            [self dismissViewControllerAnimated:YES completion:^{
-                [self.parent refreshView];
-            }];
-            break;
-        }
-        case REQUESTSIGNIN: {
-            // if BAD SIGN IN
-            if (![self checkValidityOfSignIn:(NSString *)responseString]){
-                // THEN, disply red text
-                [UIView animateWithDuration:0.5 animations:^{
-                    signInErrorsLabel.text = @"Invalid email or password.";
-                    signInErrorsLabel.alpha = 1.0f;
-                }];
-            }
-            else {
-                BOOL success = [dictResponse objectForKey:kJsonResponseKeyLoginSuccess];
-                if (success) {
-                    NSString *auth = [dictResponse objectForKey:kJsonResponseKeyLoginAuthToken];
-                    NSString *email = [dictResponse objectForKey:kJsonResponseKeyLoginEmail];
-                    
-                    self.currentUser.authToken = auth;
-                    self.currentUser.email = email;
-                    
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        [self.parent refreshView];
-                    }];
-                }
-                else {
-                    UIAlertView *alert = [[UIAlertView alloc]
-                                          initWithTitle: @"Login Error"
-                                          message: @"There was an error with your login. Please try again."
-                                          delegate: self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-                    [alert show];
-                }
-            }
-            break;
-        }
-        default:
-            break;
-    }
-    
+    [self.view endEditing:YES];
 }
+#pragma mark request invite
+-(void)successfulInviteWithMessage:(NSString *)message {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Requesting Invite Successful"
+                                                          andMessage:message];
 
-//-(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
-//{
-//    NSLog(@"CANAUTH AGAINST PROTECTION SPACE");
-//    //return YES to say that we have the necessary credentials to access the requested resource
-//    return YES;
-//}
-//
-//-(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-//{
-//    //some code here, continue reading to find out what comes here
-//    
-//    NSLog(@"DIDRECEIVE AUTH CHALLENGE");
-//    NSURLCredential *credential = [NSURLCredential credentialWithUser:self.emailAddressSignInTextField.text
-//                                                             password:self.passwordTextField.text
-//                                                          persistence:NSURLCredentialPersistenceForSession];
-//    
-//	[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
-//
-//}
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.parent refreshView];
+    }];
+}
+-(void)errorOccuredDuringInvite:(NSError *)error {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Error While Requesting Invite"
+                                                          andMessage:error.localizedDescription];
+
+}
+-(void)unsuccessfulInvite {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Requesting Invite Unsuccessful"
+                                                          andMessage:@"There was an error while requesting an invite for your account. Please try again."];
+}
 
 
 #pragma mark memory stuffs

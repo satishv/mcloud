@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
-#define kJsonResponseKeyLoginSuccess    @"success"
-#define kJsonResponseKeyLoginAuthToken  @"auth_token"
-#define kJsonResponseKeyLoginEmail      @"email"
+#define kJsonResponseKeyLoginSuccess        @"success"
+#define kJsonResponseKeyLoginAuthToken      @"auth_token"
+#define kJsonResponseKeyLoginEmail          @"email"
+#define kJsonResponseKeyLoginFailMessage    @"message"
+
+#define kJsonResponseKeyRequestInviteStatus     @"status"
+#define kJsonResponseValueRequestInviteSuccess  @"success"
+#define kJsonResponseKeyRequestInviteMessage    @"msg"
+

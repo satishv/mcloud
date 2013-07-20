@@ -216,30 +216,36 @@
     
     NSLog(@"AUTHHHHHHHHH: %@", self.currentUser.authToken);
     // set up parameters
-    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
-    [dataDict setValue:@"click" forKey:@"type"];
-    [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
-    [dataDict setValue:@"like" forKey:@"value"];
-    [dataDict setValue:self.currentUser.authToken forKey:@"auth_token"];
+//    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
+//    [dataDict setValue:@"click" forKey:@"type"];
+//    [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
+//    [dataDict setValue:@"like" forKey:@"value"];
+//    [dataDict setValue:self.currentUser.authToken forKey:@"auth_token"];
     
     NSString *url = @"https://collectivly.com/stories/recloud";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
     
-    NSString *data = [NSString stringWithFormat:@""];
-    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *data = [NSString stringWithFormat:@""];
+//    NSData *postData = ([NSJSONSerialization isValidJSONObject:dataDict]) ? [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil] : [data dataUsingEncoding:NSUTF8StringEncoding];
 //    NSLog(@"%@", postData);
     
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+//    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSString *params = [NSString stringWithFormat:@"type=click&story_id=%d&value=like&auth_token=%@", self.story.idNumber, self.currentUser.authToken];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
     
     // HTTP request, setting stuff
-    [request setHTTPMethod:@"POST"];
+//    [request setHTTPMethod:@"POST"];
 //    [request setValue:[NSString stringWithFormat:@"%@", self.currentUser.authToken] forHTTPHeaderField:@"Authorization"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
 //    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 //    [request setValue:self.currentUser.authToken forHTTPHeaderField:@"X-CSRF-Token"];
-    [request setHTTPBody:postData];
+//    [request setHTTPBody:postData];
     
 //    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
 //    [request setAllHTTPHeaderFields:dict];

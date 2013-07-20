@@ -12,16 +12,14 @@
 #import "collectivlySingleton.h"
 #import "collectivlyStory.h"
 #import "collectivlyAppDelegate.h"
+#import "collectivlyUtilities.h"
+
+#import "SignUserInCommand.h"
+#import "RequestInviteCommand.h"
 
 
-@interface collectivlyViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate> {
+@interface collectivlyViewController : UIViewController <NSURLConnectionDataDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIScrollViewDelegate, SignUserInDelegate, RequestInviteDelegate> {
     NSMutableData *_data;
-    
-    NSString *auth_token;
-    
-    // gets updated every time a request is made
-    // checked in connectionDidFinishLoading
-    int requestNumber;
     
     collectivlyCollectionsViewController *parent;
 }
@@ -47,8 +45,6 @@
 @property (retain, nonatomic) IBOutlet UILabel *inviteErrorsLabel;
 @property (retain, nonatomic) IBOutlet UILabel *signInErrorsLabel;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *closeButtonTouched;
-
-//@property (retain, nonatomic) CloudableStoriesViewController *storiesViewController;
 
 
 

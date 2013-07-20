@@ -29,6 +29,7 @@
     return self;
 }
 
+#pragma mark - VIEW STUFF
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -66,9 +67,9 @@
 }
 
 //-(void)imageDoneLoadingFromAsyncImageView:(NSNotification*)notif {
-//    NSLog(@"NOTIF!!!!!: %@ %@ %@", notif.object, notif.userInfo, notif);
+//    NSLog(@"NOTIF: %@ %@ %@", notif.object, notif.userInfo, notif);
 //    AsyncImageView *async = notif.object;
-//    collectivlySimplifiedStory *cStory = async.cStory;
+//    collectivlyStory *cStory = async.cStory;
 //    cStory.articleImage = async.image;
 //}
 
@@ -125,8 +126,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - SIDEBAR
 #pragma mark SidebarViewControllerDelegate
-
 - (void)sidebarViewController:(collectivlySidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
     
     [sidebarViewController.table deselectRowAtIndexPath:indexPath animated:YES];
@@ -177,7 +178,7 @@
 }
 
 
-#pragma mark HTTP requesting
+#pragma mark - COMMAND execution
 -(void)refreshStoriesTable {
     NSLog(@"[collectivlyStoriesViewController] REFRESHING STORIES");
     
@@ -191,22 +192,46 @@
 -(void)fetchStoriesForPage:(NSInteger)page {
     NSLog(@"[collectivlyStoriesViewController] STORIES for page %d", page);
     
-    // spinnaz
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-//    NSLog(@"id: %d", collection.idNumber);
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json?page=%d", self.currentUser.currentCollection.idNumber, page]];
-    
-    // HTTP request, setting stuff
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+    GetStoriesForCollectionCommand *cmd = [[GetStoriesForCollectionCommand alloc] initWithCollection:self.currentUser.currentCollection andPageNumber:page];
+    cmd.delegate = self;
+    [cmd fetchStoriesForCollectionFromPage];
 }
 
-#pragma mark - Table view data source
+#pragma mark - COMMAND DELEGATES
+#pragma mark Get Stories For Collection
+-(void)reactToGetStoriesResponse:(NSArray *)newStories {
+    [self.refreshControl endRefreshing];
+    
+    if (self.activityIndicatorForLoadingMoreStories != nil){
+        [self.activityIndicatorForLoadingMoreStories stopAnimating];
+    }
+    
+    if (newStories.count < 5)
+        hasReachedTheEnd = YES;
+    
+    if (self.currentUser.currentCollection != nil) {
+        // update singleton dictionary of stories for a collection
+        if (pageOfStories == INITIALSTORYPAGENUMBER){
+            self.stories = [NSMutableArray arrayWithArray:newStories];
+        }
+        else {
+            [self.stories addObjectsFromArray:newStories];
+        }
+        [self.currentUser setStories:self.stories];
+        [self.currentUser.storiesForCollectionWithId setObject:self.stories forKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber]];
+    }
+    
+    [self.tableView reloadData];
+    
+    self.tableView.userInteractionEnabled = YES;
+}
+-(void)reactToGetStoriesError:(NSError *)error {
+    [self.refreshControl endRefreshing];
+}
+
+
+#pragma mark - TABLE VIEW STUFF
+#pragma mark Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 //#warning Potentially incomplete method implementation.
@@ -269,7 +294,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    collectivlySimplifiedStory *story = [self.stories objectAtIndex:indexPath.row];
+    collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     AsyncImageView *storyImageView = (AsyncImageView *)[cell viewWithTag:100];
     [storyImageView setImage:[UIImage imageNamed:@"white_square.png"]];
@@ -305,13 +330,13 @@
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
 //    collectivlyExpandedContentViewController *detailViewController = [[collectivlyExpandedContentViewController alloc] initWithNibName:@"collectivlyExpandedContentViewController" bundle:nil];
-    collectivlySimplifiedStory *selected = [self.stories objectAtIndex:indexPath.row];
+    collectivlyStory *selected = [self.stories objectAtIndex:indexPath.row];
     [self.currentUser setCurrentStory:selected];
     NSLog(@"selected story title: %@", selected.title);
     // ...
@@ -320,98 +345,7 @@
     [self performSegueWithIdentifier:@"pushexpandedstory" sender:self];
 }
 
-
-#pragma mark connection protocol functions
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"[collectivlyStoriesViewController] conection did receive response!");
-    _data = [[NSMutableData alloc] init];
-    
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"[collectivlyStoriesViewController] conection did receive data!");
-    [_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // Please do something sensible here, like log the error.
-    NSLog(@"[collectivlyStoriesViewController] connection failed with error: %@", error.description);
-    
-    // stop spinner
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    [self.refreshControl endRefreshing];
-    
-    // alert view for network error
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Network Error"
-                          message: @"There was a network error :\\"
-                          delegate: self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Retry", nil];
-    [alert show];
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 1:
-            [self refreshStoriesTable];
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"[collectivlyStoriesViewController] connectiondidfinishloading!");
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [self.refreshControl endRefreshing];
-    
-    NSMutableArray *newStories = [[NSMutableArray alloc] init];
-    
-    if (self.activityIndicatorForLoadingMoreStories != nil){
-        [self.activityIndicatorForLoadingMoreStories stopAnimating];
-    }
-    
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
-    newStories = [self createStoriesFromResponse:array];
-    
-    if (newStories.count < 5)
-        hasReachedTheEnd = YES;
-    
-    if (self.currentUser.currentCollection != nil) {
-        // update singleton dictionary of stories for a collection
-        if (pageOfStories == INITIALSTORYPAGENUMBER){
-            self.stories = newStories;
-        }
-        else {
-            [self.stories addObjectsFromArray:newStories];
-        }
-        [self.currentUser setStories:self.stories];
-        [self.currentUser.storiesForCollectionWithId setObject:self.stories forKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollection.idNumber]];
-    }
-    
-    [self.tableView reloadData];
-    
-    self.tableView.userInteractionEnabled = YES;
-}
-
 #pragma helpers
--(NSMutableArray *)createStoriesFromResponse:(NSArray*)array {
-    NSLog(@"[collectivlyStoriesViewController] creating stories.");
-    NSMutableArray *lolz = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i++){
-        NSLog(@"STORYYY %d out of %d", i, array.count);
-        collectivlySimplifiedStory *story = [[collectivlySimplifiedStory alloc] initWithDictionaryWithoutFetchingImages:[array objectAtIndex:i]];
-//        NSLog(@"STORYYY %d: %@", i, [array objectAtIndex:i]);
-        NSLog(@"STORYYY %d out of %d DONE", i, array.count);
-        [lolz addObject:story];
-        
-    }
-    NSLog(@"[collectivlyStoriesViewController] DONE creating stories.");
-    return lolz;
-}
 
 -(NSString *)convertToGMTTime:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -509,9 +443,7 @@
     }
 }
 
-
-
-#pragma cleanup
+#pragma mark - cleanup
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

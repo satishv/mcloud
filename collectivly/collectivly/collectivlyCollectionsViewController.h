@@ -11,18 +11,21 @@
 #import "collectivlySingleton.h"
 #import "collectivlyCollection.h"
 #import "collectivlyStory.h"
-#import "collectivlySimplifiedStory.h"
+#import "collectivlyStory.h"
 #import "JTRevealSidebarV2Delegate.h"
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "collectivlySidebarViewController.h"
 #import "MBProgressHUD.h"
 
-@interface collectivlyCollectionsViewController : UIViewController <NSURLConnectionDataDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, MBProgressHUDDelegate> {
-    int requestNumber;
+#import "GetCollectionsCommand.h"
+#import "GetStoriesForCollectionCommand.h"
+
+@interface collectivlyCollectionsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, MBProgressHUDDelegate, GetCollectionsDelegate, GetStoriesDelegate> {
+
     NSMutableData *_data;
     
-    UIImageView *ithCollectionBG;
+    NSInteger selectedCollection;
     
 }
 
