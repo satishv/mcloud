@@ -96,6 +96,8 @@
 		4C8D7AC417925D4900B8D8A6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7AC117925D4900B8D8A6 /* MBProgressHUD.m */; };
 		4C8D7AC817932CBD00B8D8A6 /* GetCollectionsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D7AC717932CBD00B8D8A6 /* GetCollectionsCommand.m */; };
 		4CA998E11746A07000C252B3 /* collectivlyExpandedContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */; };
+		4CBF7A5F179C4E000059FC7E /* VotingCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBF7A5E179C4E000059FC7E /* VotingCommand.m */; };
+		4CBF7A62179C59E30059FC7E /* RecollectCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBF7A61179C59E30059FC7E /* RecollectCommand.m */; };
 		4CF8D9B31710BEAD00E4FD21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */; };
 		4CF8D9B51710BEAD00E4FD21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B41710BEAD00E4FD21 /* Foundation.framework */; };
 		4CF8D9B71710BEAD00E4FD21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF8D9B61710BEAD00E4FD21 /* CoreGraphics.framework */; };
@@ -215,6 +217,10 @@
 		4C8D7AC717932CBD00B8D8A6 /* GetCollectionsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCollectionsCommand.m; sourceTree = "<group>"; };
 		4CA998DE1746A07000C252B3 /* collectivlyExpandedContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyExpandedContentViewController.h; sourceTree = "<group>"; };
 		4CA998DF1746A07000C252B3 /* collectivlyExpandedContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyExpandedContentViewController.m; sourceTree = "<group>"; };
+		4CBF7A5D179C4E000059FC7E /* VotingCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VotingCommand.h; sourceTree = "<group>"; };
+		4CBF7A5E179C4E000059FC7E /* VotingCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VotingCommand.m; sourceTree = "<group>"; };
+		4CBF7A60179C59E30059FC7E /* RecollectCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecollectCommand.h; sourceTree = "<group>"; };
+		4CBF7A61179C59E30059FC7E /* RecollectCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecollectCommand.m; sourceTree = "<group>"; };
 		4CF8D9AF1710BEAD00E4FD21 /* collectivly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectivly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CF8D9B41710BEAD00E4FD21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -405,6 +411,8 @@
 		4C8D7AC517932B0300B8D8A6 /* DataAccess */ = {
 			isa = PBXGroup;
 			children = (
+				4CBF7A5D179C4E000059FC7E /* VotingCommand.h */,
+				4CBF7A5E179C4E000059FC7E /* VotingCommand.m */,
 				4C8D7AC617932CBD00B8D8A6 /* GetCollectionsCommand.h */,
 				4C8D7AC717932CBD00B8D8A6 /* GetCollectionsCommand.m */,
 				4C1BF794179AE5FC00AAAEDF /* GetStoriesForCollectionCommand.h */,
@@ -413,6 +421,8 @@
 				4C1BF798179AFCE100AAAEDF /* SignUserInCommand.m */,
 				4C1BF79A179B049400AAAEDF /* RequestInviteCommand.h */,
 				4C1BF79B179B049400AAAEDF /* RequestInviteCommand.m */,
+				4CBF7A60179C59E30059FC7E /* RecollectCommand.h */,
+				4CBF7A61179C59E30059FC7E /* RecollectCommand.m */,
 			);
 			path = DataAccess;
 			sourceTree = "<group>";
@@ -644,6 +654,8 @@
 				4C1BF799179AFCE100AAAEDF /* SignUserInCommand.m in Sources */,
 				4C1BF79C179B049400AAAEDF /* RequestInviteCommand.m in Sources */,
 				4C1BF79F179B0C1100AAAEDF /* collectivlyUtilities.m in Sources */,
+				4CBF7A5F179C4E000059FC7E /* VotingCommand.m in Sources */,
+				4CBF7A62179C59E30059FC7E /* RecollectCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

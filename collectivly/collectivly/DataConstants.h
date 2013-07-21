@@ -15,3 +15,7 @@
 #define kJsonResponseValueRequestInviteSuccess  @"success"
 #define kJsonResponseKeyRequestInviteMessage    @"msg"
 
+#define kParametersTypeClick        @"click"
+#define kParametersTypeUnClick      @"un_click"
+#define kParametersUpvoteValue      @"like"
+#define kParametersDownvoteValue    @"un_like"

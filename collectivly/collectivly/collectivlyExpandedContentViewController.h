@@ -15,10 +15,15 @@
 #import "collectivlySidebarViewController.h"
 #import "collectivlyWebViewController.h"
 #import "AsyncImageView.h"
+#import "collectivlyUtilities.h"
 
-@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate> {
+#import "VotingCommand.h"
+#import "RecollectCommand.h"
+
+@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate, VotingRequestDelegate, RecollectCommandDelegate> {
     NSMutableData *_data;
-    int requestNumber;
+    
+    BOOL needToUpvoteAfterDownvoteUnclick, needToDownvoteAfterUpvoteUnclick;
 }
 
 @property (retain) collectivlySingleton *currentUser;
@@ -33,8 +38,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *downVoteButton;
 
 @property (nonatomic, readwrite) BOOL recollected;
-@property (nonatomic, readwrite) BOOL upVoted;
-@property (nonatomic, readwrite) BOOL downVoted;
 
 @property (weak, nonatomic) IBOutlet UIButton *articleTitleButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeAgoLabel;
