@@ -56,22 +56,20 @@
     self.currentUser = [collectivlySingleton sharedDataModel];
         
     self.stories = [NSMutableArray arrayWithArray:self.currentUser.stories];
-//    self.stories = [self.currentUser.storiesForCollectionWithId objectForKey:[NSString stringWithFormat:@"%d", self.currentUser.currentCollectionId]];
     NSLog(@"stories for id %d: %@", self.currentUser.currentCollection.idNumber, self.stories);
     
     // SET UP NAV BAR
     [self setUpNavBar];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageDoneLoadingFromAsyncImageView:) name:AsyncImageLoadDidFinish object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageDoneLoadingFromAsyncImageView:) name:AsyncImageLoadDidFinish object:nil];
 
 }
 
-//-(void)imageDoneLoadingFromAsyncImageView:(NSNotification*)notif {
-//    NSLog(@"NOTIF: %@ %@ %@", notif.object, notif.userInfo, notif);
-//    AsyncImageView *async = notif.object;
-//    collectivlyStory *cStory = async.cStory;
-//    cStory.articleImage = async.image;
-//}
+-(void)imageDoneLoadingFromAsyncImageView:(NSNotification*)notif {
+    AsyncImageView *async = notif.object;
+    collectivlyStory *cStory = async.cStory;
+    cStory.articleImage = [notif.userInfo objectForKey:AsyncImageImageKey];
+} 
 
 #pragma mark nav bar customization
 -(void)setUpNavBar {
@@ -297,8 +295,14 @@
     collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     AsyncImageView *storyImageView = (AsyncImageView *)[cell viewWithTag:100];
-    [storyImageView setImage:[UIImage imageNamed:@"white_square.png"]];
-    [storyImageView setImageURL:[NSURL URLWithString:story.articleImageString]];
+    if (story.articleImage != nil) {
+        [storyImageView setLoadedImage:story.articleImage];
+    }
+    else {
+        storyImageView.cStory = story;
+        [storyImageView setImage:[UIImage imageNamed:@"white_square.png"]];
+        [storyImageView setImageURL:[NSURL URLWithString:story.articleImageString]];        
+    }
     
     UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
     storyNameLabel.text = story.title;

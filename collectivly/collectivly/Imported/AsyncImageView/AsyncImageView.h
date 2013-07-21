@@ -121,5 +121,6 @@ extern NSString *const AsyncImageErrorKey;
 @property (nonatomic, assign) BOOL crossfadeImages;
 @property (nonatomic, assign) NSTimeInterval crossfadeDuration;
 @property (nonatomic, retain) collectivlyStory *cStory;
+@property (nonatomic, strong) UIImage *loadedImage;
 
 @end

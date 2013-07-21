@@ -53,10 +53,7 @@
     UIFont *articleTitleFont = [UIFont fontWithName:@"ProximaNova-Bold" size:26];
     [self.articleTitleButton setTitle:self.story.title forState:UIControlStateNormal];
     self.articleTitleButton.titleLabel.font = articleTitleFont;
-    
-    // check if user logged in or not for BUTTONS
-    [self enableButtonsIfUserLoggedIn];
-    
+        
     // set up the nav bar, obvi
     [self setUpNavBar];
     
@@ -215,6 +212,11 @@
 #pragma mark - IBActions / button touch recognizers
 
 - (IBAction)centerRecollectButtonTouched:(id)sender {
+    if (!self.currentUser.isLoggedIn){
+        [self popupAlertIfUserNotLoggedIn];
+        return;
+    }
+    
     NSLog(@"!!!!!!!!!! RECOLLECT !!!!!!!!!!");
     if (!recollectButton.isSelected){
         self.recollectButton.userInteractionEnabled = NO;
@@ -226,8 +228,12 @@
 }
 
 - (IBAction)downVoteButtonTouched:(id)sender {
-    NSLog(@"!!!!!!!!!! DOWNVOTE !!!!!!!!!!");
+    if (!self.currentUser.isLoggedIn){
+        [self popupAlertIfUserNotLoggedIn];
+        return;
+    }
     
+    NSLog(@"!!!!!!!!!! DOWNVOTE !!!!!!!!!!");
     self.downVoteButton.userInteractionEnabled = NO;
     
     if (!downVoteButton.isSelected){
@@ -247,6 +253,11 @@
 }
 
 - (IBAction)upVoteButtonTouched:(id)sender {
+    if (!self.currentUser.isLoggedIn){
+        [self popupAlertIfUserNotLoggedIn];
+        return;
+    }
+    
     NSLog(@"!!!!!!!!!! UPVOTE !!!!!!!!!!");
     
     self.upVoteButton.userInteractionEnabled = NO;
@@ -350,17 +361,22 @@
     }
 }
 
--(void)enableButtonsIfUserLoggedIn {
-    if (self.currentUser.isLoggedIn){
-        self.recollectButton.alpha = 1.0f;
-        self.recollectButton.enabled = YES;
-        
-        self.upVoteButton.alpha = 1.0f;
-        self.upVoteButton.enabled = YES;
-        
-        self.downVoteButton.alpha = 1.0f;
-        self.downVoteButton.enabled = YES;
-    }
+//-(void)enableButtonsIfUserLoggedIn {
+//    if (self.currentUser.isLoggedIn){
+//        self.recollectButton.alpha = 1.0f;
+//        self.recollectButton.enabled = YES;
+//        
+//        self.upVoteButton.alpha = 1.0f;
+//        self.upVoteButton.enabled = YES;
+//        
+//        self.downVoteButton.alpha = 1.0f;
+//        self.downVoteButton.enabled = YES;
+//    }
+//}
+
+-(void)popupAlertIfUserNotLoggedIn {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Not Logged In"
+                                                              andMessage:@"You must be logged in for that!"];
 }
 
 

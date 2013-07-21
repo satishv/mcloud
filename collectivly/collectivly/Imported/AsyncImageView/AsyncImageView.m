@@ -31,6 +31,20 @@
 //  3. This notice may not be removed or altered from any source distribution.
 //
 
+
+
+
+/*
+ 
+ 
+ THIS SOFTWARE WITH THE ABOVE LICENSE HAS BEEN VERY SLIGHTLY MODIFIED BY
+    NATHAN FRAENKEL
+ FOR COLLECTIVLY
+ 
+ THAT IS ALL. thank you for reading. stay thirsty my friends.
+ 
+ */
+
 #import "AsyncImageView.h"
 #import <objc/message.h>
 
@@ -634,7 +648,7 @@ NSString *const AsyncImageErrorKey = @"error";
 @synthesize crossfadeImages = _crossfadeImages;
 @synthesize crossfadeDuration = _crossfadeDuration;
 @synthesize activityView = _activityView;
-@synthesize cStory;
+@synthesize cStory, loadedImage = _loadedImage;
 
 - (void)setUp
 {
@@ -684,6 +698,10 @@ NSString *const AsyncImageErrorKey = @"error";
 	_activityIndicatorStyle = style;
 	[_activityView removeFromSuperview];
 	self.activityView = nil;
+}
+
+-(void)setLoadedImage:(UIImage *)loadedImage {
+    super.image = loadedImage;
 }
 
 - (void)setImage:(UIImage *)image
