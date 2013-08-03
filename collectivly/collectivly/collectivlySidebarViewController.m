@@ -19,7 +19,7 @@
 
 @implementation collectivlySidebarViewController
 
-@synthesize table, sidebarDelegate, nameLabel;
+@synthesize table, sidebarDelegate, nameLabel, currentUser, profileImageView, loginSignUpButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,11 +32,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+        
     if ([self.sidebarDelegate respondsToSelector:@selector(lastSelectedIndexPathForSidebarViewController:)]) {
         NSIndexPath *indexPath = [self.sidebarDelegate lastSelectedIndexPathForSidebarViewController:self];
         [self.table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
+    
+
 }
 
 - (void)viewDidLoad
@@ -51,8 +53,24 @@
     
     self.nameLabel.font = [UIFont fontWithName:@"ProximaNova-Bold" size:20];
     
-    // TODO: get actual name
-//    self.nameLabel.text = @"????";
+    self.currentUser = [collectivlySingleton sharedDataModel];
+    
+}
+
+- (void) updateUserNameDisplay {
+    BOOL userIsLoggedIn = self.currentUser.isLoggedIn;
+    
+    self.nameLabel.hidden = !userIsLoggedIn;
+    self.profileImageView.hidden = !userIsLoggedIn;
+    self.loginSignUpButton.hidden = userIsLoggedIn;
+    
+    self.nameLabel.text = (userIsLoggedIn) ? [NSString stringWithFormat:@"%@ %@", self.currentUser.firstName, self.currentUser.lastName] : @"No on logged in yet.";
+    self.profileImageView.image = (userIsLoggedIn) ? self.currentUser.profileImage : nil;
+    
+}
+
+- (IBAction)loginSignUpTouched:(id)sender {
+    [self.sidebarDelegate didSelectLoginSignUpButton];
 }
 
 #pragma mark TableViewDataSourceDelegate methods
@@ -152,10 +170,6 @@
         }
     }
     
-    
-//    UIImageView *cellBG = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"subsubmenu_darkergrey.png"]];
-//    cellBG.frame = cell.frame;
-//    [cell insertSubview:cellBG atIndex:0];
     cell.textLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:20];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
@@ -193,15 +207,15 @@
 
 #pragma mark footer methods
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIImageView *footer = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_logo.png"]];
-    footer.frame = CGRectMake(0, 0, 270, FOOTERHEIGHT);
+    UIImageView *footer = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_logo_actual_size.png"]];
+//    footer.frame = CGRectMake(0, 0, 270, FOOTERHEIGHT);
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, FOOTERHEIGHT)];
     [footerView addSubview:footer];
-    return (section == 1) ? footerView : [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+    return (section == 1) ? footerView : nil;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return (section == 1) ? 90 : 0;
+    return (section == 1) ? 56 : 0;
 }
 
 #pragma mark TableViewDelegate methods
@@ -246,5 +260,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

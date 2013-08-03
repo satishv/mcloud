@@ -10,7 +10,7 @@
 
 @implementation collectivlySingleton
 
-@synthesize authToken, stories, collections, storiesForCollectionWithId, currentCollection, currentStory, email;
+@synthesize authToken, stories, collections, storiesForCollectionWithId, currentCollection, currentStory, email, firstName, lastName, profileImage, profileImageUrl;
 
 static collectivlySingleton *sharedDataModel = nil;
 

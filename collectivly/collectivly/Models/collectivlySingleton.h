@@ -16,7 +16,8 @@
 @property (nonatomic, strong) NSMutableDictionary *storiesForCollectionWithId;
 @property (nonatomic, strong) NSArray *stories, *collections;
 @property (nonatomic, strong) collectivlyStory *currentStory;
-@property (nonatomic, strong) NSString *authToken, *email;
+@property (nonatomic, strong) NSString *authToken, *email, *firstName, *lastName, *profileImageUrl;
+@property (nonatomic, strong) UIImage *profileImage;
 
 + (collectivlySingleton *) sharedDataModel;
 

@@ -166,10 +166,23 @@
 
 #pragma mark - COMMAND DELEGATES
 #pragma mark sign user in
--(void)successfulSignInWithAuth:(NSString *)token andEmail:(NSString *)e {
+-(void)successfulSignInWithSuccessDict:(NSDictionary *)dict {
     
-    self.currentUser.authToken = token;
+    NSString *t = [dict objectForKey:kJsonResponseKeyLoginAuthToken];
+    NSString *e = [dict objectForKey:kJsonResponseKeyLoginEmail];
+    NSString *f = [dict objectForKey:kJsonResponseKeyLoginFirstName];
+    NSString *l = [dict objectForKey:kJsonResponseKeyLoginLastName];
+    NSString *i = [dict objectForKey:kJsonResponseKeyLoginProfileImage];
+    
+    BOOL imageIsNull = i == (id)[NSNull null];
+    
+    self.currentUser.authToken = t;
     self.currentUser.email = e;
+    self.currentUser.firstName = f;
+    self.currentUser.lastName = l;
+    NSLog(@"i: %@", i);
+    self.currentUser.profileImageUrl = (imageIsNull) ? nil : i;
+    self.currentUser.profileImage = (imageIsNull) ? nil : [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:i]]];
     
     [self dismissViewControllerAnimated:YES completion:^{
         [self.parent refreshView];

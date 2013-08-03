@@ -103,6 +103,7 @@
 
 - (IBAction)rightSideBarButtonTouched:(id)sender {
     NSLog(@"[collectivlyStoriesViewController] OPTIONS MENU touched");
+    [self.rightSideBarViewController updateUserNameDisplay];
     [self.navigationController toggleRevealState:JTRevealedStateRight];
 }
 
@@ -113,6 +114,13 @@
 
 #pragma mark - SIDEBAR
 #pragma mark SidebarViewControllerDelegate
+- (void)didSelectLoginSignUpButton {
+    [self.navigationController toggleRevealState:JTRevealedStateRight];
+    UIViewController *loginNav = [self.storyboard instantiateViewControllerWithIdentifier:@"loginSignUpNavController"];
+    [self.navigationController presentViewController:loginNav animated:YES completion:^{
+        //
+    }];
+}
 
 - (void)sidebarViewController:(collectivlySidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
     

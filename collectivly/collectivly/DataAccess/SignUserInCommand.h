@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol SignUserInDelegate <NSObject>
--(void)successfulSignInWithAuth:(NSString*)token andEmail:(NSString*)e;
+-(void)successfulSignInWithSuccessDict:(NSDictionary*)dict;
 -(void)errorOccuredDuringSignIn:(NSError*)error;
 -(void)unsuccessfulSignInWithMessage:(NSString*)msg;
 @end

@@ -68,15 +68,13 @@
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
     
+    NSLog(@"[SignUserInCommand] dictresponse: %@", dictResponse);
+    
     NSNumber * isSuccessNumber = (NSNumber *)[dictResponse objectForKey:kJsonResponseKeyLoginSuccess];
     BOOL successful = isSuccessNumber && [isSuccessNumber boolValue] == YES;
     
     if(successful) {
-        NSString *auth = [dictResponse objectForKey:kJsonResponseKeyLoginAuthToken];
-        NSString *e = [dictResponse objectForKey:kJsonResponseKeyLoginEmail];
-        
-        
-        [self.delegate successfulSignInWithAuth:auth andEmail:e];
+        [self.delegate successfulSignInWithSuccessDict:dictResponse];
     }
     else {
         NSString *msg = [dictResponse objectForKey:kJsonResponseKeyLoginFailMessage];

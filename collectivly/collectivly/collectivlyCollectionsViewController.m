@@ -71,9 +71,9 @@
     NSInteger logoOffset = 28;
     CGRect logoframe = CGRectMake(logoOffset*4, logoOffset, logo.size.width - logoOffset, logo.size.height - logoOffset);
     UIButton *logoButton = [[UIButton alloc] initWithFrame:logoframe];
-//    logoButton.userInteractionEnabled = NO;
+    logoButton.userInteractionEnabled = NO;
     [logoButton setBackgroundImage:logo forState:UIControlStateNormal];
-    [logoButton addTarget:self action:@selector(leftBarButtonItemTouched:) forControlEvents:UIControlEventTouchUpInside];
+//    [logoButton addTarget:self action:@selector(leftBarButtonItemTouched:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setShowsTouchWhenHighlighted:YES];
     UIBarButtonItem *backToCollections =[[UIBarButtonItem alloc] initWithCustomView:logoButton];
     self.navigationItem.leftBarButtonItem = backToCollections;
@@ -104,31 +104,28 @@
     self.navigationItem.revealSidebarDelegate = self;
 }
 
--(IBAction)leftBarButtonItemTouched:(id)sender {
-    [self performSegueWithIdentifier:@"loginsignup" sender:self];
-}
-
 - (IBAction)rightSideBarButtonTouched:(id)sender {
     NSLog(@"[collectivlyCollectionsViewController] right side bar touched");
+    [self.rightSideBarViewController updateUserNameDisplay];
     [self.navigationController toggleRevealState:JTRevealedStateRight];
 }
 
 #pragma mark - SIDEBAR
 #pragma mark SidebarViewControllerDelegate
 
+- (void)didSelectLoginSignUpButton {
+    [self.navigationController toggleRevealState:JTRevealedStateRight];
+    UIViewController *loginNav = [self.storyboard instantiateViewControllerWithIdentifier:@"loginSignUpNavController"];
+    [self.navigationController presentViewController:loginNav animated:YES completion:^{
+        //
+    }];
+}
+
 - (void)sidebarViewController:(collectivlySidebarViewController *)sidebarViewController didSelectObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath {
     
     [sidebarViewController.table deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self.navigationController setRevealedState:JTRevealedStateNo];
-
-    NSLog(@"[collectivlyCollectionsViewController] SIDEBARRRRRR DIDSELECTOBJECT: %@", object.description);
-    if ([object isKindOfClass:[NSString class]]){
-        NSString *string = (NSString *)object;
-        if ([string isEqualToString:@"Login"]){
-            [self performSegueWithIdentifier:@"loginsignup" sender:self];
-        }
-    }
+    [self.navigationController toggleRevealState:JTRevealedStateRight];
 
 }
 
@@ -271,6 +268,8 @@
     if (!self.refresherController.enabled)
         self.refresherController.enabled = YES;
     [self.refresherController endRefreshing];
+    
+    // TODO: add UILabel for unsuccessful first request
 }
 
 #pragma mark Get Stories For Collection

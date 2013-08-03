@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="2" customClass="collectivlyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNV-9M-pSm">
@@ -41,7 +41,7 @@
                                                     <constraint firstAttribute="width" constant="251" id="T0l-Oi-ver"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="2" id="SOc-bu-PL7"/>
                                                 </connections>
@@ -116,7 +116,7 @@
                                                     <constraint firstAttribute="width" constant="251" id="Oek-RQ-dpW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="2" id="aby-mX-qcI"/>
                                                 </connections>
@@ -209,16 +209,9 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="subsubmenu_darkergrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="KAH-wz-onD">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="107" id="NDA-3I-XMg"/>
-                                </constraints>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="subsubmenu_darkergrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="KAH-wz-onD"/>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="f2d-A3-dob">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="387" id="7P1-vz-6tt"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="rightSideCollections" id="YEs-2q-XFr">
                                         <rect key="frame" x="0.0" y="22" width="320" height="40"/>
@@ -262,56 +255,77 @@
                                     <outlet property="delegate" destination="8Rf-pU-UzT" id="W6e-CI-IZp"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profileback.png" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-5H-wIF">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="ybB-vE-a1c"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profileimageexample.png" translatesAutoresizingMaskIntoConstraints="NO" id="sP6-G1-N5g">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profileback.png" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-5H-wIF"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="profileimageexample.png" translatesAutoresizingMaskIntoConstraints="NO" id="sP6-G1-N5g">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="a3M-v0-fs5"/>
                                     <constraint firstAttribute="height" constant="70" id="w13-yb-J9g"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JUN LEE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVM-WJ-cFH">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JUN LEE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVM-WJ-cFH">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="155" id="YQQ-OH-wmu"/>
+                                    <constraint firstAttribute="height" constant="21" id="eQ9-AR-I4S"/>
+                                    <constraint firstAttribute="width" constant="172" id="peM-kU-Efb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjo-U7-1ad">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="212" id="PyS-z8-33P"/>
+                                    <constraint firstAttribute="height" constant="44" id="vmq-sL-1JF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                <color key="tintColor" red="0.59999999999999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="Log In / Sign Up">
+                                    <color key="titleColor" red="0.0" green="0.028664994629999999" blue="0.38457455839999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginSignUpTouched:" destination="8Rf-pU-UzT" eventType="touchUpInside" id="psq-tk-I4l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="19" type="user" id="45V-yK-czv"/>
                             <constraint firstItem="KAH-wz-onD" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="5cb-Aa-4Df"/>
-                            <constraint firstItem="f2d-A3-dob" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="107" id="9sU-6A-OFT"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="trailing" secondItem="QVM-WJ-cFH" secondAttribute="trailing" type="default" id="95t-xU-yeB"/>
                             <constraint firstItem="KAH-wz-onD" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" type="default" id="A6y-NA-Tis"/>
                             <constraint firstItem="f2d-A3-dob" firstAttribute="leading" secondItem="eV6-yG-QGk" secondAttribute="leading" type="default" id="CjY-nB-F8q"/>
-                            <constraint firstItem="QVM-WJ-cFH" firstAttribute="centerY" secondItem="KAH-wz-onD" secondAttribute="centerY" type="default" id="OCn-R5-XvP"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="centerX" secondItem="rjo-U7-1ad" secondAttribute="centerX" type="default" id="EfH-pf-cZW"/>
+                            <constraint firstItem="rjo-U7-1ad" firstAttribute="centerX" secondItem="KAH-wz-onD" secondAttribute="centerX" type="default" id="Gfe-pC-pki"/>
                             <constraint firstItem="f2d-A3-dob" firstAttribute="trailing" secondItem="eV6-yG-QGk" secondAttribute="trailing" type="default" id="OZH-6G-9Y5"/>
-                            <constraint firstItem="QPj-5H-wIF" firstAttribute="top" secondItem="sP6-G1-N5g" secondAttribute="top" type="default" id="UAT-QC-L9s"/>
+                            <constraint firstItem="f2d-A3-dob" firstAttribute="bottom" secondItem="eV6-yG-QGk" secondAttribute="bottom" type="user" id="S1M-3L-DZu"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="top" secondItem="sP6-G1-N5g" secondAttribute="top" type="user" id="UAT-QC-L9s"/>
                             <constraint firstItem="KAH-wz-onD" firstAttribute="leading" secondItem="eV6-yG-QGk" secondAttribute="leading" type="default" id="UGm-ix-Jaj"/>
-                            <constraint firstItem="sP6-G1-N5g" firstAttribute="leading" secondItem="QPj-5H-wIF" secondAttribute="leading" type="default" id="bw1-85-52k"/>
-                            <constraint firstItem="QVM-WJ-cFH" firstAttribute="leading" secondItem="sP6-G1-N5g" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="cFx-PC-3eF"/>
-                            <constraint firstItem="sP6-G1-N5g" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="19" id="dM6-Dt-tpw"/>
-                            <constraint firstItem="QPj-5H-wIF" firstAttribute="centerX" secondItem="KAH-wz-onD" secondAttribute="centerX" type="default" id="lc7-Ru-tWO"/>
+                            <constraint firstItem="KAH-wz-onD" firstAttribute="centerY" secondItem="rjo-U7-1ad" secondAttribute="centerY" type="default" id="cAq-oS-x7a"/>
+                            <constraint firstItem="rjo-U7-1ad" firstAttribute="centerY" secondItem="sP6-G1-N5g" secondAttribute="centerY" type="default" id="cFV-mA-Bgj"/>
+                            <constraint firstItem="sP6-G1-N5g" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="19" type="user" id="dM6-Dt-tpw"/>
+                            <constraint firstItem="rjo-U7-1ad" firstAttribute="centerY" secondItem="QVM-WJ-cFH" secondAttribute="centerY" type="default" id="e9m-m7-81v"/>
+                            <constraint firstItem="QPj-5H-wIF" firstAttribute="leading" secondItem="sP6-G1-N5g" secondAttribute="leading" type="default" id="mMp-VZ-r9f"/>
+                            <constraint firstItem="QVM-WJ-cFH" firstAttribute="leading" secondItem="sP6-G1-N5g" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="otR-Ai-7GW"/>
                             <constraint firstItem="QPj-5H-wIF" firstAttribute="bottom" secondItem="sP6-G1-N5g" secondAttribute="bottom" type="default" id="xeY-1C-L8d"/>
+                            <constraint firstItem="f2d-A3-dob" firstAttribute="top" secondItem="eV6-yG-QGk" secondAttribute="top" constant="107" type="user" id="xuC-WG-tU2"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginSignUpButton" destination="rjo-U7-1ad" id="Jlf-na-2ci"/>
                         <outlet property="nameLabel" destination="QVM-WJ-cFH" id="GEV-Bp-X50"/>
+                        <outlet property="profileImageView" destination="sP6-G1-N5g" id="M2N-0C-KD9"/>
                         <outlet property="table" destination="f2d-A3-dob" id="S1A-ff-kYj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sOO-IJ-eVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="874" y="448"/>
+            <point key="canvasLocation" x="873" y="440"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xYG-kf-x74">
             <objects>
-                <navigationController definesPresentationContext="YES" id="sJW-NR-vuB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginSignUpNavController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sJW-NR-vuB" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="piz-Pk-7E1"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="4n2-Up-7fc">
@@ -433,7 +447,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="collectionsTableView" destination="xnt-Zw-Igt" id="gAZ-gX-XAs"/>
-                        <segue destination="sJW-NR-vuB" kind="modal" identifier="loginsignup" id="VKb-ee-R7e"/>
                         <segue destination="zXo-41-V8Q" kind="push" identifier="showCollection" id="yoo-7g-DUy"/>
                     </connections>
                 </viewController>
@@ -641,7 +654,6 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="dlT-m0-v9G"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="sJW-NR-vuB" kind="modal" identifier="loginsignupfromstories" id="2kM-eC-ete"/>
                         <segue destination="07V-Qb-Xzk" kind="push" identifier="pushexpandedstory" id="rgC-Uj-BCC"/>
                     </connections>
                 </tableViewController>
@@ -822,7 +834,6 @@
                         <outlet property="timeAgoLabel" destination="ZhZ-hq-ZkR" id="OCr-Jr-i3q"/>
                         <outlet property="totalCountLabel" destination="dHj-7I-2mb" id="vBG-bL-GTr"/>
                         <outlet property="upVoteButton" destination="MmI-js-2se" id="nRW-KD-1BM"/>
-                        <segue destination="2" kind="modal" identifier="loginsignupfromstory" id="UvC-Sz-jjS"/>
                         <segue destination="1hp-gC-bsU" kind="push" identifier="showWebView" id="w34-tF-0aY"/>
                     </connections>
                 </viewController>
@@ -919,7 +930,6 @@
         <class className="collectivlyCollectionsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlyCollectionsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="leftBarButtonItemTouched:"/>
                 <relationship kind="action" name="rightSideBarButtonTouched:"/>
                 <relationship kind="outlet" name="collectionsTableView" candidateClass="UITableView"/>
             </relationships>
@@ -947,7 +957,10 @@
         <class className="collectivlySidebarViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/collectivlySidebarViewController.h"/>
             <relationships>
+                <relationship kind="action" name="loginSignUpTouched:"/>
+                <relationship kind="outlet" name="loginSignUpButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="table" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -1000,8 +1013,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="2kM-eC-ete"/>
-        <segue reference="UvC-Sz-jjS"/>
-    </inferredMetricsTieBreakers>
 </document>

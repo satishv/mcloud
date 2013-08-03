@@ -9,6 +9,9 @@
 #define kJsonResponseKeyLoginSuccess        @"success"
 #define kJsonResponseKeyLoginAuthToken      @"auth_token"
 #define kJsonResponseKeyLoginEmail          @"email"
+#define kJsonResponseKeyLoginFirstName      @"first_name"
+#define kJsonResponseKeyLoginLastName       @"last_name"
+#define kJsonResponseKeyLoginProfileImage   @"profile_image"
 #define kJsonResponseKeyLoginFailMessage    @"message"
 
 #define kJsonResponseKeyRequestInviteStatus     @"status"
