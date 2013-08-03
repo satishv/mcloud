@@ -71,6 +71,8 @@
  
     NSArray *responza = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
     
+    NSLog(@"responza: %@", responza);
+    
     storiesFromResponse = [self createStoriesFromResponse:responza];
     
     [self.delegate reactToGetStoriesResponse:[NSArray arrayWithArray:storiesFromResponse]];

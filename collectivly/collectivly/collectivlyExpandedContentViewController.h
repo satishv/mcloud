@@ -19,8 +19,9 @@
 
 #import "VotingCommand.h"
 #import "RecollectCommand.h"
+#import "GetStoryInfoCommand.h"
 
-@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate, VotingRequestDelegate, RecollectCommandDelegate> {
+@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate, VotingRequestDelegate, RecollectCommandDelegate, GetStoryDelegate> {
     NSMutableData *_data;
     
     BOOL needToUpvoteAfterDownvoteUnclick, needToDownvoteAfterUpvoteUnclick;

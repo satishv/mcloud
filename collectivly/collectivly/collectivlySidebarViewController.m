@@ -38,6 +38,7 @@
         [self.table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     
+    [self updateUserNameDisplay];
 
 }
 
@@ -54,6 +55,31 @@
     self.nameLabel.font = [UIFont fontWithName:@"ProximaNova-Bold" size:20];
     
     self.currentUser = [collectivlySingleton sharedDataModel];
+    
+//    [self makeProfileImageViewAHexagon];
+    
+}
+
+-(void)makeProfileImageViewAHexagon {
+    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+    // TODO - make this a hexagon
+    int width = self.profileImageView.frame.size.width;
+    int height = self.profileImageView.frame.size.height;
+    int x1 = width / 4;
+    int x2 = 3 * width / 4;
+    int y1 = height / 4;
+    int y2 = 3 * height / 4;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, nil, 0, 0);
+//    CGPathAddLineToPoint(path, NULL, newloc.x + 16,newloc.y + 38);
+
+    CGPathRef pathRef = nil;
+    
+    shapeLayer.path = pathRef;
+    
+    self.profileImageView.layer.mask = shapeLayer;
+    
     
 }
 

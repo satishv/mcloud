@@ -75,17 +75,17 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
 //    NSString *responseString = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-    //    NSLog(@"response data: %@", responseString);
+//    NSLog(@"response data: %@", responseString);
     
     NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
                 
-            NSMutableArray *colls = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in dictResponse){
-                collectivlyCollection *cc = [[collectivlyCollection alloc] initWithDictionary:dict];
-                
-                // add collection to list of collections
-                [colls addObject:cc];
-            }
+    NSMutableArray *colls = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in dictResponse){
+        collectivlyCollection *cc = [[collectivlyCollection alloc] initWithDictionary:dict];
+        
+        // add collection to list of collections
+        [colls addObject:cc];
+    }
     
     [self.delegate reactToGetCollectionsResponse:[NSArray arrayWithArray:colls]];
            

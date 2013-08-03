@@ -58,6 +58,8 @@
     [self setUpNavBar];
     
     NSLog(@"EXPANDEDSTORY: %@", self.story.title);
+    
+    [self makeStoryInfoRequest];
 
 }
 
@@ -173,6 +175,12 @@
 }
 
 #pragma mark - COMMAND execution
+-(void)makeStoryInfoRequest {
+    GetStoryInfoCommand *cmd = [[GetStoryInfoCommand alloc] initWithStory:self.story];
+    cmd.delegate = self;
+    [cmd fetchStory];
+}
+
 -(void)makeRecollectRequest {
     RecollectCommand *cmd = [[RecollectCommand alloc]
                              initWithStory:self.story
@@ -360,6 +368,17 @@
 
 }
 
+#pragma mark get story info
+-(void)reactToStoryResponse {
+    NSLog(@"got it thooooooo");
+}
+
+-(void)reactToStoryError:(NSError *)error {
+    [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Error While Getting Story Info"
+                                                          andMessage:error.localizedDescription];
+}
+
+
 #pragma mark - helpers
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showWebView"]) {
@@ -368,19 +387,6 @@
         w.contentTitle = self.story.title;
     }
 }
-
-//-(void)enableButtonsIfUserLoggedIn {
-//    if (self.currentUser.isLoggedIn){
-//        self.recollectButton.alpha = 1.0f;
-//        self.recollectButton.enabled = YES;
-//        
-//        self.upVoteButton.alpha = 1.0f;
-//        self.upVoteButton.enabled = YES;
-//        
-//        self.downVoteButton.alpha = 1.0f;
-//        self.downVoteButton.enabled = YES;
-//    }
-//}
 
 -(void)popupAlertIfUserNotLoggedIn {
     [collectivlyUtilities createAndShowDismissableAlertviewWithTitle:@"Not Logged In"
