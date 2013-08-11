@@ -52,7 +52,7 @@
     selectedCollectionsIndex = nil;
     selectedCollectorIndex = nil;
     
-    self.nameLabel.font = [UIFont fontWithName:@"ProximaNova-Bold" size:20];
+    self.nameLabel.font = [UIFont fontWithName:APP_FONT_BOLD size:20];
     
     self.currentUser = [collectivlySingleton sharedDataModel];
     
@@ -62,24 +62,26 @@
 
 -(void)makeProfileImageViewAHexagon {
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
-    // TODO - make this a hexagon
+
     int width = self.profileImageView.frame.size.width;
     int height = self.profileImageView.frame.size.height;
     int x1 = width / 4;
     int x2 = 3 * width / 4;
-    int y1 = height / 4;
-    int y2 = 3 * height / 4;
+    int y  = height / 2;
     
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, nil, 0, 0);
-//    CGPathAddLineToPoint(path, NULL, newloc.x + 16,newloc.y + 38);
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    [aPath moveToPoint:CGPointMake(x1, 0)];
 
-    CGPathRef pathRef = nil;
+    [aPath addLineToPoint:CGPointMake(x2, 0)];
+    [aPath addLineToPoint:CGPointMake(width, y)];
+    [aPath addLineToPoint:CGPointMake(x2, height)];
+    [aPath addLineToPoint:CGPointMake(x1, height)];
+    [aPath addLineToPoint:CGPointMake(0, y)];
+    [aPath closePath];
     
-    shapeLayer.path = pathRef;
+    shapeLayer.path = aPath.CGPath;
     
     self.profileImageView.layer.mask = shapeLayer;
-    
     
 }
 
@@ -196,7 +198,7 @@
         }
     }
     
-    cell.textLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:20];
+    cell.textLabel.font = [UIFont fontWithName:APP_FONT_SEMI size:20];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
     cell.accessoryView.frame = CGRectMake(0, 0, CHECKMARKWIDTH, CHECKMARKHEIGHT);
@@ -221,7 +223,7 @@
         default:
             break;
     }
-    headerLabel.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:20];
+    headerLabel.font = [UIFont fontWithName:APP_FONT_SEMI size:20];
     headerLabel.backgroundColor = [UIColor clearColor];
     UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"submenu_lightgrey.png"]];
     bg.frame = CGRectMake(0, 0, 320, HEADERHEIGHT);

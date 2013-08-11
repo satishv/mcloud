@@ -21,10 +21,14 @@
 #import "RecollectCommand.h"
 #import "GetStoryInfoCommand.h"
 
-@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate, VotingRequestDelegate, RecollectCommandDelegate, GetStoryDelegate> {
+@interface collectivlyExpandedContentViewController : UIViewController <JTRevealSidebarV2Delegate, collectivlySidebarViewControllerDelegate, NSURLConnectionDataDelegate, VotingRequestDelegate, RecollectCommandDelegate, GetStoryDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSMutableData *_data;
     
     BOOL needToUpvoteAfterDownvoteUnclick, needToDownvoteAfterUpvoteUnclick;
+    
+    NSArray *comments;
+    
+    UIColor *lightBlueBGColor, *lightGrayBGColor;
 }
 
 @property (retain) collectivlySingleton *currentUser;
@@ -44,6 +48,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeAgoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalCountLabel;
+@property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
+
 - (IBAction)centerRecollectButtonTouched:(id)sender;
 - (IBAction)downVoteButtonTouched:(id)sender;
 - (IBAction)upVoteButtonTouched:(id)sender;

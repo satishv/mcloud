@@ -32,6 +32,7 @@
 		4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */; };
 		4C3532251794F6F400C8DB98 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3532241794F6F400C8DB98 /* AsyncImageView.m */; };
 		4C3532271794FB9700C8DB98 /* white_square.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C3532261794FB9700C8DB98 /* white_square.jpg */; };
+		4C47BDAD17AE0866006FF0B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C47BDAC17AE0866006FF0B7 /* QuartzCore.framework */; };
 		4C49646B17ADB0CE00FD7BAE /* GetStoryInfoCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C49646A17ADB0CE00FD7BAE /* GetStoryInfoCommand.m */; };
 		4C78C96B177F9748007166BF /* collectivlyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C78C96A177F9748007166BF /* collectivlyWebViewController.m */; };
 		4C8D7A7517925C7600B8D8A6 /* back_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8D7A3B17925C7600B8D8A6 /* back_logo.png */; };
@@ -145,6 +146,7 @@
 		4C3532231794F6F400C8DB98 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		4C3532241794F6F400C8DB98 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		4C3532261794FB9700C8DB98 /* white_square.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_square.jpg; sourceTree = "<group>"; };
+		4C47BDAC17AE0866006FF0B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C49646917ADB0CE00FD7BAE /* GetStoryInfoCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetStoryInfoCommand.h; sourceTree = "<group>"; };
 		4C49646A17ADB0CE00FD7BAE /* GetStoryInfoCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetStoryInfoCommand.m; sourceTree = "<group>"; };
 		4C78C969177F9748007166BF /* collectivlyWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyWebViewController.h; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			files = (
 				4CF8D9B31710BEAD00E4FD21 /* UIKit.framework in Frameworks */,
 				4CF8D9B51710BEAD00E4FD21 /* Foundation.framework in Frameworks */,
+				4C47BDAD17AE0866006FF0B7 /* QuartzCore.framework in Frameworks */,
 				4CF8D9B71710BEAD00E4FD21 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +458,7 @@
 		4CF8D9B11710BEAD00E4FD21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C47BDAC17AE0866006FF0B7 /* QuartzCore.framework */,
 				4CF8D9B21710BEAD00E4FD21 /* UIKit.framework */,
 				4CF8D9B41710BEAD00E4FD21 /* Foundation.framework */,
 				4CF8D9B61710BEAD00E4FD21 /* CoreGraphics.framework */,

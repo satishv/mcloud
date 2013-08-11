@@ -68,7 +68,7 @@
     // customize TITLE LABEL
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"ProximaNova-Bold" size:16];
+    label.font = [UIFont fontWithName:APP_FONT_BOLD size:16];
     label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor =[UIColor whiteColor];

@@ -92,7 +92,7 @@
     // customize nav bar label text
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"ProximaNova-Light" size:20];
+    label.font = [UIFont fontWithName:APP_FONT_LIGHT size:20];
     //    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     //    label.textAlignment = UITextAlignmentCenter;
     label.textAlignment = NSTextAlignmentCenter;
@@ -186,7 +186,7 @@
     UIImageView *collectionImage = (UIImageView *)[cell viewWithTag:10];
     
     UILabel *title = (UILabel*)[cell viewWithTag:100];
-    title.font = [UIFont fontWithName:@"ProximaNova-Light" size:21];
+    title.font = [UIFont fontWithName:APP_FONT_LIGHT size:21];
     title.text = cc.name.uppercaseString;
     collectionImage.image = cc.image;
 

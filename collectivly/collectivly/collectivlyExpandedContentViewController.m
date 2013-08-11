@@ -17,7 +17,7 @@
 
 @implementation collectivlyExpandedContentViewController
 
-@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel, articleTitleButton, recollectButton, recollected, upVoteButton, downVoteButton;
+@synthesize currentUser, expandedImageView, story, rightSideBarViewController, totalCountLabel, friendsCountLabel, timeAgoLabel, articleTitleButton, recollectButton, recollected, upVoteButton, downVoteButton, commentsTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,7 +50,7 @@
     self.articleTitleButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     self.articleTitleButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.articleTitleButton.titleLabel.numberOfLines = 4;
-    UIFont *articleTitleFont = [UIFont fontWithName:@"ProximaNova-Bold" size:26];
+    UIFont *articleTitleFont = [UIFont fontWithName:APP_FONT_BOLD size:26];
     [self.articleTitleButton setTitle:self.story.title forState:UIControlStateNormal];
     self.articleTitleButton.titleLabel.font = articleTitleFont;
         
@@ -59,8 +59,19 @@
     
     NSLog(@"EXPANDEDSTORY: %@", self.story.title);
     
+    lightBlueBGColor = [UIColor colorWithRed:(220/255.0) green:(241/255.0) blue:(252/255.0) alpha:1.0];
+    lightGrayBGColor = [UIColor colorWithRed:(241/255.0) green:(241/255.0) blue:(241/255.0) alpha:1.0];
+    
+    comments = @[@"OMG!!!!!! THIS IS LIKE THE CRAZIEST STORY I HAVE SEEN IN MY ENTIRE LIFE!!!!! I can't believe this actually happened",
+                 @"SAME!!!!",
+                 @"you guys are actually a bunch of 12 year old girls"];
+    
     [self makeStoryInfoRequest];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [self.commentsTableView reloadData];
 }
 
 #pragma mark - nav bar and bar button item setup
@@ -91,7 +102,7 @@
     // customize TITLE LABEL
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"ProximaNova-Bold" size:16];
+    label.font = [UIFont fontWithName:APP_FONT_BOLD size:16];
     label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor =[UIColor whiteColor];
@@ -129,14 +140,6 @@
     [sidebarViewController.table deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController setRevealedState:JTRevealedStateNo];
-    
-    NSLog(@"[collectivlyStoriesViewController] SIDEBARRRRRR DIDSELECTOBJECT: %@", object.description);
-    if ([object isKindOfClass:[NSString class]]){
-        NSString *string = (NSString *)object;
-        if ([string isEqualToString:@"Login"]){
-            [self performSegueWithIdentifier:@"loginsignupfromstory" sender:self];
-        }
-    }
     
 }
 
@@ -300,7 +303,53 @@
     
     [self performSegueWithIdentifier:@"showWebView" sender:self];
     
-//    [[UIApplication sharedApplication] openURL:self.story.origURL];
+}
+
+#pragma mark - UITABLEWVIEWSTUFF
+#pragma mark uitableview datasource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [comments count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *text = [comments objectAtIndex:indexPath.row];
+    CGSize constraint = CGSizeMake(tableView.frame.size.width, 20000.0f);
+    CGSize size = [text sizeWithFont:[UIFont fontWithName:APP_FONT_SEMI size:15.0] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+    
+    CGFloat maybe = size.height + 12 + 40;
+     
+    
+    return MAX(60, maybe);
+    
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
+    
+    UIView *bgView = [cell viewWithTag:1];
+    UILabel *userLabel = (UILabel*)[cell viewWithTag:2];
+    UILabel *contentLabel = (UILabel*)[cell viewWithTag:3];
+    UIImageView *userImageView = (UIImageView*)[cell viewWithTag:4];
+    
+    bgView.backgroundColor = (indexPath.row % 2 == 0) ? lightBlueBGColor : lightGrayBGColor;
+    userLabel.font = [UIFont fontWithName:APP_FONT_SEMI size:15.0];
+    contentLabel.font = [UIFont fontWithName:APP_FONT_SEMI size:15.0];
+    
+    userLabel.text = @"nathanFraenkel1080";
+    contentLabel.text = [comments objectAtIndex:indexPath.row];
+    [contentLabel sizeToFit];
+    
+    return cell;
+}
+
+#pragma mark uitableview delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - COMMAND DELEGATES

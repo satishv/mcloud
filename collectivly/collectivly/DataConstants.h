@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
+#define APP_FONT_BOLD       @"ProximaNova-Bold"
+#define APP_FONT_LIGHT      @"ProximaNova-Light"
+#define APP_FONT_SEMI       @"ProximaNova-Semibold"
+#define APP_FONT_COND_SEMI  @"ProximaNovaCond-Semibold"
+#define APP_FONT_COND_REG   @"ProximaNovaCond-Regular"
+
 #define kJsonResponseKeyLoginSuccess        @"success"
 #define kJsonResponseKeyLoginAuthToken      @"auth_token"
 #define kJsonResponseKeyLoginEmail          @"email"
