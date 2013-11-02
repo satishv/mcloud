@@ -1,4 +1,6 @@
 mcloud
 ======
 
-Cloudable mobile app. 
+collectivly mobile app. 
+
+http://collectivly.com

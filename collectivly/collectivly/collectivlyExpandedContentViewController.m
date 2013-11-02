@@ -322,7 +322,6 @@
     
     CGFloat maybe = size.height + 12 + 40;
      
-    
     return MAX(60, maybe);
     
 }
