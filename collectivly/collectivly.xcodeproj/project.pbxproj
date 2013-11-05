@@ -28,6 +28,18 @@
 		4C1BF799179AFCE100AAAEDF /* SignUserInCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF798179AFCE100AAAEDF /* SignUserInCommand.m */; };
 		4C1BF79C179B049400AAAEDF /* RequestInviteCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF79B179B049400AAAEDF /* RequestInviteCommand.m */; };
 		4C1BF79F179B0C1100AAAEDF /* collectivlyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BF79E179B0C1100AAAEDF /* collectivlyUtilities.m */; };
+		4C20E11B182899FA0081D727 /* style_collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E116182899FA0081D727 /* style_collection.jpg */; };
+		4C20E13618289FE40081D727 /* abc_news.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E12B18289FE40081D727 /* abc_news.jpg */; };
+		4C20E13718289FE40081D727 /* airforce_pirate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E12C18289FE40081D727 /* airforce_pirate.jpg */; };
+		4C20E13818289FE40081D727 /* bbc_news.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E12D18289FE40081D727 /* bbc_news.png */; };
+		4C20E13918289FE40081D727 /* collectivly_moms.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E12E18289FE40081D727 /* collectivly_moms.jpg */; };
+		4C20E13A18289FE40081D727 /* contemp_art.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E12F18289FE40081D727 /* contemp_art.jpg */; };
+		4C20E13B18289FE40081D727 /* kenjya_mall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E13018289FE40081D727 /* kenjya_mall.jpg */; };
+		4C20E13C18289FE40081D727 /* kenya_senseless.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E13118289FE40081D727 /* kenya_senseless.jpg */; };
+		4C20E13D18289FE40081D727 /* newstoknow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E13218289FE40081D727 /* newstoknow.jpg */; };
+		4C20E13E18289FE40081D727 /* obama_kenya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E13318289FE40081D727 /* obama_kenya.jpg */; };
+		4C20E13F18289FE40081D727 /* recipes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E13418289FE40081D727 /* recipes.jpg */; };
+		4C20E14018289FE40081D727 /* wheelchair.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C20E13518289FE40081D727 /* wheelchair.jpg */; };
 		4C2F88FA1721EF15009006EF /* collectivlyStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */; };
 		4C319C841753FDCF0037C84D /* collectivlySidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C319C831753FDCF0037C84D /* collectivlySidebarViewController.m */; };
 		4C3532251794F6F400C8DB98 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3532241794F6F400C8DB98 /* AsyncImageView.m */; };
@@ -139,6 +151,18 @@
 		4C1BF79B179B049400AAAEDF /* RequestInviteCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestInviteCommand.m; sourceTree = "<group>"; };
 		4C1BF79D179B0C1100AAAEDF /* collectivlyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyUtilities.h; sourceTree = "<group>"; };
 		4C1BF79E179B0C1100AAAEDF /* collectivlyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyUtilities.m; sourceTree = "<group>"; };
+		4C20E116182899FA0081D727 /* style_collection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = style_collection.jpg; sourceTree = "<group>"; };
+		4C20E12B18289FE40081D727 /* abc_news.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = abc_news.jpg; sourceTree = "<group>"; };
+		4C20E12C18289FE40081D727 /* airforce_pirate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = airforce_pirate.jpg; sourceTree = "<group>"; };
+		4C20E12D18289FE40081D727 /* bbc_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbc_news.png; sourceTree = "<group>"; };
+		4C20E12E18289FE40081D727 /* collectivly_moms.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = collectivly_moms.jpg; sourceTree = "<group>"; };
+		4C20E12F18289FE40081D727 /* contemp_art.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = contemp_art.jpg; sourceTree = "<group>"; };
+		4C20E13018289FE40081D727 /* kenjya_mall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenjya_mall.jpg; sourceTree = "<group>"; };
+		4C20E13118289FE40081D727 /* kenya_senseless.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenya_senseless.jpg; sourceTree = "<group>"; };
+		4C20E13218289FE40081D727 /* newstoknow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = newstoknow.jpg; sourceTree = "<group>"; };
+		4C20E13318289FE40081D727 /* obama_kenya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama_kenya.jpg; sourceTree = "<group>"; };
+		4C20E13418289FE40081D727 /* recipes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recipes.jpg; sourceTree = "<group>"; };
+		4C20E13518289FE40081D727 /* wheelchair.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wheelchair.jpg; sourceTree = "<group>"; };
 		4C2F88F81721EF15009006EF /* collectivlyStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlyStoriesViewController.h; sourceTree = "<group>"; };
 		4C2F88F91721EF15009006EF /* collectivlyStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectivlyStoriesViewController.m; sourceTree = "<group>"; };
 		4C319C821753FDCF0037C84D /* collectivlySidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectivlySidebarViewController.h; sourceTree = "<group>"; };
@@ -284,6 +308,24 @@
 			path = ProximaNova;
 			sourceTree = "<group>";
 		};
+		4C20E12A18289FE40081D727 /* hardcodedimages */ = {
+			isa = PBXGroup;
+			children = (
+				4C20E12B18289FE40081D727 /* abc_news.jpg */,
+				4C20E12C18289FE40081D727 /* airforce_pirate.jpg */,
+				4C20E12D18289FE40081D727 /* bbc_news.png */,
+				4C20E12E18289FE40081D727 /* collectivly_moms.jpg */,
+				4C20E12F18289FE40081D727 /* contemp_art.jpg */,
+				4C20E13018289FE40081D727 /* kenjya_mall.jpg */,
+				4C20E13118289FE40081D727 /* kenya_senseless.jpg */,
+				4C20E13218289FE40081D727 /* newstoknow.jpg */,
+				4C20E13318289FE40081D727 /* obama_kenya.jpg */,
+				4C20E13418289FE40081D727 /* recipes.jpg */,
+				4C20E13518289FE40081D727 /* wheelchair.jpg */,
+			);
+			path = hardcodedimages;
+			sourceTree = "<group>";
+		};
 		4C3532221794F6F400C8DB98 /* AsyncImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +338,8 @@
 		4C8D7A3A17925C7600B8D8A6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4C20E12A18289FE40081D727 /* hardcodedimages */,
+				4C20E116182899FA0081D727 /* style_collection.jpg */,
 				4CC1003517A5AA3600B73D38 /* bottom_logo_actual_size.png */,
 				4C3532261794FB9700C8DB98 /* white_square.jpg */,
 				4C8D7A3B17925C7600B8D8A6 /* back_logo.png */,
@@ -563,6 +607,8 @@
 			files = (
 				4CF8D9BD1710BEAD00E4FD21 /* InfoPlist.strings in Resources */,
 				4CF8D9CC1710BEAD00E4FD21 /* MainStoryboard.storyboard in Resources */,
+				4C20E13818289FE40081D727 /* bbc_news.png in Resources */,
+				4C20E13918289FE40081D727 /* collectivly_moms.jpg in Resources */,
 				4C08AF621721CDC900862911 /* ProximaNova-Black.otf in Resources */,
 				4C08AF631721CDC900862911 /* ProximaNova-Bold.otf in Resources */,
 				4C08AF641721CDC900862911 /* ProximaNova-BoldIt.otf in Resources */,
@@ -570,6 +616,7 @@
 				4C08AF661721CDC900862911 /* ProximaNova-Light.otf in Resources */,
 				4C08AF671721CDC900862911 /* ProximaNova-LightItalic.otf in Resources */,
 				4C08AF681721CDC900862911 /* ProximaNova-RegItalic.otf in Resources */,
+				4C20E13D18289FE40081D727 /* newstoknow.jpg in Resources */,
 				4C08AF691721CDC900862911 /* ProximaNova-Regular.otf in Resources */,
 				4C08AF6A1721CDC900862911 /* ProximaNova-RegularItalic.otf in Resources */,
 				4C08AF6B1721CDC900862911 /* ProximaNova-Semibold.otf in Resources */,
@@ -583,6 +630,8 @@
 				4C8D7A7517925C7600B8D8A6 /* back_logo.png in Resources */,
 				4C8D7A7617925C7600B8D8A6 /* cloud.png in Resources */,
 				4C8D7A7717925C7600B8D8A6 /* collectivly_logo.png in Resources */,
+				4C20E14018289FE40081D727 /* wheelchair.jpg in Resources */,
+				4C20E13F18289FE40081D727 /* recipes.jpg in Resources */,
 				4C8D7A7817925C7600B8D8A6 /* cream_pixels.png in Resources */,
 				4C8D7A7917925C7600B8D8A6 /* cream_pixels_@2X.png in Resources */,
 				4C8D7A7A17925C7600B8D8A6 /* Default-568h@2x.png in Resources */,
@@ -601,9 +650,11 @@
 				4C8D7A8717925C7600B8D8A6 /* hex_darker.png in Resources */,
 				4C8D7A8817925C7600B8D8A6 /* logo+2px.png in Resources */,
 				4C8D7A8917925C7600B8D8A6 /* menubutton.png in Resources */,
+				4C20E13C18289FE40081D727 /* kenya_senseless.jpg in Resources */,
 				4C8D7A8A17925C7600B8D8A6 /* menubutton_1px.png in Resources */,
 				4C8D7A8B17925C7600B8D8A6 /* sampleimage640x573.png in Resources */,
 				4C8D7A8C17925C7600B8D8A6 /* upvote.png in Resources */,
+				4C20E13E18289FE40081D727 /* obama_kenya.jpg in Resources */,
 				4C8D7A8D17925C7600B8D8A6 /* upvoteonclick.png in Resources */,
 				4C8D7A8E17925C7600B8D8A6 /* whitetransparentbackgroundbehindbuttons.png in Resources */,
 				4C8D7A8F17925C7600B8D8A6 /* furley_bg.png in Resources */,
@@ -616,9 +667,13 @@
 				4C8D7A9617925C7600B8D8A6 /* check_selected.png in Resources */,
 				4C8D7A9717925C7600B8D8A6 /* greyback-no-shadow.png in Resources */,
 				4C8D7A9817925C7600B8D8A6 /* notificationbackground.png in Resources */,
+				4C20E13718289FE40081D727 /* airforce_pirate.jpg in Resources */,
+				4C20E13B18289FE40081D727 /* kenjya_mall.jpg in Resources */,
 				4C8D7A9917925C7600B8D8A6 /* profile_cutout.psd in Resources */,
 				4C8D7A9A17925C7600B8D8A6 /* profileback.png in Resources */,
+				4C20E13618289FE40081D727 /* abc_news.jpg in Resources */,
 				4C8D7A9B17925C7600B8D8A6 /* profileimageexample.png in Resources */,
+				4C20E11B182899FA0081D727 /* style_collection.jpg in Resources */,
 				4C8D7A9C17925C7600B8D8A6 /* submenu_lightgrey.png in Resources */,
 				4C8D7A9D17925C7600B8D8A6 /* subsubmenu_darkergrey.png in Resources */,
 				4C8D7A9E17925C7600B8D8A6 /* sign_in_webSS.png in Resources */,
@@ -628,6 +683,7 @@
 				4C8D7AA217925C7600B8D8A6 /* logo.png in Resources */,
 				4C8D7AA317925C7600B8D8A6 /* options menu original.png in Resources */,
 				4C8D7AA417925C7600B8D8A6 /* options menu.png in Resources */,
+				4C20E13A18289FE40081D727 /* contemp_art.jpg in Resources */,
 				4C8D7AA517925C7600B8D8A6 /* partial hex top nav (full).png in Resources */,
 				4C8D7AA617925C7600B8D8A6 /* partial hex top nav.png in Resources */,
 				4C8D7AA717925C7600B8D8A6 /* red_triangle.png in Resources */,

@@ -30,7 +30,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     // set URL
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/everyone/%d.json?page=%d", collection.idNumber, page]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/stories/everyone/%d.json?page=%d", SERVER_MAIN_URL, collection.idNumber, page]];
         
     NSLog(@"[GetStoriesForCollectionCommand] fetching stories from page %d for collection with id: %d and name: %@", page, collection.idNumber, collection.name);
     

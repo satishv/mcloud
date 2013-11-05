@@ -28,7 +28,7 @@
     NSLog(@"[SignUserInCommand] signing in....");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    NSString *url = @"https://collectivly.com/users/sign_in";
+    NSString *url = [NSString stringWithFormat:@"%@/users/sign_in", SERVER_MAIN_URL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
     
     NSString *params = [NSString stringWithFormat:@"email=%@&password=%@", self.email, self.password];

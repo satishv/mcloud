@@ -39,7 +39,7 @@
     [dataDict setValue:@"" forKey:@"authenticity_token"];
     [dataDict setValue:user forKey:@"user"];
 
-    NSString *url = @"https://collectivly.com/users/invitation";
+    NSString *url = [NSString stringWithFormat:@"%@/users/invitation", SERVER_MAIN_URL_SSL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
 
     NSString *data = [NSString stringWithFormat:@""];

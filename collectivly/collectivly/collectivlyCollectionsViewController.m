@@ -188,7 +188,28 @@
     UILabel *title = (UILabel*)[cell viewWithTag:100];
     title.font = [UIFont fontWithName:APP_FONT_LIGHT size:21];
     title.text = cc.name.uppercaseString;
-    collectionImage.image = cc.image;
+    
+    // TODO: uncomment after hard coding done
+//    collectionImage.image = cc.image;
+    if ([cc.name isEqualToString:@"Contemporary Art"]) {
+        collectionImage.image = [UIImage imageNamed:@"contemp_art.jpg"];
+    }
+    else if ([cc.name isEqualToString:@"Collectivly Moms"]) {
+        collectionImage.image = [UIImage imageNamed:@"collectivly_moms.jpg"];
+    }
+    else if ([cc.name isEqualToString:@"News to Know"]) {
+        collectionImage.image = [UIImage imageNamed:@"newstoknow.jpg"];
+    }
+    else if ([cc.name isEqualToString:@"Recipe Collection"]) {
+        collectionImage.image = [UIImage imageNamed:@"recipes.jpg"];
+    }
+    else if ([cc.name isEqualToString:@"Style Collection"]) {
+        collectionImage.image = [UIImage imageNamed:@"style_collection.jpg"];
+    }
+    else {
+        collectionImage.image = cc.image;
+    }
+    //
 
     return cell;
 }

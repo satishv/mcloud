@@ -54,7 +54,7 @@
     
     NSLog(@"[VotingCommand] AUTHHHHHHHHH: %@", self.tokenOfAuth);
     
-    NSString *url = @"https://collectivly.com/stories/recloud";
+    NSString *url = [NSString stringWithFormat:@"%@/stories/recloud", SERVER_MAIN_URL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
     
     self.type = t;

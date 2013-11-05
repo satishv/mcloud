@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Nathan Fraenkel. All rights reserved.
 //
 
+#define SERVER_MAIN_URL     @"http://www.collectiv.ly"
+#define SERVER_MAIN_URL_SSL @"https://www.collectiv.ly"
+
 #define APP_FONT_BOLD       @"ProximaNova-Bold"
 #define APP_FONT_LIGHT      @"ProximaNova-Light"
 #define APP_FONT_SEMI       @"ProximaNova-Semibold"

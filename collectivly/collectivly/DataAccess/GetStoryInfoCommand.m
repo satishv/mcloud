@@ -27,7 +27,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     // set URL
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collectivly.com/stories/%d", story.idNumber]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/stories/%d", SERVER_MAIN_URL, story.idNumber]];
     
     // HTTP request, setting stuff
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:10] ;

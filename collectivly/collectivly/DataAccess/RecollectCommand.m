@@ -38,7 +38,8 @@
     [dataDict setValue:[NSString stringWithFormat:@"%d", self.story.idNumber] forKey:@"story_id"];
     [dataDict setValue:@"1" forKey:@"scope"]; // DEFAULT: 1 = public
     
-    NSString *url = @"https://collectivly.com/stories/recloud";
+    NSString *url = [NSString stringWithFormat:@"%@/stores/recloud", SERVER_MAIN_URL];
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSString *data = [NSString stringWithFormat:@""];

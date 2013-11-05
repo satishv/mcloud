@@ -40,7 +40,9 @@
     
     // update UI elements to match story's elements
 
-    [self.expandedImageView setImage:self.story.articleImage];
+    // TODO: uncomment after hard coding done
+//    [self.expandedImageView setImage:self.story.articleImage];
+    [self.expandedImageView setImage:[UIImage imageNamed:@"airforce_pirate.jpg"]];
     [self.expandedImageView setImageURL:[NSURL URLWithString:self.story.expandedImageString]];
     
     self.timeAgoLabel.text = self.story.timeAgo;

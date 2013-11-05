@@ -297,22 +297,52 @@
     collectivlyStory *story = [self.stories objectAtIndex:indexPath.row];
     NSLog(@"story number %d: %@", indexPath.row, story.title);
     AsyncImageView *storyImageView = (AsyncImageView *)[cell viewWithTag:100];
+    
+    // TODO: uncomment after hard coding done
     if (story.articleImage != nil) {
         [storyImageView setLoadedImage:story.articleImage];
     }
     else {
         storyImageView.cStory = story;
-        [storyImageView setImage:[UIImage imageNamed:@"white_square.png"]];
-        [storyImageView setImageURL:[NSURL URLWithString:story.articleImageString]];        
+//        [storyImageView setImage:[UIImage imageNamed:@"white_square.png"]];
+        switch (indexPath.row) {
+            case 0:
+                [storyImageView setImage:[UIImage imageNamed:@"kenjya_mall.jpg"]];
+                break;
+            case 1:
+                [storyImageView setImage:[UIImage imageNamed:@"obama_kenya.jpg"]];
+                break;
+            case 2:
+                [storyImageView setImage:[UIImage imageNamed:@"airforce_pirate.jpg"]];
+                break;
+            case 3:
+                [storyImageView setImage:[UIImage imageNamed:@"kenya_senseless.jpg"]];
+                break;
+            case 4:
+                [storyImageView setImage:[UIImage imageNamed:@"wheelchair.jpg"]];
+                break;
+            default:
+                break;
+        }
+        [storyImageView setImageURL:[NSURL URLWithString:story.articleImageString]];
     }
     
     UILabel *storyNameLabel = (UILabel *)[cell viewWithTag:101];
     storyNameLabel.text = story.title;
     storyNameLabel.font = customFont;
-    
+
+    // TODO: uncomment after hard coding done
     AsyncImageView *sourceImage = (AsyncImageView *)[cell viewWithTag:102];
-    [sourceImage setImage:[UIImage imageNamed:@"white_square.png"]];
-    [sourceImage setImageURL:[NSURL URLWithString:story.profileImageString]];
+//    [sourceImage setImage:[UIImage imageNamed:@"white_square.png"]];
+//    [sourceImage setImageURL:[NSURL URLWithString:story.profileImageString]];
+    switch (indexPath.row) {
+        case 4:
+            [sourceImage setImage:[UIImage imageNamed:@"bbc_news.png"]];
+            break;
+        default:
+            [sourceImage setImage:[UIImage imageNamed:@"abc_news.jpg"]];
+            break;
+    }
     
     // extract time difference between current time and post time, output time difference to UI
     NSString *timeDifference = [self findDifferenceBetweenCurrent:currentGMTTime AndCreatedTime:story.createdAt];

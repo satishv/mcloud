@@ -31,17 +31,18 @@
     NSString *url = @"";
     if ([self userIsLoggedIn]){
         NSLog(@"[GetColletionsCommand] SOMEONE LOGGED IN --> personalized collections!");
-        url = @"https://www.collectivly.com/clubb.json";
+        url = [NSString stringWithFormat:@"%@/clubb.json", SERVER_MAIN_URL];
     }
     else {
         NSLog(@"[GetColletionsCommand] NO ONE LOGGED IN --> popular collections!");
-        url = @"https://www.collectivly.com/clubb.json";
+        url = [NSString stringWithFormat:@"%@/clubb.json", SERVER_MAIN_URL];
     }
     
     // HTTP request, setting stuff
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
     
     // start connection
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
